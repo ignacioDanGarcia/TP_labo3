@@ -58,27 +58,8 @@ Cada contenedor define un precio base que se debe pagar para transportar una det
 #### Básico
 El contenedor Básico estándar también conocido como contenedor de 20 pies, es el contenedor más usados a nivel mundial en el transporte marítimo de mercancías. El contenedor estándar se diferencia de otros modelos de contenedor principalmente en que está cerrado herméticamente y no cuenta con sistemas de refrigeración o ventilación, como es el caso de los contenedores refrigerados o ventilados. 
 
-
-Dimensiones del contenedor        | Ancho[m] | Alto[m]  | Largo[m] |
-------------- | -------------
-Exterior   | 2.45 | 2.6 | 6.1
-Interior  | 2.35 | 2.3 | 6.0
-
-Peso y Volumen soportado        | Peso max[Kg] | Volumen[m3]
-------------- | -------------
-   | 24000 | 32.6
-
 #### Básico HC (High Cube)
 El contenedor Básico HC, también conocido como contenedor de 40 pies, es idéntico al contenedor básico pero con mayores dimensiones, volumen y kilos soportados.
-
-Dimensiones del contenedor        | Ancho[m] | Alto[m]  | Largo[m] |
-------------- | -------------
-Exterior   | 2.45 | 2.6 | 12.1
-Interior  | 2.35 | 2.3 | 12.0
-
-Peso y Volumen soportado        | Peso max[Kg] | Volumen[m3]
-------------- | -------------
-   | 32500 | 67.7
 
 
 #### Flat Rack
@@ -86,15 +67,6 @@ Los contenedores flat rack están diseñados para dar cabida a todas aquellas ca
 >Mercancías muy pesadas que deben ser cargadas en el contenedor con grúas o equipamientos especializados. Un ejemplo típico de mercancías transportadas en flat rack son las de la industria de la maquinaria.
 
 >Mercancías con una altura superior a la de un contenedor de 20 o 40 pies High Cube o con volúmenes muy irregulares, como vehículos industriales o tuberías.
-
-Dimensiones del contenedor        | Ancho[m] | Alto[m]  | Largo[m] |
-------------- | -------------
-Exterior   | N/A | 2.3 | 6.1
-Interior  | N/A | 2.3 | 6.0
-
-Peso y Volumen soportado        | Peso max[Kg] | Volumen[m3]
-------------- | -------------
-   | 45000 | 33
 
                 
 ----
