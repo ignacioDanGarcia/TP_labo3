@@ -36,12 +36,6 @@ El trabajo práctico constará de puntos de control en fechas específicas y una
 
 # INFORMACIÓN
 
-**Índice**
-
-[TOCM]
-
-[TOC]
-
 ## Introducción
 Una empresa que se dedica al transporte de containers desea desarrollar una aplicación que le permita gestionar su negocio. La empresa cuenta con una flota de barcos y camiones que le permiten transportar los mencionados containers entre distintos paises donde la empresa posee sedes.
 
