@@ -11,7 +11,7 @@ Que los alumnos/as comprendan la importancia del trabajo en equipo para llevar a
 #### Técnicas y herramientas
 Que los alumnos/as comiencen a utilizar, o incrementen sus conocimientos sobre, técnicas y herramientas de desarrollo de software actualmente utilizadas en la industria.
 
-##Forma de entrega y evaluación
+## Forma de entrega y evaluación
 El trabajo práctico debe estar versionado en un repositorio de código (github o gitlab).
 El trabajo práctico será evaluado tanto en forma grupal como en forma individual. Para lograr esto, cada equipo debe realizar una presentación grupal del trabajo, para lo cual deberán presentar el mencionado repositorio con el código y documentación de la solución. En lo que respecta a la evaluación individual, se evaluarán los aportes de cada integrante del equipo dentro del repositorio. En caso de que alguno de los integrantes del grupo no demuestre haberse comprometido con el trabajo grupal se le realizará un coloquio en el que deberá defender la solución propuesta.
 El trabajo práctico constará de puntos de control en fechas específicas y una entrega final.
