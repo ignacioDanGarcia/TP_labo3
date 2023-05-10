@@ -1,5 +1,5 @@
-from abc import ABC
-
+from abc import ABC,abstractmethod
+from Medidas_contenedores import Medidas
 
 class Contenedor(ABC):
 
@@ -9,13 +9,13 @@ class Contenedor(ABC):
     def __init__(self, id, precio_transporte_carga):
         self.id = id
         self.precio_transporte_carga = precio_transporte_carga
-        self.volumen = 0.0
-        self.peso = 0.0
+        self.volumen_max = 0.0
+        self.peso_max = 0.0
         self.medidas_interior = None
         self.medidas_exterior = None
     
     
-    @abc.abstractmethod
+    @abstractmethod
     def getVolumen(self):
         pass
 
