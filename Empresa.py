@@ -31,7 +31,7 @@ class Empresa:
         return random.randint(1, 20000)
     
     def definirPrecioViaje(Camion, contenedor):
-        #implementacion
+        #peso por transportar de cada contenedor dentro de un barco + el precio de la carga
         pass
     def definirPrecioViaje(Barco, listaContenedores):
         #implementacion
