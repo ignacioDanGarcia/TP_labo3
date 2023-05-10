@@ -9,4 +9,5 @@ class Contenedor_Basico_Estandar(Contenedor):
         self.medidas_interior = Medidas(6.0,2.35,2.3)
         self.peso_max = 24000
         self.volumen_max = 32.6
+        self.carga = None
     

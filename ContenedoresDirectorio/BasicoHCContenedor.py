@@ -10,5 +10,6 @@ class BasicoHCContenedor(Contenedor):
         self.medidas_interior = Medidas(12.0,2.35,2.3)
         self.volumen_max = 67.7
         self.peso_max = 32500
+        self.carga = None
        
     

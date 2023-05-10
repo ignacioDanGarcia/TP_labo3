@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from Medidas_contenedores import Medidas
 
 class Contenedor(ABC):
@@ -11,6 +11,7 @@ class Contenedor(ABC):
         self.peso_max = 0.0
         self.medidas_interior = None
         self.medidas_exterior = None
+        self.carga = None
 
     def get_medidas_interior(self):
         return self.medidas_interior
@@ -29,3 +30,11 @@ class Contenedor(ABC):
     
     def get_peso_max(self):
         return self.peso_max
+    
+    @abstractmethod
+    def verificar_carga(self, carga):
+        pass
+
+    def cargar(self, carga):
+        if self.verificar_carga(carga):
+            self.carga = carga

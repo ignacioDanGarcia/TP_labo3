@@ -9,4 +9,5 @@ class FlatRackContenedor(Contenedor):
         self.medidas_interior = Medidas(6.0,100000,2.3)
         self.volumen_max = 33
         self.peso_max = 45000
+        self.carga = None
     
