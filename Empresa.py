@@ -1,4 +1,4 @@
-from Vehiculos import Barcos, Camion
+import Barco
 from Contenedores import Contenedores
 from Pedidos import Pedidos
 from MetodosViajes import MetodosViajes
@@ -10,13 +10,12 @@ Esta clase es la que deberia controlar todo calculo. En el diagrama no la habiam
 Pero para definir precios de viajes, calcular kilometros, aceptar y gestionar pedidos, creo
 que de eso se deberia encargar esta clase.
 """
-    
 
 class Empresa:
-    def __init__(self):
-        self.cantCamiones = 5
-        self.camiones = [1, 2, 3, 4, 5]
-        #barcos ilimitados
+    def __init__(self, camiones, barcos):
+        self.camiones = camiones
+        self.barcos = barcos
+        #para instanciar la empresa le paso como parametro la lista de barcos y camiones
         
         
     def moduloGPS():

@@ -1,46 +1,18 @@
-import abc #para hacerla clase abstracta
+from abc import ABC
 
-class Medidas:
-    def __init__(self, largoInterior, anchoInterior, altoInterior, largoExt, anchoExt, altoExt):
-        self.largoInterior = largoInterior
-        self.anchoInterior = anchoInterior
-        self.altoInterior = altoInterior
-        self.largoExt = largoExt
-        self.anchoExt = anchoExt
-        self.altoExt = altoExt
-"""
-creo que debemos usar la clase crga, hay una regla de negocio de no cargar una carga que supere la medidas del container
-class Carga:
-    def __init__(self, medidas, precio):
-        self.medidas = madidas
-        self.precio = precio
-        
-class Contenedores(abc.ABC):
-    
-    def __init__(self, id, volumen, peso, medidas):
-        self.id = id
-        self.volumen = volumen
-        self.peso = peso
-        self.medidas = medidas
-    
-    
-    @abc.abstractmethod
-    def getVolumen(self):
-        pass
-        
-    @abc.abstractmethod
-    def cargar(self, carga):
-        pass
-"""
 
-class Contenedores(abc.ABC):
+class Contenedor(ABC):
+
+    #Cada contenedor define un precio base que se debe pagar para transportar una determinada carga.
+    # a esto debe sumarse el precio que se debe pagar por la carga, este precio se define en carga
     
-    def __init__(self, id, volumen, precioCarga, peso, medidas):
+    def __init__(self, id, precio_transporte_carga):
         self.id = id
-        self.volumen = volumen
-        self.precioCarga = precioCarga
-        self.peso = peso
-        self.medidas = medidas
+        self.precio_transporte_carga = precio_transporte_carga
+        self.volumen = 0.0
+        self.peso = 0.0
+        self.medidas_interior = None
+        self.medidas_exterior = None
     
     
     @abc.abstractmethod
