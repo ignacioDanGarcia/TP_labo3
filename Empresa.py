@@ -37,3 +37,7 @@ class Empresa:
     def definirPrecioViaje(Barco, listaContenedores):
         #implementacion
         pass
+
+    def prueba2(self):
+        #otra prueba
+        pass
