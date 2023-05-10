@@ -1,7 +1,12 @@
-from ..Contenedores import Contenedores
+from Contenedores import Contenedor
+from Medidas_contenedores import Medidas
 
 
-class FlatRackContenedor(Contenedores):
-    def __init__(self, id, volumen, precioCarga, peso, medidas):
-        super().__init__(id, volumen, peso, precioCarga, medidas)
+class FlatRackContenedor(Contenedor):
+    def __init__(self,id, precio_transporte):
+        super().__init__(id, precio_transporte)
+        self.medidas_exterior = Medidas(6.1,100000,2.3)
+        self.medidas_interior = Medidas(6.0,100000,2.3)
+        self.volumen_max = 33
+        self.peso_max = 45000
     
