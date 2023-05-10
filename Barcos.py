@@ -8,15 +8,16 @@ class Barco(ABC):
         self.peso_max = peso_max
         self.cant_contenedores_max = cant_contenedores_max
         self.kmRecorrido = 0
-
         #saque las vriables de medidas interior y exterior ya que el enunciado solo habla de las medidas de 
         # los contenedores contenedores.
-        #contenedores:Todos los barcos poseen una estructura especializada que permite organizar, asegurar 
-        # y transportar los contenedores. En el caso de los barcos de tipo básico, dicha estructura sólo
-        #  está diseñada para soportar contenedores cuyas dimensiones coincidan con las de un contenedor de 
-        # tipo básico.mientras que en el caso de los barcos especializados dicha estructura permite transportar 
-        # cualquier tipo de contenedor cuyas medidas sean superiores a las de un contenedor básico. 
-        #este punto lo trato en el metodo puede_cargar_contenedor(self, contenedor):
+
+
+        #Un container con material especial (explosivos, desechos químicos o radioactivos) 
+        # sólo puede ser transportado por un barco diseñado para tal fin.
+        #los barcos de tipo básico, soportan contenedores con medidas del tipo basico
+        # los barcos soportan cualquier contenedor cuyas medidas sean mayores a las de un contenedor básico. 
+        #mi idea es resolver eso en puee_cargar_contenedor (cheque las medidas)
+        
     @abstractmethod
     def puede_cargar_contenedor(self, contenedor):
         pass

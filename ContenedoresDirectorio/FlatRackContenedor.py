@@ -10,4 +10,8 @@ class FlatRackContenedor(Contenedor):
         self.volumen_max = 33
         self.peso_max = 45000
         self.carga = None
+
+    def verificar_carga(self, carga):
+        carga_verificada = False
+        
     
