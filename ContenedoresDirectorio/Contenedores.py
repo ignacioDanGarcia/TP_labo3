@@ -12,6 +12,7 @@ class Contenedor(ABC):
         self.medidas_interior = None
         self.medidas_exterior = None
         self.carga = None
+
         #algo hay que hacer con este punto:
         # Un contenedor sin características especiales no puede transportar material especial.
 
@@ -35,9 +36,16 @@ class Contenedor(ABC):
     
     #Cualquier carga cuyas  medidas o peso supere lo definido en el container no podrá 
     # ser trasladada en el mismo.
-    @abstractmethod
     def verificar_carga(self, carga):
-        pass
+        no_supera_medidas = False
+        no_supera_peso_max = False
+        if self.medidas_interior.comparar_medidas(carga.get_medidas()):
+            no_supera_medidas = True
+
+        if carga.get_peso() < self.peso_max:
+            no_supera_peso_max = True
+
+        return no_supera_peso_max and no_supera_medidas
 
     
     def cargar(self, carga):
