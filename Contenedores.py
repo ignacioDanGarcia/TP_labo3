@@ -47,7 +47,5 @@ class Contenedores(abc.ABC):
     def getVolumen(self):
         pass
 
-    def prueba(self):
-        #esto es una prueba de repositorio remoto
-        pass
+
     

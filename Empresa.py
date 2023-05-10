@@ -38,6 +38,3 @@ class Empresa:
         #implementacion
         pass
 
-    def prueba2(self):
-        #otra prueba
-        pass
