@@ -11,5 +11,8 @@ class BasicoHCContenedor(Contenedor):
         self.volumen_max = 67.7
         self.peso_max = 32500
         self.carga = None
+
+    def verificar_carga(self, carga):
+        if self.medidas_exterior
        
     

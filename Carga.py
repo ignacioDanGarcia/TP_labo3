@@ -9,3 +9,9 @@ class Carga:
         #esto creo debe estar en otra clase para implementar principio de responsabiliddad unica
         pass
 
+    def get_medidas(self):
+        return self.medidas
+    
+    def get_precio(self):
+        return self.precio
+

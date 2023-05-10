@@ -12,17 +12,19 @@ class Barco(ABC):
         # los contenedores contenedores.
 
 
-        #Un container con material especial (explosivos, desechos químicos o radioactivos) 
+        #CONTAINER MATERIAL ESPECIAL (explosivos, desechos químicos o radioactivos) 
         # sólo puede ser transportado por un barco diseñado para tal fin.
         #los barcos de tipo básico, soportan contenedores con medidas del tipo basico
         # los barcos soportan cualquier contenedor cuyas medidas sean mayores a las de un contenedor básico. 
         #mi idea es resolver eso en puee_cargar_contenedor (cheque las medidas)
-        
+
+    #chequeo el material del contenedor y si la capacidad max de contenedores no esta cubierta
+    # si se supera el max de contenedores agregar excepcion  
     @abstractmethod
     def puede_cargar_contenedor(self, contenedor):
         pass
 
     @abstractmethod
     def cargar(self, carga):
-        #redefinir en cada clase que ereda de barco
+        #redefinir en cada clase que hereda de barco
         pass

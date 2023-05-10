@@ -33,12 +33,13 @@ class Contenedor(ABC):
     def get_peso_max(self):
         return self.peso_max
     
-    #Cualquier carga cuyas dimensiones, volumen o peso supere lo definido en el container no podrá 
+    #Cualquier carga cuyas  medidas o peso supere lo definido en el container no podrá 
     # ser trasladada en el mismo.
     @abstractmethod
     def verificar_carga(self, carga):
         pass
 
+    
     def cargar(self, carga):
         if self.verificar_carga(carga):
             self.carga = carga
