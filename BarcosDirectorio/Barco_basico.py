@@ -1,6 +1,8 @@
-from ContenedoresDirectorio.Contenedor_basico_interfaz import Cont_basico_interfaz
 from Excepciones.exceptions import *
-from Barcos import Barco
+from BarcosDirectorio.Barcos import Barco
+import sys
+sys.path.insert(0,'ContenedoresDirectorio\Contenedor_basico_interfaz.py')
+from ContenedoresDirectorio.Contenedor_basico_interfaz import Cont_basico_interfaz
 
 class Barco_basico(Barco):
     def __init__(self, id, peso_max, cant_contenedores_max, lleva_mat_esp):

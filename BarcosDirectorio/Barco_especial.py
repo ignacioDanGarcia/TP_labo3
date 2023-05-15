@@ -1,5 +1,5 @@
-from Barcos import Barco
-from Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_exception, Material_no_compatible_con_barco_Exceptionn, Peso_excedido_exception
+from BarcosDirectorio.Barcos import Barco
+from BarcosDirectorio.Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_exception, Material_no_compatible_con_barco_Exceptionn, Peso_excedido_exception
 
 class Barco_especial(Barco):
     def __init__(self, id, peso_max, cant_contenedores_max, lleva_mat_esp):
@@ -9,8 +9,9 @@ class Barco_especial(Barco):
         if not self.lleva_mat_esp and carga.get_mat_especial():
             raise Material_no_compatible_con_barco_Exceptionn("Este barco no puede llevar el material que se intenta cargar.")
         return True
+    
     def tiene_lugar(self,carga):
-        if self.contenedores.size() == self.cant_contenedores_max:
+        if len(self.contenedores) == self.cant_contenedores_max:
             raise Cantidad_contenedores_maxima_alcanzada_exception("El barco está lleno. No es posible cargar el contenedor.")
         
         if ( carga.get_peso() + self.obtener_peso_actual() )> self.peso_max:

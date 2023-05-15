@@ -1,5 +1,7 @@
-from Cargable import Cargable
+from BarcosDirectorio.Cargable import Cargable
 from abc import ABC, abstractmethod
+
+
 class Barco(Cargable, ABC):
     def __init__(self, id, peso_max, cant_contenedores_max, lleva_mat_esp):
         self.__id = id
@@ -64,19 +66,11 @@ class Barco(Cargable, ABC):
     contenedores = property(get_contenedores,set_contenedores)
         
     
+    
+    
     def obtener_peso_actual(self):
         peso = 0
         for contenedor in self.contenedores:
             peso += contenedor.get_carga().get_peso()
         return peso
     
-    #chequeo el material del contenedor y si la capacidad max de contenedores no esta cubierta
-    # si se supera el max de contenedores agregar excepcion  
-    @abstractmethod
-    def puede_cargar_contenedor(self, contenedor):
-        pass
-
-    @abstractmethod
-    def cargar(self, carga):
-        #redefinir en cada clase que hereda de barco
-        pass
