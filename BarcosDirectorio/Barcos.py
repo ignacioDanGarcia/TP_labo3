@@ -1,6 +1,5 @@
-from abc import ABC, abstractmethod
-from Contenedores import Contenedor
 from Cargable import Cargable
+from abc import ABC, abstractmethod
 class Barco(Cargable, ABC):
     def __init__(self, id, peso_max, cant_contenedores_max, lleva_mat_esp):
         self.__id = id

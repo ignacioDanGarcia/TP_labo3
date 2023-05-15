@@ -1,7 +1,6 @@
-from Barcos_directorio.Barcos import Barco
-from Cont_basico_interfaz import Cont_basico_interfaz
-from Barcos_directorio.Excepciones.exceptions import *
-
+from ContenedoresDirectorio.Contenedor_basico_interfaz import Cont_basico_interfaz
+from Excepciones.exceptions import *
+from Barcos import Barco
 
 class Barco_basico(Barco):
     def __init__(self, id, peso_max, cant_contenedores_max, lleva_mat_esp):
@@ -16,9 +15,15 @@ class Barco_basico(Barco):
         return True
         
     def tiene_lugar(self, carga):
-        if ( carga.get_peso() + self.obtener_peso_actual() )> self.peso_max:
-            raise Peso_excedido_exception(f"Este peso es mucho para el barco. Sobran {self.obtener_peso_actual() + carga.get_peso() - self.peso_max} kgs")
-        
         if self.contenedores.size() == self.cant_contenedores_max:
             raise Cantidad_contenedores_maxima_alcanzada_exception("El barco está lleno. No es posible cargar el contenedor.")
+        
+        if ( carga.get_peso() + self.obtener_peso_actual() )> self.peso_max:
+            raise Peso_excedido_exception(f"Este peso es mucho para el barco. Sobran {self.obtener_peso_actual() + carga.get_peso() - self.peso_max} kgs")
+        return True
+    
+    def cargar(self, carga):
+        if self.puede_cargar_esta_carga(carga) and self.tiene_lugar(carga):
+            self.contenedores.append(carga)
+        
     
