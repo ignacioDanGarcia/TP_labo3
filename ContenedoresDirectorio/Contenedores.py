@@ -52,3 +52,6 @@ class Contenedor(ABC):
     def cargar(self, carga):
         if self.verificar_carga(carga):
             self.carga = carga
+    
+    def peso_contenedor(self):
+        return self.carga.get_peso()

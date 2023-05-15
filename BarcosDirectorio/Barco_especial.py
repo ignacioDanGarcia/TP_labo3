@@ -11,9 +11,14 @@ class Barco_especial(Barco):
         return True
     
     def tiene_lugar(self,carga):
-        if len(self.contenedores) == self.cant_contenedores_max:
+        if len(self.contenedores) >= self.cant_contenedores_max:
             raise Cantidad_contenedores_maxima_alcanzada_exception("El barco está lleno. No es posible cargar el contenedor.")
         
-        if ( carga.get_peso() + self.obtener_peso_actual() )> self.peso_max:
-            raise Peso_excedido_exception(f"Este peso es mucho para el barco. Sobran {self.obtener_peso_actual() + carga.get_peso() - self.peso_max} kgs")
+        if ( carga.peso_contenedor() + self.obtener_peso_actual() )> self.peso_max:
+            raise Peso_excedido_exception(f"Este peso es mucho para el barco. Sobran {self.obtener_peso_actual() + carga.peso_contenedor() - self.peso_max} kgs")
+        return True
     
+    
+    def cargar(self, carga):
+        if self.puede_cargar_esta_carga(carga) and self.tiene_lugar(carga):
+            self.contenedores.append(carga)
