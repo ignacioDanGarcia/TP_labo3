@@ -22,4 +22,3 @@ class Barco_especial(Barco):
     def cargar(self, carga):
         if self.puede_cargar_esta_carga(carga) and self.tiene_lugar(carga):
             self.contenedores.append(carga)
-            return True
