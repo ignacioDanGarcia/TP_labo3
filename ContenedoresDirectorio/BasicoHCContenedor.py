@@ -1,4 +1,4 @@
-from Cont_basico_interfaz import Barco_basico_interfaz, Cont_basico_interfaz
+from Contenedor_basico_interfaz import Cont_basico_interfaz
 from Contenedores import Contenedor
 from Medidas_contenedores import Medidas
 
