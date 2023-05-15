@@ -15,6 +15,7 @@ class Contenedor(ABC):
 
         #algo hay que hacer con este punto:
         # Un contenedor sin características especiales no puede transportar material especial.
+        #Creo que con un booleano de si es apto para material especial en el contructor podría ir este punto así 
 
     def get_medidas_interior(self):
         return self.medidas_interior

@@ -1,4 +1,4 @@
-from Barcos import Barco
+from Barcos_directorio.Barcos import Barco
 from Contenedores import Contenedores
 from Pedidos import Pedidos
 from MetodosViajes import MetodosViajes
