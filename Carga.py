@@ -1,8 +1,9 @@
 class Carga:
 
-    def __init__(self, medidas):
+    def __init__(self, medidas, peso):
         self.medidas = medidas
         self.precio = 0.0
+        self.peso = peso
 
     def definir_precio_carga(self):
         #se define segun la carga: carga especial o simple
@@ -18,4 +19,6 @@ class Carga:
     
     def get_precio(self):
         return self.precio
+    def get_peso(self):
+        return self.peso
 

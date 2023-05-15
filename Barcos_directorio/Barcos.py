@@ -9,6 +9,7 @@ class Barco(Cargable, ABC):
         self.__cant_contenedores_max = cant_contenedores_max
         self.__kmRecorridos = 0
         self.__lleva_mat_esp = lleva_mat_esp
+        self.__contenedores = []
         
         #saque las vriables de medidas interior y exterior ya que el enunciado solo habla de las medidas de 
         # los contenedores contenedores.
@@ -55,9 +56,21 @@ class Barco(Cargable, ABC):
         return self.__kmRecorridos
     def set_km_recorridos(self, kms):
         self.__kmRecorridos = kms
+    km_recorridos = property(get_km_recorridos,set_km_recorridos)
+    
+    def get_contenedores(self):
+        return self.__contenedores
+    def set_contenedores(self,contenedores):
+        self.__contenedores = contenedores
+    contenedores = property(get_contenedores,set_contenedores)
         
-        
-        
+    
+    def obtener_peso_actual(self):
+        peso = 0
+        for contenedor in self.contenedores:
+            peso += contenedor.get_carga().get_peso()
+        return peso
+    
     #chequeo el material del contenedor y si la capacidad max de contenedores no esta cubierta
     # si se supera el max de contenedores agregar excepcion  
     @abstractmethod
