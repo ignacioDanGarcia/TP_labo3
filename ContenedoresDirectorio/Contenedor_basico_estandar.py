@@ -1,9 +1,8 @@
-from Contenedor_basico_interfaz import Cont_basico_interfaz
 from Contenedores import Contenedor
 from Medidas_contenedores import Medidas
 
 
-class Contenedor_Basico_Estandar(Contenedor, Cont_basico_interfaz):
+class Contenedor_Basico_Estandar(Contenedor):
     def __init__(self,id, precio_transporte):
         super().__init__(id, precio_transporte)
         self.medidas_exterior = Medidas(6.1,2.45,2.6)
