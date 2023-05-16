@@ -1,15 +1,15 @@
 from Excepciones.exceptions import *
 from BarcosDirectorio.Barcos import Barco
 import sys
-sys.path.insert(0,'ContenedoresDirectorio\Contenedor_basico_interfaz.py')
-from ContenedoresDirectorio.Contenedor_basico_interfaz import Cont_basico_interfaz
+sys.path.insert(0,'ContenedoresDirectorio\Contenedor_basico_abstracto.py')
+from Contenedor_basico_abstracta import Cont_basico_abstracto
 
 class Barco_basico(Barco):
     def __init__(self, id, peso_max, cant_contenedores_max, lleva_mat_esp):
         super().__init__(id, peso_max, cant_contenedores_max, lleva_mat_esp)
     
     def puede_cargar_esta_carga(self, carga):
-        if not (isinstance(carga, Cont_basico_interfaz)):
+        if not (isinstance(carga, Cont_basico_abstracto)):
             raise Contenedor_no_aceptado_exception("Este barco solo puede llevar contenedores básicos")
         #Hay que ver como manejamos en la carga si lleva alguna carga especial o no.
         if not self.lleva_mat_esp and carga.get_mat_especial():
