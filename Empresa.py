@@ -1,4 +1,5 @@
 from BarcosDirectorio.Barcos import Barco
+from Camion import Camion
 from Contenedores import Contenedores
 from Pedidos import Pedidos
 from MetodosViajes import MetodosViajes
@@ -13,10 +14,14 @@ que de eso se deberia encargar esta clase.
 """
 
 class Empresa:
-    def __init__(self, camiones, barcos):
-        self.camiones = camiones
+    def __init__(self, barcos):
+        self.camiones = []
+        for i in range(5):
+            camion = Camion(i)
+            self.camiones.append(camion)
         self.barcos = barcos
-        #para instanciar la empresa le paso como parametro la lista de barcos y camiones
+        # barcos seria una lista
+        # para instanciar la empresa le paso como parametro la lista de barcos y camiones
         
         
     def moduloGPS():
