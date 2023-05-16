@@ -3,7 +3,7 @@ from Camion import Camion
 from Contenedores import Contenedores
 from Pedidos import Pedidos
 from MetodosViajes import MetodosViajes
-from BarcosDirectorio.Excepciones import No_hay_camiones_disponibles
+from BarcosDirectorio.Excepciones.exceptions import No_hay_camiones_disponibles
 
 import random
 
@@ -35,6 +35,14 @@ class Empresa:
         """
         
         return random.randint(1, 20000)
+    
+    def camion_disponible(self):          
+        for camion in self.camiones:
+            if (camion.disponible):
+                #segun la teoria, esto afecta a la lista de empresa de self.camiones en cualquier parte del codigo
+                camion.disponible = False
+                return camion
+        raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")
     
     def definirPrecioViaje(Camion, contenedor):
         #peso por transportar de cada contenedor dentro de un barco + el precio de la carga
