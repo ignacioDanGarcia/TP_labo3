@@ -1,9 +1,7 @@
-from BarcosDirectorio.Barcos import Barco
-from Camion import Camion
+from Barcos import Barco
 from Contenedores import Contenedores
 from Pedidos import Pedidos
 from MetodosViajes import MetodosViajes
-from BarcosDirectorio.Excepciones.exceptions import No_hay_camiones_disponibles
 
 import random
 
@@ -14,14 +12,10 @@ que de eso se deberia encargar esta clase.
 """
 
 class Empresa:
-    def __init__(self, barcos):
-        self.camiones = []
-        for i in range(5):
-            camion = Camion(i)
-            self.camiones.append(camion)
+    def __init__(self, camiones, barcos):
+        self.camiones = camiones
         self.barcos = barcos
-        # barcos seria una lista
-        # para instanciar la empresa le paso como parametro la lista de barcos y camiones
+        #para instanciar la empresa le paso como parametro la lista de barcos y camiones
         
         
     def moduloGPS():
@@ -35,14 +29,6 @@ class Empresa:
         """
         
         return random.randint(1, 20000)
-    
-    def camion_disponible(self):          
-        for camion in self.camiones:
-            if (camion.disponible):
-                #segun la teoria, esto afecta a la lista de empresa de self.camiones en cualquier parte del codigo
-                camion.disponible = False
-                return camion
-        raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")
     
     def definirPrecioViaje(Camion, contenedor):
         #peso por transportar de cada contenedor dentro de un barco + el precio de la carga

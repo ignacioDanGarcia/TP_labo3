@@ -15,7 +15,6 @@ class Contenedor(ABC):
 
         #algo hay que hacer con este punto:
         # Un contenedor sin características especiales no puede transportar material especial.
-        #Creo que con un booleano de si es apto para material especial en el contructor podría ir este punto así 
 
     def get_medidas_interior(self):
         return self.medidas_interior
@@ -52,6 +51,3 @@ class Contenedor(ABC):
     def cargar(self, carga):
         if self.verificar_carga(carga):
             self.carga = carga
-    
-    def peso_contenedor(self):
-        return self.carga.get_peso()
