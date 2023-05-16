@@ -3,7 +3,8 @@ from Camion import Camion
 from Contenedores import Contenedores
 from Pedidos import Pedidos
 from MetodosViajes import MetodosViajes
-from BarcosDirectorio.Excepciones.exceptions import No_hay_camiones_disponibles
+# corregir directorio de estas dos
+from BarcosDirectorio.Excepciones.exceptions import No_hay_camiones_disponibles, distancia_incorrecta
 
 import random
 
@@ -43,6 +44,34 @@ class Empresa:
                 camion.disponible = False
                 return camion
         raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")
+    
+    def calcular_precio_adicional(self, distancia, carga, contenedor):
+        # distancia se llena con un num del moduloGPS
+        # carga se llena con un objeto de la clase carga
+        if distancia < 100 and contenedor.medidas.comparar_medidas(carga.medidas):
+            precio_adicional = 200000
+        elif distancia < 100 and not contenedor.medidas.comparar_medidas(carga.medidas):
+            precio_adicional = 1000 * (carga.peso // 100)
+        elif distancia < 1000 and contenedor.medidas.comparar_medidas(carga.medidas):
+            precio_adicional = 210000
+        elif distancia < 1000 and not contenedor.medidas.comparar_medidas(carga.medidas):
+            precio_adicional = 1100 * (carga.peso // 100)
+        elif distancia < 10000 and contenedor.medidas.comparar_medidas(carga.medidas):
+            precio_adicional = 230000
+        elif distancia < 10000 and not contenedor.medidas.comparar_medidas(carga.medidas):
+            precio_adicional = 1150 * (carga.peso // 100)
+        elif distancia > 10000 and contenedor.medidas.comparar_medidas(carga.medidas):
+            precio_adicional = 250000
+        elif distancia > 10000 and not contenedor.medidas.comparar_medidas(carga.medidas):
+            precio_adicional = 1500 * (carga.peso // 100)
+        else:
+            raise distancia_incorrecta("La distancia especificada no cumplen con ningún caso")
+
+        if contenedor.carga is not None:
+            precio_adicional += contenedor.precio_transporte
+        
+        return precio_adicional
+    
     
     def definirPrecioViaje(Camion, contenedor):
         #peso por transportar de cada contenedor dentro de un barco + el precio de la carga

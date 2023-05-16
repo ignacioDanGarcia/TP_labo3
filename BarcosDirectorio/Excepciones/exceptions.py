@@ -32,3 +32,16 @@ class No_hay_camiones_disponibles(Exception):
         self.mensaje = mensaje
     def __str__(self) -> str:
         return self.mensaje
+    
+class distancia_incorrecta(Exception):
+    def __init__(self, mensaje) -> None:
+        self.mensaje = mensaje
+    def __str__(self) -> str:
+        return self.mensaje
+    
+# excepcion contenedor basico abstracto
+class el_contenedor_basico_no_puede_mat_especial(Exception):
+    def __init__(self, mensaje) -> None:
+        self.mensaje = mensaje
+    def __str__(self) -> str:
+        return self.mensaje
