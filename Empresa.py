@@ -1,6 +1,6 @@
 from BarcosDirectorio.Barcos import Barco
 from Camion import Camion
-from Contenedores import Contenedores
+from Contenedores import Contenedor
 from Pedidos import Pedidos
 from MetodosViajes import MetodosViajes
 # corregir directorio de estas dos
@@ -99,3 +99,6 @@ class Empresa:
         #implementacion
         pass
 
+    def misma_carga_mas_veces(self):
+        # falta implementar
+        pass
