@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from Medidas_contenedores import Medidas
-from Excepciones.exceptions import contenedor_no_puede_llevar_carga
+from Excepciones.exceptions import contenedor_no_puede_llevar_carga, medidas_incorrectas
 
 class Contenedor(ABC):
     
@@ -42,19 +42,22 @@ class Contenedor(ABC):
         no_supera_medidas = False
         no_supera_peso_max = False
         no_supera_vol_max = False
-        if self.medidas_interior.comparar_medidas(carga.get_medidas()):
-            no_supera_medidas = True
+        try:
+            if self.medidas_interior.comparar_medidas(carga.get_medidas()):
+                no_supera_medidas = True
 
-        if carga.get_peso() < self.get_peso_max():
-            no_supera_peso_max = True
+            if carga.get_peso() < self.get_peso_max():
+                no_supera_peso_max = True
 
-        if carga.get_volumen() < self.get_volumen_max():
-            no_supera_vol_max = True
-        
-        if (no_supera_peso_max and no_supera_medidas and no_supera_vol_max):
-            return True
-        # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
-        raise contenedor_no_puede_llevar_carga("La carga no puede ser transportada por este contenedor")
+            if carga.get_volumen() < self.get_volumen_max():
+                no_supera_vol_max = True
+            
+            if (no_supera_peso_max and no_supera_medidas and no_supera_vol_max):
+                return True
+        except medidas_incorrectas as e:
+            print(str(e))
+        else:
+            raise contenedor_no_puede_llevar_carga("La carga no puede ser transportada por este contenedor")
 
     
     def cargar(self, carga):

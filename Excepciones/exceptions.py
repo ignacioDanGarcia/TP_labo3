@@ -52,3 +52,10 @@ class contenedor_no_puede_llevar_carga(Exception):
         self.mensaje = mensaje
     def __str__(self) -> str:
         return self.mensaje
+
+# Excepciones de medidas contenedor
+class medidas_incorrectas(Exception):
+    def __init__(self, mensaje) -> None:
+        self.mensaje = mensaje
+    def __str__(self) -> str:
+        return self.mensaje

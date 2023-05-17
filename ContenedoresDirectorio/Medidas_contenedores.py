@@ -1,3 +1,4 @@
+from Excepciones.exceptions import medidas_incorrectas
 class Medidas:
 
     def __init__(self, largo, ancho, alto):
@@ -22,13 +23,15 @@ class Medidas:
         largo = False
         ancho = False
 
-        if medidas.get_alto <= self.get_alto:
+        if 0 < medidas.get_alto <= self.get_alto:
             alto = True
         
-        if medidas.get_ancho <= self.get_ancho:
+        if 0 < medidas.get_ancho <= self.get_ancho:
             ancho = True
         
-        if medidas.get_largo <= self.get_largo:
+        if 0 < medidas.get_largo <= self.get_largo:
             largo = True
 
-        return alto and largo and ancho
+        if (alto and largo and ancho):
+            return True
+        raise medidas_incorrectas("La carga no puede ser transportada por este contenedor")
