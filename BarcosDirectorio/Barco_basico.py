@@ -21,8 +21,8 @@ class Barco_basico(Barco):
             # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
             raise Cantidad_contenedores_maxima_alcanzada_exception("El barco está lleno. No es posible cargar el contenedor.")
         
-        if ( carga.get_peso() + self.obtener_peso_actual() )> self.peso_max:
-            raise Peso_excedido_exception(f"Este peso es mucho para el barco. Sobran {self.obtener_peso_actual() + carga.get_peso() - self.peso_max} kgs")
+        if ( contenedor.get_peso() + self.obtener_peso_actual() )> self.peso_max:
+            raise Peso_excedido_exception(f"Este peso es mucho para el barco. Sobran {self.obtener_peso_actual() + contenedor.get_peso() - self.peso_max} kgs")
         return True
     
     def cargar(self, contenedor):
