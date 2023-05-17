@@ -4,7 +4,7 @@ from Contenedores import Contenedores
 from Pedidos import Pedidos
 from MetodosViajes import MetodosViajes
 # corregir directorio de estas dos
-from BarcosDirectorio.Excepciones.exceptions import No_hay_camiones_disponibles, distancia_incorrecta
+from Excepciones.exceptions import No_hay_camiones_disponibles, distancia_incorrecta
 
 import random
 
