@@ -16,15 +16,26 @@ que de eso se deberia encargar esta clase.
 
 class Empresa:
     def __init__(self, barcos):
-        self.camiones = []
+        self.__camiones = []
         for i in range(5):
             camion = Camion(i)
-            self.camiones.append(camion)
-        self.barcos = barcos
+            self.__camiones.append(camion)
+        self.__barcos = barcos
         # barcos seria una lista
         # para instanciar la empresa le paso como parametro la lista de barcos y camiones
         
-        
+    def get_barcos(self):
+        return self.__barcos
+    def set_barcos(self, barcos):
+        self.__barcos = barcos
+    barcos = property(get_barcos,set_barcos)
+    
+    def get_camiones(self):
+        return self.__camiones
+    def set_camiones(self, camiones):
+        self.__camiones = camiones
+    camiones = property(get_camiones,set_camiones)
+    
     def moduloGPS():
         """
         para "calcular" distancias
