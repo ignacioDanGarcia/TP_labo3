@@ -2,7 +2,7 @@ from Contenedor_basico_abstracta import Cont_basico_abstracto
 from Contenedores import Contenedor
 from Medidas_contenedores import Medidas
 
-class BasicoHCContenedor(Contenedor, Cont_basico_abstracto):
+class BasicoHCContenedor(Cont_basico_abstracto):
     
     def __init__(self,id, precio_transporte):
         super().__init__(id, precio_transporte)
