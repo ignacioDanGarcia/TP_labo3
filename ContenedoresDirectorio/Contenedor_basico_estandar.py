@@ -1,6 +1,6 @@
 from Contenedor_basico_abstracta import Cont_basico_abstracto
 from Contenedores import Contenedor
-from Medidas_contenedores import Medidas
+from Medidas import Medidas
 
 
 class Contenedor_Basico_Estandar(Contenedor, Cont_basico_abstracto):
