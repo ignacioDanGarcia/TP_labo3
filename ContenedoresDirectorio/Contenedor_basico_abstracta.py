@@ -15,5 +15,6 @@ class Cont_basico_abstracto(ABC):
     def verificar_carga(self, carga):
         super().verificar_carga(self, carga)
         if (carga.get_mat_especial() != None):
+            # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
             raise el_contenedor_basico_no_puede_mat_especial("Un contenedor basico no puede cargar un material especial")
         return True

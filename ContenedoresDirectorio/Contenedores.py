@@ -53,6 +53,7 @@ class Contenedor(ABC):
         
         if (no_supera_peso_max and no_supera_medidas and no_supera_vol_max):
             return True
+        # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
         raise contenedor_no_puede_llevar_carga("La carga no puede ser transportada por este contenedor")
 
     

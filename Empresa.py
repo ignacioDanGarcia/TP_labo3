@@ -43,6 +43,7 @@ class Empresa:
                 #segun la teoria, esto afecta a la lista de empresa de self.camiones en cualquier parte del codigo
                 camion.disponible = False
                 return camion
+        # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
         raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")
     
     def calcular_precio_adicional(self, distancia, carga, contenedor):
@@ -65,6 +66,7 @@ class Empresa:
         elif distancia > 10000 and contenedor.verificar_carga(carga) and not contenedor.medidas.comparar_medidas(carga.medidas):
             precio_adicional = 1500 * (carga.peso // 100)
         else:
+            # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
             raise distancia_incorrecta("La distancia especificada no cumplen con ningún caso")
 
         if contenedor.carga is not None:

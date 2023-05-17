@@ -7,14 +7,17 @@ class Barco_especial(Barco):
     
     def puede_cargar_esta_carga(self, carga):
         if not self.lleva_mat_esp and carga.get_mat_especial():
+            # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
             raise Material_no_compatible_con_barco_Exceptionn("Este barco no puede llevar el material que se intenta cargar.")
         return True
     
     def tiene_lugar(self,carga):
         if len(self.contenedores) >= self.cant_contenedores_max:
+            # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
             raise Cantidad_contenedores_maxima_alcanzada_exception("El barco está lleno. No es posible cargar el contenedor.")
         
         if ( carga.peso_contenedor() + self.obtener_peso_actual() )> self.peso_max:
+            # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
             raise Peso_excedido_exception(f"Este peso es mucho para el barco. Sobran {self.obtener_peso_actual() + carga.peso_contenedor() - self.peso_max} kgs")
         return True
     
