@@ -2,18 +2,28 @@ from Excepciones.exceptions import medidas_incorrectas
 class Medidas:
 
     def __init__(self, largo, ancho, alto):
-        self.largo = largo
-        self.ancho = ancho
-        self.alto = alto
+        self.__largo = largo
+        self.__ancho = ancho
+        self.__alto = alto
 
     def get_alto(self):
-        return self.alto
+        return self.__alto
+    def set_alto(self, al):
+        self.__alto = al
+    alto = property(get_alto,set_alto)
+    
     
     def get_ancho(self):
-        return self.ancho
+        return self.__ancho
+    def set_ancho(self, an):
+        self.__ancho = an
+    ancho = property(get_ancho,set_ancho)
     
     def get_largo(self):
-        return self.largo
+        return self.__largo
+    def set_largo(self,lar):
+        self.__largo = lar
+    largo = property(get_largo,set_largo)
     
     def comparar_medidas(self, medidas):
         #devuelve FAlSE si las medidas pasadas por parametro son mayores a las de la instancia
