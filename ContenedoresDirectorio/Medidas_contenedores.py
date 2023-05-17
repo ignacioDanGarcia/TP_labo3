@@ -34,4 +34,5 @@ class Medidas:
 
         if (alto and largo and ancho):
             return True
+        # excepcion catcheada en verificar_carga() de contenedor
         raise medidas_incorrectas("La carga no puede ser transportada por este contenedor")

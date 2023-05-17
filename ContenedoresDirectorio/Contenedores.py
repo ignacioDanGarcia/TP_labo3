@@ -57,6 +57,7 @@ class Contenedor(ABC):
         except medidas_incorrectas as e:
             print(str(e))
         else:
+            #excepcion catcheada en calcular_precio_adicional de empresa
             raise contenedor_no_puede_llevar_carga("La carga no puede ser transportada por este contenedor")
 
     
