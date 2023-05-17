@@ -1,3 +1,4 @@
+from Medidas import Medidas
 class Carga:
 
     def __init__(self, medidas, peso):

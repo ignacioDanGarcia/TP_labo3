@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Medidas_contenedores import Medidas
+from Medidas import Medidas
 from Excepciones.exceptions import contenedor_no_puede_llevar_carga, medidas_incorrectas
 
 class Contenedor(ABC):

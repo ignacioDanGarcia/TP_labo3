@@ -1,5 +1,5 @@
 from Contenedores import Contenedor
-from Medidas_contenedores import Medidas
+from Medidas import Medidas
 
 
 class FlatRackContenedor(Contenedor):
