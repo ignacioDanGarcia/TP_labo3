@@ -45,3 +45,10 @@ class el_contenedor_basico_no_puede_mat_especial(Exception):
         self.mensaje = mensaje
     def __str__(self) -> str:
         return self.mensaje
+    
+# excepciones contenedor abc
+class contenedor_no_puede_llevar_carga(Exception):
+    def __init__(self, mensaje) -> None:
+        self.mensaje = mensaje
+    def __str__(self) -> str:
+        return self.mensaje
