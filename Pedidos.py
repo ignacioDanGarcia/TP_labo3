@@ -3,11 +3,11 @@ import random
 from generar_id import generar_id
 
 class Pedidos:
+    gen = generar_id()
     def __init__(self, retiraEnPuerto, conteneCompleto, carga):
-        gen = generar_id()
         self.__retiraEnPuerto = retiraEnPuerto #bool
         self.__conteneCompleto = conteneCompleto #bool
-        self.__id = gen.generar_numeros_distintos()
+        self.__id = Pedidos.gen.generar_numeros_distintos()
         self.__carga = carga
         'pruebas de git'
     

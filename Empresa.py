@@ -20,7 +20,9 @@ class Empresa:
         for i in range(5):
             camion = Camion(i)
             self.__camiones.append(camion)
-        self.__barcos = barcos
+        for barco in barcos:
+            self.__barcos.append(barco)
+        
         # barcos seria una lista
         # para instanciar la empresa le paso como parametro la lista de barcos y camiones
         

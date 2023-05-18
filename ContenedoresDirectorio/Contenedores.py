@@ -1,12 +1,14 @@
 from abc import ABC, abstractmethod
 from Medidas import Medidas
 from Excepciones.exceptions import contenedor_no_puede_llevar_carga, medidas_incorrectas, no_existe_carga, distancia_incorrecta
+from generar_id import generar_id
 
 class Contenedor(ABC):
-    
+    gen = generar_id()
 
-    def __init__(self, id, mat_especial):
-        self.__id = id
+    def __init__(self, mat_especial):
+        
+        self.__id = Contenedor.gen.generar_numeros_distintos()
         self.__precio_adicional = 0 #Cada contenedor define un precio base que se debe pagar para transportar carga
         self.__volumen_max = 0.0
         self.__peso_max = 0.0
