@@ -33,5 +33,3 @@ class Pedidos:
     def set_carga(self, carga):
         self.__carga = carga
     carga = property(get_carga,set_carga)
-
-    #test Github lencinaNicolas (BORRAR)
