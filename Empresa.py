@@ -57,38 +57,7 @@ class Empresa:
         # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
         raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")
     
-    def calcular_precio_adicional(self, distancia, carga, contenedor):
-        # distancia se llena con un num del moduloGPS
-        # carga se llena con un objeto de la clase carga
-        try:
-            
-            if distancia < 100 and contenedor.verificar_carga(carga) and contenedor.medidas.comparar_medidas(carga.medidas):
-                precio_adicional = 200000
-            elif distancia < 100 and contenedor.verificar_carga(carga) and not contenedor.medidas.comparar_medidas(carga.medidas):
-                precio_adicional = 1000 * (carga.peso // 100)
-            elif distancia < 1000 and contenedor.verificar_carga(carga) and contenedor.medidas.comparar_medidas(carga.medidas):
-                precio_adicional = 210000
-            elif distancia < 1000 and contenedor.verificar_carga(carga) and not contenedor.medidas.comparar_medidas(carga.medidas):
-                precio_adicional = 1100 * (carga.peso // 100)
-            elif distancia < 10000 and contenedor.verificar_carga(carga) and contenedor.medidas.comparar_medidas(carga.medidas):
-                precio_adicional = 230000
-            elif distancia < 10000 and contenedor.verificar_carga(carga) and not contenedor.medidas.comparar_medidas(carga.medidas):
-                precio_adicional = 1150 * (carga.peso // 100)
-            elif distancia > 10000 and contenedor.verificar_carga(carga) and contenedor.medidas.comparar_medidas(carga.medidas):
-                precio_adicional = 250000
-            elif distancia > 10000 and contenedor.verificar_carga(carga) and not contenedor.medidas.comparar_medidas(carga.medidas):
-                precio_adicional = 1500 * (carga.peso // 100)
-            
-        except contenedor_no_puede_llevar_carga as e:
-            print(str(e))
-        else:
-            if (distancia is not None):
-                # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
-                raise distancia_incorrecta("La distancia especificada no cumplen con ningún caso")    
-            if contenedor.carga is not None:
-                precio_adicional += contenedor.precio_transporte
-        
-            return precio_adicional
+    
         
     
     
