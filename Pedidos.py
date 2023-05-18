@@ -12,6 +12,9 @@ class Pedidos:
         'pruebas de git'
     
     'Getters y setters:'
+    def get_id(self):
+        return self.__id
+    
     def get_retiraEnPuerto(self):
         return self.__retiraEnPuerto
     def set_retiraEnPuerto(self, ret):
@@ -24,11 +27,6 @@ class Pedidos:
         self.__conteneCompleto = completo
     conteneCompleto = property(get_conteneCompleto,set_conteneCompleto)
 
-    def get_id(self):
-        return self.__id
-    def set_id(self, id):
-        self.__id = id
-    id = property(get_id,set_id)
     
     def get_carga(self):
         return self.__carga

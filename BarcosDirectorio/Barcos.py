@@ -24,12 +24,7 @@ class Barco(Cargable, ABC):
         # los barcos soportan cualquier contenedor cuyas medidas sean mayores a las de un contenedor básico. 
         #mi idea es resolver eso en puee_cargar_contenedor (cheque las medidas)
     
-    #Agrego getters y setters.
-    def get_id(self):
-        return self.__id
-    def set_id(self):
-        self.__id = id
-    id = property(get_id,set_id)
+    'Agrego getters y setters'
     
     def get_peso_max(self):
         return self.__peso_max

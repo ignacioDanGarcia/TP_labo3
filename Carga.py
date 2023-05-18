@@ -12,6 +12,9 @@ class Carga:
         self.__mat_especial = mat_especial
     
     'Getters y setters'
+    def get_id(self):
+        return self.__id
+    
     def get_medidas(self):
         return self.__medidas
     def set_medidas(self,m):

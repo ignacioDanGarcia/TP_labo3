@@ -23,12 +23,39 @@ class Empresa:
         for barco in barcos:
             self.__barcos.append(barco)
         
+        # para puntos 3 y 4 de SE PIDE
         self.__barco_con_mas_km = None
         self.__barco_con_menos_km = None
         
-        # barcos seria una lista
-        # para instanciar la empresa le paso como parametro la lista de barcos y camiones
+        """
+        Para punto 2 de se pide podriamos hacer esto:
+        self.__contenedores = []
+        
+        si usamos esto para resolver el punto 2 podriamos hacer un metodo que recorra esta,
+        y guarde y devuelva la que mas alto tenga el counter de su variable: 
+        self.__cant_de_veces_comple_y_carga_unica
+        
+        Pero si usamos una lista de contenedores, para realizar o efectuar un viaje de un pedido
+        habria que recorrer esta lista de contenedores a ver si esta disponible o no, y si tiene
+        las caracteristicas necesarias como para llevarlo, y si ese no es el caso, pasar al
+        siguiente de la lista.
+        El problema con esto es que habria que reflexionar sobre el uso de excepciones en
+        por ejemplo, cuando un contenedor basico no puede llevar una carga porque. Dado que, entiendo
+        que si una de esas excepciones es catcheada, el programa finaliza ahi, por lo cual nunca llegaria
+        a analizar el siguiente contenedor de la lista.
+        
+        Si no queremos usar esta opcion, habria que ver como hacer para resolver el punto 2 de SE PIDE.
+        Y si usamos esta opcion, podriamos considerar raisear una excepcion cuando se termina de
+        recorrer la lista el problema es que ahi no sabremos porque no podemos usar los contenedores.
+        Aunque eso no esta tan mal, porque si pudiesemos, o si lo hariamos, tendriamos que ponernos a
+        explicar el porque no podemos usar un contenedor para cada contenedor de la lista de contenedores. Y
+        si tenemos mil contenedores puede llegar a ser algo tedioso e innecesario.
+        """
+
     'Getters y Setters'
+    def get_id(self):
+        return self.__id
+    
     def get_barcos(self):
         return self.__barcos
     def set_barcos(self, barcos):
@@ -45,13 +72,13 @@ class Empresa:
         return self.__barco_con_mas_km
     def set_barco_con_mas_km(self, barcos):
         self.__barco_con_mas_km = barcos
-    barco_con_mas_km = property(get_barcos,set_barcos)
+    barco_con_mas_km = property(get_barco_con_mas_km,set_barco_con_mas_km)
     
     def get_barco_con_menos_km(self):
         return self.__barco_con_menos_km
     def set_barco_con_menos_km(self, barcos):
         self.__barco_con_menos_km = barcos
-    __barco_con_menos_km = property(get_barcos,set_barcos)
+    __barco_con_menos_km = property(get_barco_con_menos_km,set_barco_con_menos_km)
     
     
     
