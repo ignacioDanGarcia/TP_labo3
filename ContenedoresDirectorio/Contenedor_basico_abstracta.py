@@ -1,6 +1,6 @@
 from abc import ABC
 from Excepciones.exceptions import el_contenedor_basico_no_puede_mat_especial
-from Contenedores import Contenedor
+from ContenedoresDirectorio.Contenedores import Contenedor
 
 class Cont_basico_abstracto(Contenedor, ABC):
     """
@@ -14,7 +14,7 @@ class Cont_basico_abstracto(Contenedor, ABC):
 
     """
     def verificar_carga(self, carga):
-        super().verificar_carga(self, carga)
+        super().verificar_carga(carga)
         if (carga.get_mat_especial() != None):
             # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
             raise el_contenedor_basico_no_puede_mat_especial("Un contenedor basico no puede cargar un material especial")

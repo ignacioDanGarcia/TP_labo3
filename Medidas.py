@@ -33,13 +33,13 @@ class Medidas:
         largo = False
         ancho = False
 
-        if 0 < medidas.get_alto <= self.get_alto:
+        if 0 < medidas.get_alto() and medidas.get_alto() <= self.get_alto():
             alto = True
         
-        if 0 < medidas.get_ancho <= self.get_ancho:
+        if 0 < medidas.get_ancho() and medidas.get_ancho() <= self.get_ancho():
             ancho = True
         
-        if 0 < medidas.get_largo <= self.get_largo:
+        if 0 < medidas.get_largo() and medidas.get_largo() <= self.get_largo():
             largo = True
 
         if (alto and largo and ancho):

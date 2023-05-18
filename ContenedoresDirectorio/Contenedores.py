@@ -75,16 +75,13 @@ class Contenedor(ABC):
     
     #Cualquier carga cuyas  medidas o peso supere lo definido en el container no podrá 
     # ser trasladada en el mismo.
-    def verificar_carga(self):
+    def verificar_carga(self, carga):
         # este metodo la usa esta misma clase
         
         no_supera_medidas = False
         no_supera_peso_max = False
         no_supera_vol_max = False
-        try:
-            # aca me aseguro que la carga que uso es la que esta guardada en las vaiables de contenedor
-            carga = self.get_carga()
-            
+        try:            
             if self.medidas_interior.comparar_medidas(carga.get_medidas()):
                 no_supera_medidas = True
 
