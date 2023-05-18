@@ -32,3 +32,8 @@ class Carga:
         self.__precio = p
     precio = property(get_precio,set_precio)
     
+    def get_volumen(self):
+        volumen = self.medidas.get_alto() * self.medidas.get_ancho() * self.medidas.get_largo()
+        return volumen
+    
+    
