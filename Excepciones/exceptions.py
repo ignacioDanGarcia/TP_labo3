@@ -59,3 +59,9 @@ class medidas_incorrectas(Exception):
         self.mensaje = mensaje
     def __str__(self) -> str:
         return self.mensaje
+    
+class no_existe_carga(Exception):
+    def __init__(self, mensaje) -> None:
+        self.mensaje = mensaje
+    def __str__(self) -> str:
+        return self.mensaje
