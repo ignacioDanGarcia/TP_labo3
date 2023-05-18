@@ -14,7 +14,7 @@ class Contenedor(ABC):
         self.__peso_max = 0.0
         self.__medidas_interior = None
         self.__medidas_exterior = None
-        self.__carga = None
+        self.__cargas = []
         self.__mat_especial = mat_especial
         self.__disponible = True
         self.__cant_de_veces_comple_y_carga_unica = 0
@@ -85,7 +85,7 @@ class Contenedor(ABC):
     def get_carga(self):
         return self.__carga
     def set_carga(self, c):
-        self.__carga = c
+        self.__carga.append(c)
     carga = property(get_carga,set_carga)
     'Fin Getters y Setters'
     
