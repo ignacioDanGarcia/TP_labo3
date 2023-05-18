@@ -1,9 +1,11 @@
 from Medidas import Medidas
+from Tasador_de_cargas import Tasador_de_cargas
+
 class Carga:
 
     def __init__(self, medidas, peso, precio, mat_especial):
         self.__medidas = medidas
-        self.__precio = 0.0
+        self.__precio = 0
         self.__peso = peso
         self.__precio = precio
         self.__mat_especial = mat_especial
@@ -17,8 +19,8 @@ class Carga:
     
     def get_precio(self):
         return self.__precio
-    def set_precio(self, p):
-        self.__precio = p
+    def set_precio(self):
+        pass
     precio = property(get_precio,set_precio)
     
     def get_peso(self):
