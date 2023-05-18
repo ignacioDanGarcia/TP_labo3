@@ -1,12 +1,14 @@
 from abc import ABC, abstractmethod
 from Medidas import Medidas
 from Excepciones.exceptions import contenedor_no_puede_llevar_carga, medidas_incorrectas, no_existe_carga, distancia_incorrecta
+from generar_id import generar_id
 
 class Contenedor(ABC):
-    
+    gen = generar_id()
 
-    def __init__(self, id, mat_especial):
-        self.__id = id
+    def __init__(self, mat_especial):
+        
+        self.__id = Contenedor.gen.generar_numeros_distintos()
         self.__precio_adicional = 0 #Cada contenedor define un precio base que se debe pagar para transportar carga
         self.__volumen_max = 0.0
         self.__peso_max = 0.0
@@ -14,17 +16,31 @@ class Contenedor(ABC):
         self.__medidas_exterior = None
         self.__carga = None
         self.__mat_especial = mat_especial
+        self.__disponible = True
+        self.__cant_de_veces_comple_y_carga_unica = 0
 
         #algo hay que hacer con este punto:
         # Un contenedor sin características especiales no puede transportar material especial.
         #Creo que con un booleano de si es apto para material especial en el contructor podría ir este punto así 
     
     'Getters y Setters:'
+    
     def get_id(self):
         return self.__id
-    def set_id(self,id):
-        self.__id = id
-    id = property(get_id,set_id)
+    
+    def get_cant_de_veces_comple_y_carga_unica(self):
+        return self.__cant_de_veces_comple_y_carga_unica
+    
+    def COUNTER_cant_de_veces_comple_y_carga_unica(self):
+        # en otra funcion habria que hacer preguntar si el contenedor esta lleno en medidas, y tiene una sola carga, y ahi ejecutar este
+        self.__cant_de_veces_comple_y_carga_unica += 1
+    cant_de_veces_comple_y_carga_unica = property(get_cant_de_veces_comple_y_carga_unica,COUNTER_cant_de_veces_comple_y_carga_unica)
+    
+    def get_disponible(self):
+        return self.__disponible
+    def set_disponible(self,dispo):
+        self.__disponible = dispo
+    disponible = property(get_disponible,set_disponible)
     
     def get_precio_adicional(self):
         return self.__precio_adicional

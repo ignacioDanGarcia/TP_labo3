@@ -3,15 +3,18 @@ import random
 from generar_id import generar_id
 
 class Pedidos:
+    gen = generar_id()
     def __init__(self, retiraEnPuerto, conteneCompleto, carga):
-        gen = generar_id()
         self.__retiraEnPuerto = retiraEnPuerto #bool
         self.__conteneCompleto = conteneCompleto #bool
-        self.__id = gen.generar_numeros_distintos()
+        self.__id = Pedidos.gen.generar_numeros_distintos()
         self.__carga = carga
         'pruebas de git'
     
     'Getters y setters:'
+    def get_id(self):
+        return self.__id
+    
     def get_retiraEnPuerto(self):
         return self.__retiraEnPuerto
     def set_retiraEnPuerto(self, ret):
@@ -24,11 +27,6 @@ class Pedidos:
         self.__conteneCompleto = completo
     conteneCompleto = property(get_conteneCompleto,set_conteneCompleto)
 
-    def get_id(self):
-        return self.__id
-    def set_id(self, id):
-        self.__id = id
-    id = property(get_id,set_id)
     
     def get_carga(self):
         return self.__carga
