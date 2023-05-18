@@ -1,11 +1,12 @@
 from Medidas import Medidas
 class Carga:
 
-    def __init__(self, medidas, peso, precio):
+    def __init__(self, medidas, peso, precio, mat_especial):
         self.__medidas = medidas
         self.__precio = 0.0
         self.__peso = peso
         self.__precio = precio
+        self.__mat_especial = mat_especial
     
     'Getters y setters'
     def get_medidas(self):
@@ -31,4 +32,15 @@ class Carga:
     def set_precio(self, p):
         self.__precio = p
     precio = property(get_precio,set_precio)
+    
+    def get_mat_especial(self):
+        return self.__mat_especial
+    def set_mat_especial(self,mat):
+        self.__mat_especial = mat
+    mat_especial = property(get_mat_especial,set_mat_especial)
+    
+    def get_volumen(self):
+        volumen = self.medidas.get_alto() * self.medidas.get_ancho() * self.medidas.get_largo()
+        return volumen
+    
     
