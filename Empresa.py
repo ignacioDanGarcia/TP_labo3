@@ -23,9 +23,12 @@ class Empresa:
         for barco in barcos:
             self.__barcos.append(barco)
         
+        self.__barco_con_mas_km = None
+        self.__barco_con_menos_km = None
+        
         # barcos seria una lista
         # para instanciar la empresa le paso como parametro la lista de barcos y camiones
-        
+    'Getters y Setters'
     def get_barcos(self):
         return self.__barcos
     def set_barcos(self, barcos):
@@ -37,6 +40,20 @@ class Empresa:
     def set_camiones(self, camiones):
         self.__camiones = camiones
     camiones = property(get_camiones,set_camiones)
+    
+    def get_barco_con_mas_km(self):
+        return self.__barco_con_mas_km
+    def set_barco_con_mas_km(self, barcos):
+        self.__barco_con_mas_km = barcos
+    barco_con_mas_km = property(get_barcos,set_barcos)
+    
+    def get_barco_con_menos_km(self):
+        return self.__barco_con_menos_km
+    def set_barco_con_menos_km(self, barcos):
+        self.__barco_con_menos_km = barcos
+    __barco_con_menos_km = property(get_barcos,set_barcos)
+    
+    
     
     def moduloGPS(self):
         """
@@ -60,7 +77,21 @@ class Empresa:
         raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")
     
     
+    def actualizar_barco_trotamundo_o_sedentario(self):
         
+        bmenos = self.get_barco_con_menos_km()
+        bmas = self.get_barco_con_mas_km()
+        
+        for barco in self.get_barcos():
+            # actualizo barco sedentario
+            if barco.get_km_recorridos() < bmenos or bmenos.get_km_recorridos() == 0:
+                self.set_barco_con_menos_km(barco)
+            
+            # actualizo barco trotamundo
+            if barco.get_km_recorridos() > bmas:
+                self.set_barco_con_mas_km(barco)
+        
+        return
     
     
     def definirPrecioViaje(Camion, contenedor):
