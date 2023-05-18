@@ -1,6 +1,6 @@
 from abc import ABC
 from Excepciones.exceptions import el_contenedor_basico_no_puede_mat_especial
-from Contenedores import Contenedor
+from ContenedoresDirectorio.Contenedores import Contenedor
 
 class Cont_basico_abstracto(Contenedor, ABC):
     """
