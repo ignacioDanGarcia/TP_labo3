@@ -1,8 +1,14 @@
+from Carga import Carga
+import random
+from generar_id import generar_id
+
 class Pedidos:
-    def __init__(self, retiraEnPuerto, conteneCompleto, id):
+    def __init__(self, retiraEnPuerto, conteneCompleto, carga):
+        gen = generar_id()
         self.__retiraEnPuerto = retiraEnPuerto #bool
         self.__conteneCompleto = conteneCompleto #bool
-        self.__id = id
+        self.__id = gen.generar_numeros_distintos()
+        self.__carga = carga
         'pruebas de git'
     
     'Getters y setters:'
@@ -23,3 +29,9 @@ class Pedidos:
     def set_id(self, id):
         self.__id = id
     id = property(get_id,set_id)
+    
+    def get_carga(self):
+        return self.__carga
+    def set_carga(self, carga):
+        self.__carga = carga
+    carga = property(get_carga,set_carga)

@@ -36,7 +36,7 @@ class Empresa:
         self.__camiones = camiones
     camiones = property(get_camiones,set_camiones)
     
-    def moduloGPS():
+    def moduloGPS(self):
         """
         para "calcular" distancias
         segun la tabla de precios las distancias minimas estan abajo de 100, y las maximas arriba de 10 mil
