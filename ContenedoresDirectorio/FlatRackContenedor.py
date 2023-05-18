@@ -1,4 +1,4 @@
-from Contenedores import Contenedor
+from ContenedoresDirectorio.Contenedores import Contenedor
 from Medidas import Medidas
 
 
@@ -12,6 +12,6 @@ class FlatRackContenedor(Contenedor):
         self.carga = None
 
     def verificar_carga(self, carga):
-        carga_verificada = False
+        return super().verificar_carga(carga)
         
     

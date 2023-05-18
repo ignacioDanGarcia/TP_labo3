@@ -111,9 +111,9 @@ class Contenedor(ABC):
                 return True
         except medidas_incorrectas as e:
             print(str(e))
-        else:
+        
             #excepcion catcheada en calcular_precio_adicional de esta misma clase
-            raise contenedor_no_puede_llevar_carga("La carga no puede ser transportada por este contenedor")
+        raise contenedor_no_puede_llevar_carga("La carga no puede ser transportada por este contenedor")
 
     def calcular_precio_adicional(self, distancia):
         # distancia se llena con un num del moduloGPS
