@@ -8,7 +8,7 @@ class Pedidos:
         self.__retiraEnPuerto = retiraEnPuerto #bool
         self.__conteneCompleto = conteneCompleto #bool
         self.__id = Pedidos.gen.generar_numeros_distintos()
-        self.__carga = carga
+        self.__carga = []
         'pruebas de git'
     
     'Getters y setters:'
@@ -31,5 +31,5 @@ class Pedidos:
     def get_carga(self):
         return self.__carga
     def set_carga(self, carga):
-        self.__carga = carga
+        self.__carga.append(carga)
     carga = property(get_carga,set_carga)
