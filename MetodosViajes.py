@@ -1,10 +1,10 @@
-import abc #para hacerla clase abstracta
+from abc import ABC, abstractmethod
 
-class MetodosViajes(abc.ABC):
-    @abc.abstractmethod
+class MetodosViajes(ABC):
+    @abstractmethod
     def viajar():
         pass
     
-    @abc.abstractmethod
-    def definirPrecioViaje():
+    @abstractmethod
+    def definirPrecioViaje(self,viaje):
         pass
