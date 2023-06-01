@@ -8,7 +8,7 @@ class Pedidos:
         self.__retiraEnPuerto = retiraEnPuerto #bool
         self.__conteneCompleto = conteneCompleto #bool
         self.__id = Pedidos.gen.generar_numeros_distintos()
-        self.__carga = cargas
+        self.__cargas = cargas
         self.__necesitaTransporte = necesitaTransporte #bool si es False no sumamos el precio de 
                                                        #transporte carga x camion en el costo total del pedido
         'pruebas de git'
@@ -34,9 +34,9 @@ class Pedidos:
     conteneCompleto = property(get_conteneCompleto,set_conteneCompleto)
 
     
-    def get_carga(self):
-        return self.__carga
-    def set_carga(self, carga):
-        self.__carga.append(carga)
-    carga = property(get_carga,set_carga)
+    def get_cargas(self):
+        return self.__cargas
+    def set_cargas(self, cargas):
+        self.__cargas.append(cargas)
+    cargas = property(get_cargas,set_cargas)
         
