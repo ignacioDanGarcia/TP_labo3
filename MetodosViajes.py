@@ -6,5 +6,5 @@ class MetodosViajes(ABC):
         pass
     
     @abstractmethod
-    def definirPrecioViaje(self,viaje):
+    def definirPrecioViaje(self,pedido):
         pass
