@@ -4,11 +4,12 @@ from generar_id import generar_id
 
 class Pedidos:
     gen = generar_id()
-    def __init__(self, retiraEnPuerto, conteneCompleto, cargas, necesitaTransporte):
+    def __init__(self, retiraEnPuerto, conteneCompleto, cargas, necesitaTransporte, containers):
         self.__retiraEnPuerto = retiraEnPuerto #bool
         self.__conteneCompleto = conteneCompleto #bool
         self.__id = Pedidos.gen.generar_numeros_distintos()
         self.__cargas = cargas
+        self.__containers = containers #necesitamos que el pedido tenga los containers asociados a las cargas
         self.__necesitaTransporte = necesitaTransporte #bool si es False no sumamos el precio de 
                                                        #transporte carga x camion en el costo total del pedido
         'pruebas de git'
