@@ -14,7 +14,7 @@ Pero para definir precios de viajes, calcular kilometros, aceptar y gestionar pe
 que de eso se deberia encargar esta clase.
 """
 
-class Empresa:
+class Empresa(MetodosViajes):
     def __init__(self, barcos):
         self.__camiones = []
         for i in range(5):
@@ -58,24 +58,40 @@ class Empresa:
     
     def get_barcos(self):
         return self.__barcos
+    
     def set_barcos(self, barcos):
         self.__barcos = barcos
     barcos = property(get_barcos,set_barcos)
     
     def get_camiones(self):
         return self.__camiones
+    
     def set_camiones(self, camiones):
         self.__camiones = camiones
     camiones = property(get_camiones,set_camiones)
+
+    def calcular_barco_con_mas_km(self):
+        max = self.__barcos[0].get_km_recorridos()
+        barco_max = self.__barcos[0]
+        for barco in self.__barcos:
+            if barco.get_km_recorridos() > max:
+                max = barco.get_km_recorridos()
+                barco_max = barco
+
+        self.__barco_con_mas_km = barco_max
+
     
     def get_barco_con_mas_km(self):
+        self.calcular_barco_con_mas_km()
         return self.__barco_con_mas_km
+    
     def set_barco_con_mas_km(self, barcos):
         self.__barco_con_mas_km = barcos
     barco_con_mas_km = property(get_barco_con_mas_km,set_barco_con_mas_km)
     
     def get_barco_con_menos_km(self):
         return self.__barco_con_menos_km
+    
     def set_barco_con_menos_km(self, barcos):
         self.__barco_con_menos_km = barcos
     __barco_con_menos_km = property(get_barco_con_menos_km,set_barco_con_menos_km)
@@ -120,13 +136,8 @@ class Empresa:
         
         return
     
-    
-    def definirPrecioViaje(Camion, contenedor):
-        #peso por transportar de cada contenedor dentro de un barco + el precio de la carga
-        pass
-    def definirPrecioViaje(Barco, listaContenedores):
-        #implementacion
-        pass
+                
+           
 
     def misma_carga_mas_veces(self):
         # falta implementar
