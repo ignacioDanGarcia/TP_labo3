@@ -14,6 +14,10 @@ class Pedidos:
         'pruebas de git'
     
     'Getters y setters:'
+
+    def get_necesitaTransporte(self):
+        return self.__necesitaTransporte
+
     def get_id(self):
         return self.__id
     
