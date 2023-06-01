@@ -88,8 +88,19 @@ class Empresa(MetodosViajes):
     def set_barco_con_mas_km(self, barcos):
         self.__barco_con_mas_km = barcos
     barco_con_mas_km = property(get_barco_con_mas_km,set_barco_con_mas_km)
+
+    def calcular_barco_con_menos_km(self):
+        min = self.__barcos[0].get_km_recorridos()
+        barco_min = self.__barcos[0]
+        for barco in self.__barcos:
+            if barco.get_km_recorridos() < min:
+                min = barco.get_km_recorridos()
+                barco_min = barco
+
+        self.__barco_con_menos_km = barco_min
     
     def get_barco_con_menos_km(self):
+        self.calcular_barco_con_menos_km()
         return self.__barco_con_menos_km
     
     def set_barco_con_menos_km(self, barcos):
