@@ -7,7 +7,7 @@ class Carga:
         tas = Tasador_de_cargas()
         p = tas.setear_precio_carga()
         self.__medidas = medidas
-        self.__precio = p
+        self.__precio_transporte_base = p
         self.__peso = peso
         self.__mat_especial = mat_especial
     
@@ -21,11 +21,11 @@ class Carga:
         self.__medidas = m
     medidas = property(get_medidas,set_medidas)
     
-    def get_precio(self):
-        return self.__precio
-    def set_precio(self):
-        pass
-    precio = property(get_precio,set_precio)
+    def get_precio_transporte_base(self):
+        return self.__precio_transporte_base
+    def set_precio_transporte_base(self, precio):
+        self.__precio_transporte_base = precio
+    __precio_transporte_base = property(get_precio_transporte_base,set_precio_transporte_base)
     
     def get_peso(self):
         return self.__peso
