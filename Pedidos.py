@@ -16,6 +16,16 @@ class Pedidos:
     
     'Getters y setters:'
 
+    def get_cant_containers(self):
+        cant = 0
+        for container in self.__containers:
+            cant += 1
+         
+        return cant
+    
+    def get_containers(self):
+        return self.__containers
+
     def get_necesitaTransporte(self):
         return self.__necesitaTransporte
 
