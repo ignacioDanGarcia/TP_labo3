@@ -2,7 +2,7 @@
 supuestamente esta clase siempre va a dar un id distinto
 """
 
-class generar_id():
+class GenerarId():
     def __init__(self):
         self.id_actual = 0
     

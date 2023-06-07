@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 from Medidas import Medidas
 from Excepciones.exceptions import contenedor_no_puede_llevar_carga, medidas_incorrectas, no_existe_carga, distancia_incorrecta
-from generar_id import generar_id
+from GenerarId import GenerarId
 
 class Contenedor(ABC):
-    gen = generar_id()
+    gen = GenerarId()
 
     def __init__(self, mat_especial):
         
@@ -83,10 +83,10 @@ class Contenedor(ABC):
     peso_max = property(get_peso_max,set_peso_max)
     
     def get_carga(self):
-        return self.__carga
+        return self.__cargas
     def set_carga(self, c):
-        self.__carga.append(c)
-    carga = property(get_carga,set_carga)
+        self.__cargas.append(c)
+    cargas = property(get_carga,set_carga)
     'Fin Getters y Setters'
     
     #Cualquier carga cuyas  medidas o peso supere lo definido en el container no podrá 

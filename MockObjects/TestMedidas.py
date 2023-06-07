@@ -7,7 +7,7 @@ from Carga import Carga
 from Excepciones.exceptions import medidas_incorrectas
 from Medidas import Medidas
 
-class test_Carga(TestCase):
+class TestMedidas(TestCase):
     def test_volumen_simple(self):
         medidas = Medidas(3,3,3)
         carga = Carga(medidas,3,100)

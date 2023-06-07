@@ -1,9 +1,9 @@
 from Carga import Carga
 import random
-from generar_id import generar_id
+from GenerarId import GenerarId
 
 class Pedidos:
-    gen = generar_id()
+    gen = GenerarId()
     def __init__(self, retiraEnPuerto, conteneCompleto, carga):
         self.__retiraEnPuerto = retiraEnPuerto #bool
         self.__conteneCompleto = conteneCompleto #bool
