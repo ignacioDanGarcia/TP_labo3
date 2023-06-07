@@ -83,10 +83,10 @@ class Contenedor(ABC):
     peso_max = property(get_peso_max,set_peso_max)
     
     def get_carga(self):
-        return self.__carga
+        return self.__cargas
     def set_carga(self, c):
-        self.__carga.append(c)
-    carga = property(get_carga,set_carga)
+        self.__cargas.append(c)
+    cargas = property(get_carga,set_carga)
     'Fin Getters y Setters'
     
     #Cualquier carga cuyas  medidas o peso supere lo definido en el container no podrá 

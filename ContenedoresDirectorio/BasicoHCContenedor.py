@@ -4,13 +4,13 @@ from Medidas import Medidas
 
 class BasicoHCContenedor(Cont_basico_abstracto):
     
-    def __init__(self,id, mat_especial):
-        super().__init__(id, mat_especial)
+    def __init__(self, mat_especial):
+        super().__init__( mat_especial)
         self.medidas_exterior = Medidas(12.1,2.45,2.6)
         self.medidas_interior = Medidas(12.0,2.35,2.3)
         self.volumen_max = 67.7
         self.peso_max = 32500
-        self.carga = None
+        
 
     def verificar_carga(self, carga):
         return super().verificar_carga(carga)
