@@ -16,6 +16,6 @@ Por eso pusimos que devuelva un numero random.
 """
 
 
-class Tasador_de_cargas():
+class TasadorDeCargas():
     def setear_precio_carga(self):
         return random.randint(1, 20000)

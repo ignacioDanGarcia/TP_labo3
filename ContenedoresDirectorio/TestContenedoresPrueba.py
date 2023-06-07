@@ -9,7 +9,7 @@ from pytest import raises
 from Excepciones.exceptions import *
 from Medidas import Medidas
 
-class test_empresa(TestCase):
+class TestContenedoresPrueba(TestCase):
      
     """ 5. Cualquier carga cuyas dimensiones, volumen o peso supere lo definido en el container no podrá ser trasladada en el mismo.
     6. Un contenedor sin características especiales no puede transportar material especial. """

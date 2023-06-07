@@ -1,8 +1,8 @@
-from ContenedoresDirectorio.Contenedor_basico_abstracta import Cont_basico_abstracto
+from ContenedorBasicoAbstracta import ContenedorBasicoAbstracta
 
 from Medidas import Medidas
 
-class BasicoHCContenedor(Cont_basico_abstracto):
+class BasicoHCContenedor(ContenedorBasicoAbstracta):
     
     def __init__(self, mat_especial):
         super().__init__( mat_especial)

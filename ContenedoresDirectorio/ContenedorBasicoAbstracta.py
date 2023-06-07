@@ -2,7 +2,7 @@ from abc import ABC
 from Excepciones.exceptions import el_contenedor_basico_no_puede_mat_especial
 from ContenedoresDirectorio.Contenedores import Contenedor
 
-class Cont_basico_abstracto(Contenedor, ABC):
+class ContenedorBasicoAbstracta(Contenedor, ABC):
     """
     VERIFICAR CARGA EN CLASE CONTENEDORES ABSTRACTA Y CONTENEDORES FLAT RACK QUEDA IGUAL
     EN ESTE TIPO DE CONTENEDORES SOLO HACE FALTA QUE RESPETE LAS MEDIDAS

@@ -1,9 +1,9 @@
-from Contenedor_basico_abstracta import Cont_basico_abstracto
+from ContenedorBasicoAbstracta import ContenedorBasicoAbstracta
 from Contenedores import Contenedor
 from Medidas import Medidas
 
 
-class Contenedor_Basico_Estandar(Cont_basico_abstracto):
+class ContenedorBasicoEstandar(ContenedorBasicoAbstracta):
     def __init__(self, mat_especial):
         super().__init__(mat_especial)
         self.medidas_exterior = Medidas(6.1,2.45,2.6)

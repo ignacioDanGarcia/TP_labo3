@@ -5,7 +5,7 @@ from Empresa import Empresa
 from pytest import raises
 from Excepciones.exceptions import *
 
-class test_empresa(TestCase):
+class TestEmpresaPrueba(TestCase):
     """ TEST OBLIGATORIOS PEDIDOS POR EL TP """
     # ENVIOS DE CARGAS
     def test_cliente_retira_carga_en_puerto(self):

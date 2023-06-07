@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 from Medidas import Medidas
 from Excepciones.exceptions import contenedor_no_puede_llevar_carga, medidas_incorrectas, no_existe_carga, distancia_incorrecta
-from generar_id import generar_id
+from GenerarId import GenerarId
 
 class Contenedor(ABC):
-    gen = generar_id()
+    gen = GenerarId()
 
     def __init__(self, mat_especial):
         
