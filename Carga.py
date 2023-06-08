@@ -10,6 +10,7 @@ class Carga:
         self.__precio_transporte_base = p
         self.__peso = peso
         self.__mat_especial = mat_especial
+        #falta id de carga, y sino sacar el getter
     
     'Getters y setters'
     def get_id(self):
@@ -25,7 +26,7 @@ class Carga:
         return self.__precio_transporte_base
     def set_precio_transporte_base(self, precio):
         self.__precio_transporte_base = precio
-    __precio_transporte_base = property(get_precio_transporte_base,set_precio_transporte_base)
+    precio_transporte_base = property(get_precio_transporte_base,set_precio_transporte_base)
     
     def get_peso(self):
         return self.__peso
