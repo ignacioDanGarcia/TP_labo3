@@ -1,11 +1,11 @@
 # este es un comentario a ver si me funciona la branch correctamente
 from Pedidos import Pedidos
 from Carga import Carga
-from generar_id import generar_id
+from GenerarId import GenerarId
 
 
 class Cliente:
-    gen = generar_id()
+    gen = GenerarId()
     def __init__(self, apellido, nombre):
         self.__apellido = apellido
         self.__nombre = nombre

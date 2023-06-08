@@ -1,10 +1,10 @@
 from Medidas import Medidas
-from Tasador_de_cargas import Tasador_de_cargas
+from TasadorDeCargas import TasadorDeCargas
 
 class Carga:
 
     def __init__(self, medidas, peso, mat_especial):
-        tas = Tasador_de_cargas()
+        tas = TasadorDeCargas()
         p = tas.setear_precio_carga()
         self.__medidas = medidas
         self.__precio_transporte_base = p

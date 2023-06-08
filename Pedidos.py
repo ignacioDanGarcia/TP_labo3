@@ -1,10 +1,10 @@
 from Carga import Carga
 import random
-from generar_id import generar_id
+from GenerarId import GenerarId
 
 class Pedidos:
-    gen = generar_id()
-    def __init__(self, retiraEnPuerto, conteneCompleto, cargas, necesitaTransporte, containers):
+    gen = GenerarId()
+    def __init__(self, retiraEnPuerto, conteneCompleto, carga):
         self.__retiraEnPuerto = retiraEnPuerto #bool
         self.__conteneCompleto = conteneCompleto #bool
         self.__id = Pedidos.gen.generar_numeros_distintos()
