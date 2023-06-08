@@ -3,11 +3,11 @@ import random
 from GenerarId import GenerarId
 
 class Pedidos:
-    gen = GenerarId()
     def __init__(self, retiraEnPuerto, conteneCompleto, cargas, necesitaTransporte):
+        gen = GenerarId()
         self.__retiraEnPuerto = retiraEnPuerto #bool
         self.__conteneCompleto = conteneCompleto #bool
-        self.__id = Pedidos.gen.generar_numeros_distintos()
+        self.__id = gen.generar_numeros_distintos()
         self.__cargas = cargas
         self.__containers = None #necesitamos que el pedido tenga los containers asociados a las cargas
         self.__necesitaTransporte = necesitaTransporte #bool si es False no sumamos el precio de 

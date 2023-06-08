@@ -8,3 +8,6 @@ class MetodosViajes(ABC):
     @abstractmethod
     def definirPrecioViaje(self,pedido):
         pass
+    
+    
+    # ambas funciones estan en barco, empresa y contenedores. Capaz hay que acomodar esto

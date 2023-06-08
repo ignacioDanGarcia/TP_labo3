@@ -1,12 +1,14 @@
 from BarcosDirectorio.Cargable import Cargable
 from abc import ABC, abstractmethod
 from GenerarId import GenerarId
+from MetodosViajes import MetodosViajes
 
 class Barco(Cargable, ABC):
-    gen = GenerarId()
+    
     
     def __init__(self, peso_max, cant_contenedores_max, lleva_mat_esp):
-        self.__id = Barco.gen.generar_numeros_distintos()
+        gen = GenerarId()
+        self.__id = gen.generar_numeros_distintos()
         self.__disponible = True
         self.__peso_max = peso_max
         self.__cant_contenedores_max = cant_contenedores_max
