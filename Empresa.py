@@ -87,7 +87,7 @@ class Empresa(MetodosViajes):
     
     def set_barco_con_menos_km(self, barcos):
         self.__barco_con_menos_km = barcos
-    __barco_con_menos_km = property(get_barco_con_menos_km,set_barco_con_menos_km)
+    barco_con_menos_km = property(get_barco_con_menos_km,set_barco_con_menos_km)
     
     
     
@@ -105,9 +105,9 @@ class Empresa(MetodosViajes):
     
     def camion_disponible(self):          
         for camion in self.camiones:
-            if (camion.disponible):
+            if (camion.get_disponible()):
                 #segun la teoria, esto afecta a la lista de empresa de self.camiones en cualquier parte del codigo
-                camion.disponible = False
+                camion.set_disponible = False
                 return camion
         # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
         raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")

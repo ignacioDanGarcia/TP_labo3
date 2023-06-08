@@ -4,27 +4,25 @@ from GenerarId import GenerarId
 
 class Pedidos:
     gen = GenerarId()
-    def __init__(self, retiraEnPuerto, conteneCompleto, carga):
+    def __init__(self, retiraEnPuerto, conteneCompleto, cargas, necesitaTransporte):
         self.__retiraEnPuerto = retiraEnPuerto #bool
         self.__conteneCompleto = conteneCompleto #bool
         self.__id = Pedidos.gen.generar_numeros_distintos()
         self.__cargas = cargas
-        self.__containers = containers #necesitamos que el pedido tenga los containers asociados a las cargas
+        self.__containers = None #necesitamos que el pedido tenga los containers asociados a las cargas
         self.__necesitaTransporte = necesitaTransporte #bool si es False no sumamos el precio de 
                                                        #transporte carga x camion en el costo total del pedido
         'pruebas de git'
     
     'Getters y setters:'
 
-    def get_cant_containers(self):
-        cant = 0
-        for container in self.__containers:
-            cant += 1
-         
-        return cant
     
     def get_containers(self):
         return self.__containers
+    
+    def get_cant_containers(self):
+        cant = len(self.get_containers)
+        return cant
 
     def get_necesitaTransporte(self):
         return self.__necesitaTransporte

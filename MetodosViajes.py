@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 class MetodosViajes(ABC):
     @abstractmethod
-    def viajar():
+    def viajar(self):
         pass
     
     @abstractmethod
