@@ -5,8 +5,8 @@ sys.path.insert(0,'ContenedoresDirectorio\Contenedor_basico_abstracto.py')
 from ContenedorBasicoAbstracta import ContenedorBasicoAbstracta
 
 class BarcoBasico(Barco):
-    def __init__(self, id, peso_max, cant_contenedores_max, lleva_mat_esp):
-        super().__init__(id, peso_max, cant_contenedores_max, lleva_mat_esp)
+    def __init__(self, peso_max, cant_contenedores_max, lleva_mat_esp):
+        super().__init__(peso_max, cant_contenedores_max, lleva_mat_esp)
     
     def puede_cargar_esta_carga(self, carga):
         if not (isinstance(carga, ContenedorBasicoAbstracta)):

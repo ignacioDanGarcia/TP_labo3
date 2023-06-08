@@ -1,4 +1,4 @@
-from ContenedorBasicoAbstracta import ContenedorBasicoAbstracta
+from .ContenedorBasicoAbstracta import ContenedorBasicoAbstracta
 
 from Medidas import Medidas
 
