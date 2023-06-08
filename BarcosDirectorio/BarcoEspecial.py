@@ -2,8 +2,8 @@ from BarcosDirectorio.Barcos import Barco
 from Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_exception, Material_no_compatible_con_barco_Exceptionn, Peso_excedido_exception
 
 class BarcoEspecial(Barco):
-    def __init__(self, id, peso_max, cant_contenedores_max, lleva_mat_esp):
-        super().__init__(id, peso_max, cant_contenedores_max, lleva_mat_esp)
+    def __init__(self, peso_max, cant_contenedores_max, lleva_mat_esp):
+        super().__init__(peso_max, cant_contenedores_max, lleva_mat_esp)
     
     def puede_cargar_esta_carga(self, contenedor):
         if not self.lleva_mat_esp and contenedor.get_mat_especial():
