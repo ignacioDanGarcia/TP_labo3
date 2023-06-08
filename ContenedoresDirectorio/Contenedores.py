@@ -82,11 +82,11 @@ class Contenedor(ABC):
         self.__peso_max = p
     peso_max = property(get_peso_max,set_peso_max)
     
-    def get_carga(self):
+    def get_cargas(self):
         return self.__cargas
-    def set_carga(self, c):
+    def set_cargas(self, c):
         self.__cargas.append(c)
-    cargas = property(get_carga,set_carga)
+    cargas = property(get_cargas,set_cargas)
     'Fin Getters y Setters'
     
     #Cualquier carga cuyas  medidas o peso supere lo definido en el container no podrá 
@@ -119,7 +119,7 @@ class Contenedor(ABC):
         # distancia se llena con un num del moduloGPS
         # este metodo la usaria la clase empresa
         try:
-            carga = self.get_carga()
+            carga = self.get_cargas()
             if carga is None:
                 # excepcion catcheada en esta misma funcion, segun lo que encontre se podia
                 raise no_existe_carga("No existe una carga")
