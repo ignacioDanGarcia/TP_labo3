@@ -4,11 +4,10 @@ from Excepciones.exceptions import contenedor_no_puede_llevar_carga, medidas_inc
 from GenerarId import GenerarId
 
 class Contenedor(ABC):
-    gen = GenerarId()
 
     def __init__(self, mat_especial):
         
-        self.__id = Contenedor.gen.generar_numeros_distintos()
+        self.__id = GenerarId.generar_numeros_distintos()
         self.__precio_adicional = 0 #Cada contenedor define un precio base que se debe pagar para transportar carga
         self.__volumen_max = 0.0
         self.__peso_max = 0.0
