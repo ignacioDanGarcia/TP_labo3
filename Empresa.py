@@ -131,7 +131,17 @@ class Empresa(MetodosViajes):
     
                 
            
+    #El container que mayor cantidad de veces viajó completo con una única carga.
+    def container_con_mas_viajes_con_una_carga(self):
+        container_mas_viajes = Contenedor()
+        aux = 0
 
-    def misma_carga_mas_veces(self):
-        # falta implementar
-        pass
+        for barco in self.__barcos:
+
+            for container in barco.get_contenedores():
+
+                if container.get_cant_de_veces_comple_y_carga_unica() > aux:
+                    aux = container.get_cant_de_veces_comple_y_carga_unica()
+                    container_mas_viajes = container
+        
+        return container_mas_viajes
