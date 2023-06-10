@@ -3,13 +3,13 @@ from TasadorDeCargas import TasadorDeCargas
 
 class Carga:
 
-    def __init__(self, medidas, peso, mat_especial):
+    def __init__(self, medidas, peso, material_especial):
         tas = TasadorDeCargas()
         p = tas.setear_precio_carga()
         self.__medidas = medidas
         self.__precio_transporte_base = p
         self.__peso = peso
-        self.__mat_especial = mat_especial
+        self.__material_especial = material_especial
         #falta id de carga, y sino sacar el getter
     
     'Getters y setters'
@@ -34,11 +34,11 @@ class Carga:
         self.__peso = peso
     peso = property(get_peso,set_peso)
     
-    def get_mat_especial(self):
-        return self.__mat_especial
-    def set_mat_especial(self,mat):
-        self.__mat_especial = mat
-    mat_especial = property(get_mat_especial,set_mat_especial)
+    def get_material_especial(self):
+        return self.__material_especial
+    def set_material_especial(self,mat):
+        self.__material_especial = mat
+    material_especial = property(get_material_especial,set_material_especial)
     
     def get_volumen(self):
         volumen = self.medidas.get_alto() * self.medidas.get_ancho() * self.medidas.get_largo()

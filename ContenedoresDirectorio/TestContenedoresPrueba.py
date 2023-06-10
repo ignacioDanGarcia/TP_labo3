@@ -29,7 +29,7 @@ class TestContenedoresPrueba(TestCase):
         assert(conteiner_hc.verificar_carga(carga)) == True
     'Tiene medidas que si entran'
     
-    def test_verificar_carga_por_mat_especial1(self):
+    def test_verificar_carga_por_material_especial1(self):
         conteiner_hc = BasicoHCContenedor(False)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,True)
@@ -37,14 +37,14 @@ class TestContenedoresPrueba(TestCase):
             conteiner_hc.verificar_carga(carga)
         'Tiene medidas que entran pero el contenido es especial en un basico.'
         
-    def test_verificar_carga_por_mat_especial2(self):
+    def test_verificar_carga_por_material_especial2(self):
         conteiner_fr = FlatRackContenedor(True)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,True)
         assert(conteiner_fr.verificar_carga(carga)) == True
         'Tiene medidas que entran y el contenido es especial en un especial.'
     
-    def test_verificar_carga_por_mat_especial3(self):
+    def test_verificar_carga_por_material_especial3(self):
         conteiner_fr = FlatRackContenedor(True)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,False)

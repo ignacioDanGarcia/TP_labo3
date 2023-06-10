@@ -5,7 +5,7 @@ from GenerarId import GenerarId
 
 class Contenedor(ABC):
 
-    def __init__(self, mat_especial):
+    def __init__(self, material_especial):
         gen = GenerarId()
         self.__id = gen.generar_numeros_distintos()
         self.__precio_adicional = 0 #Cada contenedor define un precio base que se debe pagar para transportar carga
@@ -14,7 +14,7 @@ class Contenedor(ABC):
         self.__medidas_interior = None
         self.__medidas_exterior = None
         self.__cargas = []
-        self.__mat_especial = mat_especial
+        self.__material_especial = material_especial
         self.__disponible = True
         self.__cant_de_veces_comple_y_carga_unica = 0
 
@@ -47,11 +47,11 @@ class Contenedor(ABC):
         self.__precio_adicional = p
     precio_adicional = property(get_precio_adicional,set_precio_adicional)
     
-    def get_mat_especial(self):
-        return self.__mat_especial
-    def set_mat_especial(self, mat):
-        self.__mat_especial = mat
-    mat_especial = property(get_mat_especial,set_mat_especial)
+    def get_material_especial(self):
+        return self.__material_especial
+    def set_material_especial(self, mat):
+        self.__material_especial = mat
+    material_especial = property(get_material_especial,set_material_especial)
     'mat especial es un booleano para diferencias si el container puede llevar una carga especial como explosivos.'
 
     def get_medidas_interior(self):

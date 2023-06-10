@@ -3,8 +3,8 @@ from Medidas import Medidas
 
 
 class FlatRackContenedor(Contenedor):
-    def __init__(self, mat_especial):
-        super().__init__(mat_especial)
+    def __init__(self, material_especial):
+        super().__init__(material_especial)
         self.medidas_exterior = Medidas(6.1,100000,2.3)
         self.medidas_interior = Medidas(6.0,100000,2.3)
         self.volumen_max = 33
