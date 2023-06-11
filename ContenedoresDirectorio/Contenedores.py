@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from Medidas import Medidas
-from Excepciones.exceptions import contenedor_no_puede_llevar_carga, medidas_incorrectas, no_existe_carga, distancia_incorrecta
+from Excepciones.exceptions import contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga, distancia_incorrecta
 from GenerarId import GenerarId
 from TasadorDeCargas import TasadorDeCargas
 
@@ -16,7 +16,7 @@ class Contenedor(ABC):
     def __init__(self, material_especial):
         gen = GenerarId()
         self.__id = gen.generar_numeros_distintos()
-        
+        self.__tipo = ''
         tas = TasadorDeCargas()
         p = tas.setear_precio_carga()
         self.__precio_transporte_base = p
@@ -41,7 +41,11 @@ class Contenedor(ABC):
         return self.__estado
     estado = property(get_estado,set_estado)
 
-    
+    def set_tipo(self, tipo):
+        self.__tipo = tipo
+    def get_tipo(self):
+        return self.__tipo
+    tipo = property(get_tipo,set_tipo)
     
     def get_id(self):
         return self.__id
@@ -103,6 +107,7 @@ class Contenedor(ABC):
     def get_cargas(self):
         return self.__cargas
     def set_cargas(self, c):
+        self.verificar_carga(c) #Edito acá agregando el verificar carga cuando seteamos la carga para que revise antes de agregarla.
         self.__cargas.append(c)
     cargas = property(get_cargas,set_cargas)
     'Fin Getters y Setters'
@@ -113,6 +118,9 @@ class Contenedor(ABC):
         # este metodo la usa esta misma clase
         
         try:
+            if "basico" in self.tipo.lower() and carga.get_material_especial() != None: #En vez de que vea si es instancia de barco_basico_abstracto lo vemos por el tipo de barco
+                raise el_contenedor_basico_no_puede_mat_especial("Un contenedor basico no puede cargar un material especial")
+
             if self.medidas_interior.comparar_medidas(carga.get_medidas()) and \
                     carga.get_peso() <= self.get_peso_max() and \
                     carga.get_volumen() <= self.get_volumen_max():
