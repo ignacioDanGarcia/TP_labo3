@@ -2,9 +2,11 @@ from unittest import TestCase
 from unittest.mock import Mock, patch, MagicMock
 import mock
 from pytest import raises
+from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
+from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
+from ContenedoresDirectorio.Contenedores import Contenedor
 
 from Pedidos import Pedidos
-from ContenedoresDirectorio.BasicoHCContenedor import BasicoHCContenedor
 from Carga import Carga
 from Medidas import Medidas
 
@@ -19,8 +21,10 @@ class TestEstados(TestCase):
         cargas.append(carga)
         cargas.append(carga2)
         
+        builder = Contenedor_builder()
+        director = Contenedor_director(builder)
         
-        contenedor = BasicoHCContenedor(False)
+        contenedor = director.crear_contenedor_hc(False)
         
         
         contenedor.set_precio_transporte_base(500) # cambio lo establecido por el tasador de cargas para tener mas control
@@ -49,7 +53,10 @@ class TestEstados(TestCase):
         cargas.append(carga2)
         
         
-        contenedor = BasicoHCContenedor(False)
+        builder = Contenedor_builder()
+        director = Contenedor_director(builder)
+        
+        contenedor = director.crear_contenedor_hc(False)
         
         
         contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
@@ -71,6 +78,7 @@ class TestEstados(TestCase):
     #---------------------------------------------------------------------
     
     """MENOR A MIL"""
+    
     def test_distancia_menor_1000_por_peso_calcular_precio(self):
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,None)
@@ -80,8 +88,10 @@ class TestEstados(TestCase):
         cargas.append(carga)
         cargas.append(carga2)
         
+        builder = Contenedor_builder()
+        director = Contenedor_director(builder)
         
-        contenedor = BasicoHCContenedor(False)
+        contenedor = director.crear_contenedor_hc(False)
         
 
         
@@ -97,7 +107,7 @@ class TestEstados(TestCase):
         
         assert contenedor.calcular_precio(999) == 1600
     
-        
+    
     def test_distancia_menor_1000_contenedor_completo_calcular_precio(self):
         medidas = Medidas(12.0,2.35,2.3)
         carga = Carga(medidas,50,None)
@@ -106,8 +116,10 @@ class TestEstados(TestCase):
         cargas = []
         cargas.append(carga)
         
+        builder = Contenedor_builder()
+        director = Contenedor_director(builder)
         
-        contenedor = BasicoHCContenedor(False)
+        contenedor = director.crear_contenedor_hc(False)
         
         
         contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
@@ -123,6 +135,7 @@ class TestEstados(TestCase):
         
         assert contenedor.calcular_precio(999) == 210500
 
+    
     def test_distancia_menor_10000_por_peso_calcular_precio(self):
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,None)
@@ -133,8 +146,10 @@ class TestEstados(TestCase):
         cargas.append(carga2)
         
         
-        contenedor = BasicoHCContenedor(False)
+        builder = Contenedor_builder()
+        director = Contenedor_director(builder)
         
+        contenedor = director.crear_contenedor_hc(False)
 
         
         contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
@@ -148,7 +163,7 @@ class TestEstados(TestCase):
         # 1100 + 500
         
         assert contenedor.calcular_precio(9999) == 1650
-        
+    
     def test_distancia_menor_10000_contenedor_completo_calcular_precio(self):
         medidas = Medidas(12.0,2.35,2.3)
         carga = Carga(medidas,50,None)
@@ -157,9 +172,10 @@ class TestEstados(TestCase):
         cargas = []
         cargas.append(carga)
         
+        builder = Contenedor_builder()
+        director = Contenedor_director(builder)
         
-        contenedor = BasicoHCContenedor(False)
-        
+        contenedor = director.crear_contenedor_hc(False)
         
         contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
         
@@ -174,6 +190,7 @@ class TestEstados(TestCase):
         
         assert contenedor.calcular_precio(9999) == 230500
     
+    
     def test_distancia_mas_10000_por_peso_calcular_precio(self):
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,None)
@@ -184,7 +201,10 @@ class TestEstados(TestCase):
         cargas.append(carga2)
         
         
-        contenedor = BasicoHCContenedor(False)
+        builder = Contenedor_builder()
+        director = Contenedor_director(builder)
+        
+        contenedor = director.crear_contenedor_hc(False)
         
 
         
@@ -210,7 +230,10 @@ class TestEstados(TestCase):
         cargas.append(carga)
         
         
-        contenedor = BasicoHCContenedor(False)
+        builder = Contenedor_builder()
+        director = Contenedor_director(builder)
+        
+        contenedor = director.crear_contenedor_hc(False)
         
         
         contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
@@ -225,3 +248,5 @@ class TestEstados(TestCase):
         # 210000 + 500
         
         assert contenedor.calcular_precio(99999) == 250500
+        
+    

@@ -3,17 +3,21 @@ from unittest.mock import Mock, patch, MagicMock
 import mock
 
 from pytest import raises
+from BarcosDirectorio.BarcoBasico import BarcoBasico
 from BarcosDirectorio.BarcoEspecial import BarcoEspecial
 from Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_exception, Material_no_compatible_con_barco_Exceptionn, Peso_excedido_exception
 
 
-class TestBarcos(TestCase):
+class test_barcos(TestCase):
+    #Test barcos especiales:
+    
     def test_mat_aceptado(self):
         barco = BarcoEspecial(100,3,False)
         mock_contenedor = Mock()
         mock_contenedor.get_material_especial.return_value = False
         assert barco.puede_cargar_esta_carga(mock_contenedor) == True
         #Testea si puede llevar el material de la carga del barco.
+        
     
     def test_mat_aceptado2(self):
         barco = BarcoEspecial(100,3,True)
@@ -36,7 +40,7 @@ class TestBarcos(TestCase):
         with self.assertRaises(Material_no_compatible_con_barco_Exceptionn):
             barco.puede_cargar_esta_carga(mock_contenedor)
         #Testea si la carga es especial y el barco no la puede llevar que tire exception. 
-        
+    
     def test_carga_basico(self):
         barco = BarcoEspecial(100,3,False)
         mock_contenedor = Mock()
@@ -45,7 +49,8 @@ class TestBarcos(TestCase):
         barco.cargar(mock_contenedor)
         assert (mock_contenedor in barco.contenedores)       
         #Testea si se puede cargar un barco cumpliendo condiciones basicas. 
-        
+    
+    
     def test_peso_excedido(self):
         barco = BarcoEspecial(100,3,False)
         mock_contenedor = Mock()
@@ -84,7 +89,7 @@ class TestBarcos(TestCase):
             barco.tiene_lugar(mock_contenedor)
         #Testea si entra un contenedor por la cantidad de contenedores aceptada del barco. 
         
-        
+    
     def test_barco_con_peso_disponible_insuficiente(self):
         barco = BarcoEspecial(100,4,False)
         mock_contenedor1=Mock()
@@ -109,4 +114,86 @@ class TestBarcos(TestCase):
         
         with self.assertRaises(Peso_excedido_exception):
             barco.tiene_lugar(mock_contenedor)
-        #Si tiene lugar disponible el barco pero el que intento agregar es más pesado tira exception.
+        #Si tiene lugar disponible el barco especial pero el que intento agregar es más pesado tira exception.
+        
+    
+    def test_mat_no_aceptado_basico(self):
+        barco = BarcoBasico(100,3,False)
+        mock_contenedor = Mock()
+        mock_contenedor.get_material_especial.return_value = True
+        mock_contenedor.get_tipo.return_value = 'Basico'
+        with self.assertRaises(Material_no_compatible_con_barco_Exceptionn):
+            barco.puede_cargar_esta_carga(mock_contenedor)
+        #Testea si la carga es especial y el barco no la puede llevar que tire exception. 
+    
+    
+    def test_mat_no_aceptado_basico2(self):
+        barco = BarcoBasico(100,3,False)
+        mock_contenedor = Mock()
+        mock_contenedor.get_material_especial.return_value = False
+        mock_contenedor.get_tipo.return_value = 'Basico'
+        #with self.assertRaises(Material_no_compatible_con_barco_Exceptionn):
+        barco.puede_cargar_esta_carga(mock_contenedor) == True
+        #Testea si la carga no especial y el barco la puede llevar que no tire exception. 
+    
+    
+    def test_barco_con_peso_disponible_insuficiente2(self):
+        barco = BarcoBasico(100,4,False)
+        mock_contenedor1=Mock()
+        mock_contenedor1.peso_contenedor.return_value =25
+        mock_contenedor1.get_material_especial.return_value = False
+        mock_contenedor1.get_tipo.return_value = 'Basico'
+        
+        mock_contenedor2 = Mock()
+        mock_contenedor2.peso_contenedor.return_value =25
+        mock_contenedor2.get_material_especial.return_value = False
+        mock_contenedor2.get_tipo.return_value = 'Basico'
+        
+        mock_contenedor3 = Mock()
+        mock_contenedor3.peso_contenedor.return_value =25
+        mock_contenedor3.get_material_especial.return_value = False
+        mock_contenedor3.get_tipo.return_value = 'Basico'
+        
+        barco.cargar(mock_contenedor1)
+        barco.cargar(mock_contenedor2)
+        barco.cargar(mock_contenedor3)
+        
+        mock_contenedor = Mock()
+        mock_contenedor.peso_contenedor.return_value =33
+        mock_contenedor.get_material_especial.return_value = False
+        mock_contenedor.get_tipo.return_value = 'Basico'
+        
+        with self.assertRaises(Peso_excedido_exception):
+            barco.tiene_lugar(mock_contenedor)
+        #Si tiene lugar disponible el barco Basico pero el que intento agregar es más pesado tira exception.
+    
+    
+    def test_barco_con_capacidad_contenedores_al_tope_basico(self):
+        barco = BarcoBasico(100,3,False)
+        mock_contenedor1=Mock()
+        mock_contenedor1.peso_contenedor.return_value =1
+        mock_contenedor1.get_material_especial.return_value = False
+        mock_contenedor1.get_tipo.return_value = 'Basico'
+        
+        mock_contenedor2 = Mock()
+        mock_contenedor2.peso_contenedor.return_value =1
+        mock_contenedor2.get_material_especial.return_value = False
+        mock_contenedor2.get_tipo.return_value = 'Basico'
+        
+        mock_contenedor3 = Mock()
+        mock_contenedor3.peso_contenedor.return_value =1
+        mock_contenedor3.get_material_especial.return_value = False
+        mock_contenedor3.get_tipo.return_value = 'Basico'
+        
+        barco.cargar(mock_contenedor1)
+        barco.cargar(mock_contenedor2)
+        barco.cargar(mock_contenedor3)
+        
+        mock_contenedor = Mock()
+        mock_contenedor.peso_contenedor.return_value =80
+        mock_contenedor.get_material_especial.return_value = False
+        mock_contenedor.get_tipo.return_value = 'Basico'
+        
+        with self.assertRaises(Cantidad_contenedores_maxima_alcanzada_exception):
+            barco.tiene_lugar(mock_contenedor)
+        #Testea si entra un contenedor por la cantidad de contenedores aceptada del barco basico. 
