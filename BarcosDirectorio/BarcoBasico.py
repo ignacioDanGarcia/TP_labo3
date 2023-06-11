@@ -5,14 +5,14 @@ sys.path.insert(0,'ContenedoresDirectorio\Contenedor_basico_abstracto.py')
 from ContenedorBasicoAbstracta import ContenedorBasicoAbstracta
 
 class BarcoBasico(Barco):
-    def __init__(self, peso_max, cant_contenedores_max, lleva_mat_esp):
-        super().__init__(peso_max, cant_contenedores_max, lleva_mat_esp)
+    def __init__(self, peso_max, cant_contenedores_max, lleva_material_especial):
+        super().__init__(peso_max, cant_contenedores_max, lleva_material_especial)
     
     def puede_cargar_esta_carga(self, carga):
         if not (isinstance(carga, ContenedorBasicoAbstracta)):
             raise Contenedor_no_aceptado_exception("Este barco solo puede llevar contenedores básicos")
         #Hay que ver como manejamos en la carga si lleva alguna carga especial o no.
-        if not self.lleva_mat_esp and carga.get_mat_especial():
+        if not self.lleva_material_especial and carga.get_material_especial():
             raise Material_no_compatible_con_barco_Exceptionn("Este barco no puede llevar el material que se intenta cargar.")
         return True
         
