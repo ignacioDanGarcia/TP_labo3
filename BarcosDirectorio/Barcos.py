@@ -1,7 +1,7 @@
 from BarcosDirectorio.Cargable import Cargable
 from abc import ABC, abstractmethod
 from GenerarId import GenerarId
-from MetodosViajes import MetodosViajes
+
 
 class Barco(Cargable, ABC):
     

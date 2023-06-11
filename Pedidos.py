@@ -12,9 +12,17 @@ class Pedidos:
         self.__containers = None #necesitamos que el pedido tenga los containers asociados a las cargas
         self.__necesita_transporte_camion = necesita_transporte_camion #bool si es False no sumamos el precio de 
                                                        #transporte carga x camion en el costo total del pedido
+        self.__precio_final_pedido = 0
         'pruebas de git'
     
     'Getters y setters:'
+
+
+    def get_precio_final_pedido(self):
+        return self.__precio_final_pedido
+    def set_precio_final_pedido(self, precio):
+        self.__precio_final_pedido = precio
+    precio_final_pedido = property(get_precio_final_pedido,set_precio_final_pedido)
 
     
     def get_containers(self):

@@ -4,10 +4,8 @@ from TasadorDeCargas import TasadorDeCargas
 class Carga:
 
     def __init__(self, medidas, peso, material_especial):
-        tas = TasadorDeCargas()
-        p = tas.setear_precio_carga()
+
         self.__medidas = medidas
-        self.__precio_transporte_base = p
         self.__peso = peso
         self.__material_especial = material_especial
         #falta id de carga, y sino sacar el getter
@@ -22,11 +20,7 @@ class Carga:
         self.__medidas = m
     medidas = property(get_medidas,set_medidas)
     
-    def get_precio_transporte_base(self):
-        return self.__precio_transporte_base
-    def set_precio_transporte_base(self, precio):
-        self.__precio_transporte_base = precio
-    precio_transporte_base = property(get_precio_transporte_base,set_precio_transporte_base)
+
     
     def get_peso(self):
         return self.__peso
