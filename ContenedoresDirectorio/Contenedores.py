@@ -11,7 +11,7 @@ from .Estados.EstadoMenor10000 import EstadoMenor10000
 from .Estados.EstadoMas10000 import EstadoMas10000
 from ModuloGPS import ModuloGPS
 
-class Contenedor(ABC):
+class Contenedor():
 
     def __init__(self, material_especial):
         gen = GenerarId()

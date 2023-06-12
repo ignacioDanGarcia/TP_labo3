@@ -9,6 +9,8 @@ class Contenedor_director:
     def change_builder(self, builder):
       self.builder = builder
     
+    '''
+    Lo comento por si volvemos con el cambio.
     def crear_contenedor_basico(self, material_especial):
       return self\
       .crear_contenedor(material_especial) \
@@ -37,9 +39,15 @@ class Contenedor_director:
       .set_medidas_interior_flatrack()\
       .set_peso_maximo_flatrack()\
       .set_volumen_maximo_flatrack() \
-      .get_contenedor()
+      .get_contenedor()'''
             
     def crear_contenedor(self, material_especial):
       self.builder \
-      .reset(material_especial)
-      return self.builder
+      .reset(material_especial) 
+      return self.builder \
+      .set_tipo() \
+      .set_peso_maximo() \
+      .set_medidas_interior() \
+      .set_medidas_exterior() \
+      .set_volumen_maximo() \
+      .get_contenedor()
