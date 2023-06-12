@@ -5,6 +5,9 @@ from pytest import raises
 from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from ContenedoresDirectorio.Contenedores import Contenedor
+from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderContenedorBasico
+from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderContenedorBasicoHC
+from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
 
 from Pedidos import Pedidos
 from Carga import Carga
@@ -21,10 +24,10 @@ class TestEstados(TestCase):
         cargas.append(carga)
         cargas.append(carga2)
         
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
         
-        contenedor = director.crear_contenedor_hc(False)
+        contenedor = director.crear_contenedor(False)
         
         
         contenedor.set_precio_transporte_base(500) # cambio lo establecido por el tasador de cargas para tener mas control
@@ -53,10 +56,10 @@ class TestEstados(TestCase):
         cargas.append(carga2)
         
         
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
         
-        contenedor = director.crear_contenedor_hc(False)
+        contenedor = director.crear_contenedor(False)
         
         
         contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
@@ -88,10 +91,10 @@ class TestEstados(TestCase):
         cargas.append(carga)
         cargas.append(carga2)
         
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
         
-        contenedor = director.crear_contenedor_hc(False)
+        contenedor = director.crear_contenedor(False)
         
 
         
@@ -116,10 +119,10 @@ class TestEstados(TestCase):
         cargas = []
         cargas.append(carga)
         
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
         
-        contenedor = director.crear_contenedor_hc(False)
+        contenedor = director.crear_contenedor(False)
         
         
         contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
@@ -146,10 +149,10 @@ class TestEstados(TestCase):
         cargas.append(carga2)
         
         
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
         
-        contenedor = director.crear_contenedor_hc(False)
+        contenedor = director.crear_contenedor(False)
 
         
         contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
@@ -172,10 +175,10 @@ class TestEstados(TestCase):
         cargas = []
         cargas.append(carga)
         
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
         
-        contenedor = director.crear_contenedor_hc(False)
+        contenedor = director.crear_contenedor(False)
         
         contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
         
@@ -201,10 +204,10 @@ class TestEstados(TestCase):
         cargas.append(carga2)
         
         
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
         
-        contenedor = director.crear_contenedor_hc(False)
+        contenedor = director.crear_contenedor(False)
         
 
         
@@ -230,10 +233,10 @@ class TestEstados(TestCase):
         cargas.append(carga)
         
         
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
         
-        contenedor = director.crear_contenedor_hc(False)
+        contenedor = director.crear_contenedor(False)
         
         
         contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas

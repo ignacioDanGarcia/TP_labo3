@@ -1,6 +1,8 @@
 from unittest import TestCase
 from unittest.mock import Mock
-from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
+from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderContenedorBasicoHC
+from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderContenedorBasico
+from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from ContenedoresDirectorio.Contenedores import Contenedor
 from Medidas import Medidas
@@ -9,9 +11,9 @@ from Medidas import Medidas
 class ContenedorBuilderTest(TestCase):
     
     def test_crear_contenedor_simple(self):
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasico()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor_basico(None)
+        contenedor = director.crear_contenedor(None)
         
         assert isinstance(contenedor, Contenedor) == True
         assert contenedor.tipo == "Basico estandar"
@@ -31,9 +33,9 @@ class ContenedorBuilderTest(TestCase):
         
         
     def test_crear_contenedor_hc(self):
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor_hc(None)
+        contenedor = director.crear_contenedor(None)
         
         assert isinstance(contenedor, Contenedor) == True
         assert contenedor.tipo == "Basico HC"
@@ -50,9 +52,9 @@ class ContenedorBuilderTest(TestCase):
         
         
     def test_crear_contenedor_flatrack(self):
-        builder = Contenedor_builder()
+        builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor_flatrack(None)
+        contenedor = director.crear_contenedor(None)
 
         assert isinstance(contenedor, Contenedor) == True
         assert contenedor.tipo == "Flat Rack"
@@ -64,3 +66,11 @@ class ContenedorBuilderTest(TestCase):
         assert contenedor.get_medidas_exterior().alto == 2.3
         assert contenedor.get_medidas_exterior().ancho == 100000
         assert contenedor.get_medidas_exterior().largo == 6.1
+        
+    def test_change_builder(self):
+        builder = BuilderContenedorFlatRack()
+        director = Contenedor_director(builder)
+        builder2 = BuilderContenedorBasico()
+        director.change_builder(builder2)
+        
+        assert isinstance(director.builder, BuilderContenedorBasico) == True

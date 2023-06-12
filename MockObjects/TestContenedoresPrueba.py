@@ -5,6 +5,9 @@ import mock
 from Carga import Carga
 from ContenedoresDirectorio.Contenedores import Contenedor
 from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
+from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderContenedorBasico
+from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderContenedorBasicoHC
+from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from pytest import raises
 from Excepciones.exceptions import *
@@ -16,9 +19,9 @@ class TestContenedoresPrueba(TestCase):
     6. Un contenedor sin características especiales no puede transportar material especial. """
         
     def test_verificar_carga_por_dimensioneshc1(self):
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor_hc(None)
+        contenedor = director.crear_contenedor(None)
         
         medidas = Medidas(100,3,5)
         carga = Carga(medidas,50,None)
@@ -31,9 +34,9 @@ class TestContenedoresPrueba(TestCase):
         
     
     def test_verificar_carga_por_dimensioneshc2(self):
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor_hc(None)
+        contenedor = director.crear_contenedor(None)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,None)
         assert(contenedor.verificar_carga(carga)) == True
@@ -48,9 +51,9 @@ class TestContenedoresPrueba(TestCase):
     
     
     def test_verificar_carga_por_material_especialhc1(self):
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor_hc(None)
+        contenedor = director.crear_contenedor(None)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,True)
         with self.assertRaises(el_contenedor_basico_no_puede_mat_especial):
@@ -59,9 +62,9 @@ class TestContenedoresPrueba(TestCase):
     
     
     def test_verificar_carga_por_material_especial_flatrack1(self):
-        builder = Contenedor_builder()
+        builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor_flatrack(None)
+        contenedor = director.crear_contenedor(None)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,True)
         contenedor.set_cargas(carga)
@@ -72,9 +75,9 @@ class TestContenedoresPrueba(TestCase):
     
     
     def test_verificar_carga_por_material_especial_flatrack2(self):
-        builder = Contenedor_builder()
+        builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor_flatrack(None)
+        contenedor = director.crear_contenedor(None)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,False)
         assert len(contenedor.get_cargas()) == 0
@@ -87,9 +90,9 @@ class TestContenedoresPrueba(TestCase):
     
     
     def test_verificar_carga_por_dimensiones_flatrack(self):
-        builder = Contenedor_builder()
+        builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor_flatrack(None)
+        contenedor = director.crear_contenedor(None)
         medidas = Medidas(100,3,5)
         carga = Carga(medidas,50,None)
         with self.assertRaises(contenedor_no_puede_llevar_carga):
@@ -98,11 +101,12 @@ class TestContenedoresPrueba(TestCase):
         with self.assertRaises(contenedor_no_puede_llevar_carga):
             contenedor.set_cargas(carga)
         'medidas superiores'
+        
     
     def test_verificar_carga_por_dimensiones_basico_y_carga_con_material_especial(self):
-        builder = Contenedor_builder()
+        builder = BuilderContenedorBasico()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor_basico(None)
+        contenedor = director.crear_contenedor(None)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,None)
         assert(contenedor.verificar_carga(carga)) == True

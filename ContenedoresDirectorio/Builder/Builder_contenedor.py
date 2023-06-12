@@ -1,8 +1,8 @@
 from ContenedoresDirectorio.Contenedores import Contenedor
 from Medidas import Medidas
+from abc import ABC, abstractmethod
 
-
-class Contenedor_builder:
+class Contenedor_builder(ABC):
     
     def __init__(self) -> None:
       pass
@@ -14,6 +14,25 @@ class Contenedor_builder:
     def get_contenedor(self):
         return self.contenedor
     
+    @abstractmethod
+    def set_tipo(self):
+        return self
+    @abstractmethod
+    def set_volumen_maximo(self):
+        return self
+    @abstractmethod
+    def set_peso_maximo(self):
+        return self
+    @abstractmethod
+    def set_medidas_interior(self):
+        return self
+    @abstractmethod
+    def set_medidas_exterior(self):
+        return self
+    
+    
+    '''
+    Lo comento por si volvemos con el cambio.
     #Basicos:
     def set_tipo_basico(self):
         self.contenedor.set_tipo("Basico estandar")
@@ -75,3 +94,5 @@ class Contenedor_builder:
     def set_medidas_exterior_flatrack(self):
         self.contenedor.set_medidas_exterior(Medidas(6.1,100000,2.3))
         return self
+        
+        '''
