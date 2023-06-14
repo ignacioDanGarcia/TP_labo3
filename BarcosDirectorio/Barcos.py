@@ -5,7 +5,7 @@ from GenerarId import GenerarId
 class Barco(Cargable, ABC):
     gen = GenerarId()
     
-    def __init__(self, peso_max, cant_contenedores_max, lleva_mat_esp):
+    def __init__(self, peso_max, cant_contenedores_max, lleva_mat_esp, nombre):
         self.__id = Barco.gen.generar_numeros_distintos()
         self.__disponible = True
         self.__peso_max = peso_max
@@ -13,6 +13,7 @@ class Barco(Cargable, ABC):
         self.__kmRecorridos = 0
         self.__lleva_mat_esp = lleva_mat_esp
         self.__contenedores = []
+        self.__nombre = nombre
         
         #saque las vriables de medidas interior y exterior ya que el enunciado solo habla de las medidas de 
         # los contenedores contenedores.

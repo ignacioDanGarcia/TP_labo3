@@ -3,6 +3,7 @@ from unittest.mock import Mock, patch, MagicMock
 import mock
 
 from pytest import raises
+from BarcosDirectorio.FactoryBarcos import FactoryBarcos
 from BarcosDirectorio.BarcoEspecial import BarcoEspecial
 from Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_exception, Material_no_compatible_con_barco_Exceptionn, Peso_excedido_exception
 
@@ -110,3 +111,7 @@ class test_barcos(TestCase):
         with self.assertRaises(Peso_excedido_exception):
             barco.tiene_lugar(mock_contenedor)
         #Si tiene lugar disponible el barco pero el que intento agregar es más pesado tira exception.
+
+    def test_barco_dinamico(self):
+        barco = FactoryBarcos.crear_barco("Especial")(100,4,False)
+        #Crea dinamicamente un barco del tipo que se le pase por parametro, en este caso "Especial"

@@ -6,7 +6,7 @@ from ContenedorBasicoAbstracta import ContenedorBasicoAbstracta
 
 class BarcoBasico(Barco):
     def __init__(self, peso_max, cant_contenedores_max, lleva_mat_esp):
-        super().__init__(peso_max, cant_contenedores_max, lleva_mat_esp)
+        super().__init__(peso_max, cant_contenedores_max, lleva_mat_esp, "Basico")
     
     def puede_cargar_esta_carga(self, carga):
         if not (isinstance(carga, ContenedorBasicoAbstracta)):

@@ -15,12 +15,13 @@ que de eso se deberia encargar esta clase.
 """
 
 class Empresa:
-    def __init__(self, barcos):
+    def __init__(self):
+        self.__barcos = []
         self.__camiones = []
         for i in range(5):
             camion = Camion(i)
             self.__camiones.append(camion)
-        for barco in barcos:
+        for barco in self.__barcos:
             self.__barcos.append(barco)
         
         # para puntos 3 y 4 de SE PIDE
@@ -131,3 +132,11 @@ class Empresa:
     def misma_carga_mas_veces(self):
         # falta implementar
         pass
+
+    def insertCargar(self, carga):
+        for barco in self.get_barcos():
+            for contenedor in barco.get_contenedores():
+                if contenedor.verificar_carga(carga):
+                    contenedor.set_cargas(carga)
+                    return True
+        raise Exception("Ningún barco puede transportar esta carga")

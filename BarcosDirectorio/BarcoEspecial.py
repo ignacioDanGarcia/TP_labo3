@@ -3,7 +3,7 @@ from Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_except
 
 class BarcoEspecial(Barco):
     def __init__(self, peso_max, cant_contenedores_max, lleva_mat_esp):
-        super().__init__(peso_max, cant_contenedores_max, lleva_mat_esp)
+        super().__init__(peso_max, cant_contenedores_max, lleva_mat_esp, "Especial")
     
     def puede_cargar_esta_carga(self, contenedor):
         if not self.lleva_mat_esp and contenedor.get_mat_especial():
