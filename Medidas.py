@@ -46,4 +46,7 @@ class Medidas:
             return True
         
         # Excepción capturada en verificar_carga() de Contenedor
-        raise medidas_incorrectas("La carga no puede ser transportada por este contenedor")
+        #raise medidas_incorrectas("La carga no puede ser transportada por este contenedor") 
+        # #-- La idea va a ser que recorra todos los contenedores posibles para ver donde puede meter la carga. 
+        #Si tiramos excepción se cortaría el programa y no podría verificar más excepciones. 
+        return False

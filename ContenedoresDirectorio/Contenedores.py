@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from Carga import Carga
 from Medidas import Medidas
 from Excepciones.exceptions import contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga, distancia_incorrecta
 from GenerarId import GenerarId
@@ -106,15 +107,21 @@ class Contenedor():
     
     def get_cargas(self):
         return self.__cargas
-    def set_cargas(self, c):
-        self.verificar_carga(c) #Edito acá agregando el verificar carga cuando seteamos la carga para que revise antes de agregarla.
-        self.__cargas.append(c)
-    cargas = property(get_cargas,set_cargas)
+    
+    
+    cargas = property(get_cargas)
     'Fin Getters y Setters'
     
+    def peso_contenedor(self):
+        peso = 0
+        for carga in self.cargas: 
+            peso+= carga.get_peso()
+        return peso
+    
+    #-------------------------------ESTA RESPONSABILIDAD FUE MOVIDA AL MANEJADOR DE CARGAS -------------------------------------------------------------------
     #Cualquier carga cuyas  medidas o peso supere lo definido en el container no podrá 
     # ser trasladada en el mismo.
-    def verificar_carga(self, carga):
+    '''def verificar_carga(self, carga):
         # este metodo la usa esta misma clase
         
         try:
@@ -127,11 +134,10 @@ class Contenedor():
                 return True
             raise contenedor_no_puede_llevar_carga("La carga no puede ser transportada por este contenedor")
         except medidas_incorrectas as e:
-            raise contenedor_no_puede_llevar_carga(str(e))
+            raise contenedor_no_puede_llevar_carga(str(e))'''
         
 
     
-
     def calcular_precio(self, distancia):
         # distancia se llena con un num del moduloGPS
         # este metodo la usaria la clase empresa
@@ -177,11 +183,10 @@ class Contenedor():
             
             
     
-    """
-    esto creo que no sirve, osea para esto esta el set_carga
+    
+    ''' esto creo que no sirve, osea para esto esta el set_carga
     def cargar(self, carga):
         if self.verificar_carga(carga):
             self.carga = carga
-    """
-    def peso_contenedor(self):
-        return self.carga.get_peso()
+    '''
+    

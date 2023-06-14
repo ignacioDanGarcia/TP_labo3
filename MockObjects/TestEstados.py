@@ -8,7 +8,7 @@ from ContenedoresDirectorio.Contenedores import Contenedor
 from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderContenedorBasico
 from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderContenedorBasicoHC
 from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
-
+from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
 from Pedidos import Pedidos
 from Carga import Carga
 from Medidas import Medidas
@@ -32,9 +32,10 @@ class TestEstados(TestCase):
         
         contenedor.set_precio_transporte_base(500) # cambio lo establecido por el tasador de cargas para tener mas control
         
+        manejadorDeCargas = ManejadorDeCargas()
+        manejadorDeCargas.cargar(carga, contenedor)
         
-        contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
-        contenedor.set_cargas(carga2)
+        manejadorDeCargas.cargar(carga2, contenedor) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
         
         # esta es la parte importante
         
@@ -62,8 +63,9 @@ class TestEstados(TestCase):
         contenedor = director.crear_contenedor(False)
         
         
-        contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
-        
+        # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
+        manejadorDeCargas = ManejadorDeCargas()
+        manejadorDeCargas.cargar(carga, contenedor)
         
         # esta es la parte importante
         
@@ -98,9 +100,11 @@ class TestEstados(TestCase):
         
 
         
-        contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
-        contenedor.set_cargas(carga2)
-        
+        # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
+        manejadorDeCargas = ManejadorDeCargas()
+        manejadorDeCargas.cargar(carga, contenedor)
+        manejadorDeCargas.cargar(carga2, contenedor)
+
         # esta es la parte importante
         
         # y como las medidas son cualquiera, con ese peso deberia devolver 500
@@ -125,8 +129,10 @@ class TestEstados(TestCase):
         contenedor = director.crear_contenedor(False)
         
         
-        contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
+        # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
         
+        manejadorDeCargas = ManejadorDeCargas()
+        manejadorDeCargas.cargar(carga, contenedor)
         
         # esta es la parte importante
         
@@ -155,9 +161,10 @@ class TestEstados(TestCase):
         contenedor = director.crear_contenedor(False)
 
         
-        contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
-        contenedor.set_cargas(carga2)
-        
+         # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
+        manejadorDeCargas = ManejadorDeCargas()
+        manejadorDeCargas.cargar(carga, contenedor)
+        manejadorDeCargas.cargar(carga2, contenedor)
         # esta es la parte importante
         
         # y como las medidas son cualquiera, con ese peso deberia devolver 500
@@ -180,8 +187,9 @@ class TestEstados(TestCase):
         
         contenedor = director.crear_contenedor(False)
         
-        contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
-        
+        # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
+        manejadorDeCargas = ManejadorDeCargas()
+        manejadorDeCargas.cargar(carga, contenedor)
         
         # esta es la parte importante
         
@@ -211,9 +219,11 @@ class TestEstados(TestCase):
         
 
         
-        contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
-        contenedor.set_cargas(carga2)
-        
+       # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
+    
+        manejadorDeCargas = ManejadorDeCargas()
+        manejadorDeCargas.cargar(carga, contenedor)
+        manejadorDeCargas.cargar(carga2, contenedor)
         # esta es la parte importante
         
         # y como las medidas son cualquiera, con ese peso deberia devolver 500
@@ -239,8 +249,9 @@ class TestEstados(TestCase):
         contenedor = director.crear_contenedor(False)
         
         
-        contenedor.set_cargas(carga) # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
-        
+         # inserto a la lista de cargas dos cargas, no tengo todavia metodo que crea y recorre conts y mete cargas
+        manejadorDeCargas = ManejadorDeCargas()
+        manejadorDeCargas.cargar(carga, contenedor)
         
         # esta es la parte importante
         
