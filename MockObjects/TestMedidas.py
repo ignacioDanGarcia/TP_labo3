@@ -25,8 +25,7 @@ class TestMedidas(TestCase):
         medidas_1 = Medidas(3,3,3)
         medidas_2 = Medidas(4,4,3)
         
-        with self.assertRaises(medidas_incorrectas):
-            medidas_1.comparar_medidas(medidas_2)
+        assert  medidas_1.comparar_medidas(medidas_2) == False
 
     def test_comparar_medidas_correcto(self):
          #devuelve FAlSE si las medidas pasadas por parametro son mayores a las de la instancia

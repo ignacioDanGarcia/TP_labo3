@@ -26,23 +26,27 @@ class Medidas:
     largo = property(get_largo,set_largo)
     
     def comparar_medidas(self, medidas):
-        #devuelve FAlSE si las medidas pasadas por parametro son mayores a las de la instancia
-        #devuelve TRUE si las medidas pasadas x parametro son menores o iguales a las de la instancia
+        # Devuelve False si las medidas pasadas por parámetro son mayores o iguales a las de la instancia
+        # Devuelve True si las medidas pasadas por parámetro son menores estrictamente a las de la instancia
 
         alto = False
         largo = False
         ancho = False
 
-        if 0 < medidas.get_alto() and medidas.get_alto() <= self.get_alto():
+        if 0 < medidas.get_alto() <= self.get_alto():
             alto = True
-        
-        if 0 < medidas.get_ancho() and medidas.get_ancho() <= self.get_ancho():
+            
+        if 0 < medidas.get_ancho() <= self.get_ancho():
             ancho = True
-        
-        if 0 < medidas.get_largo() and medidas.get_largo() <= self.get_largo():
+            
+        if 0 < medidas.get_largo() <= self.get_largo():
             largo = True
 
-        if (alto and largo and ancho):
+        if alto and largo and ancho:
             return True
-        # excepcion catcheada en verificar_carga() de contenedor
-        raise medidas_incorrectas("La carga no puede ser transportada por este contenedor")
+        
+        # Excepción capturada en verificar_carga() de Contenedor
+        #raise medidas_incorrectas("La carga no puede ser transportada por este contenedor") 
+        # #-- La idea va a ser que recorra todos los contenedores posibles para ver donde puede meter la carga. 
+        #Si tiramos excepción se cortaría el programa y no podría verificar más excepciones. 
+        return False

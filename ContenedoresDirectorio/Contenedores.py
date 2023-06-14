@@ -1,29 +1,52 @@
 from abc import ABC, abstractmethod
+from Carga import Carga
 from Medidas import Medidas
-from Excepciones.exceptions import contenedor_no_puede_llevar_carga, medidas_incorrectas, no_existe_carga, distancia_incorrecta
+from Excepciones.exceptions import contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga, distancia_incorrecta
 from GenerarId import GenerarId
+from TasadorDeCargas import TasadorDeCargas
 
-class Contenedor(ABC):
-    gen = GenerarId()
+from .Estados.EstadoContenedorAbstracta import EstadoContenedorAbstracta
+from .Estados.EstadoMenor100 import EstadoMenor100
+from .Estados.EstadoMenor1000 import EstadoMenor1000
+from .Estados.EstadoMenor10000 import EstadoMenor10000
+from .Estados.EstadoMas10000 import EstadoMas10000
+from ModuloGPS import ModuloGPS
 
-    def __init__(self, mat_especial):
-        
-        self.__id = Contenedor.gen.generar_numeros_distintos()
-        self.__precio_adicional = 0 #Cada contenedor define un precio base que se debe pagar para transportar carga
+class Contenedor():
+
+    def __init__(self, material_especial):
+        gen = GenerarId()
+        self.__id = gen.generar_numeros_distintos()
+        self.__tipo = ''
+        tas = TasadorDeCargas()
+        p = tas.setear_precio_carga()
+        self.__precio_transporte_base = p
         self.__volumen_max = 0.0
         self.__peso_max = 0.0
         self.__medidas_interior = None
         self.__medidas_exterior = None
         self.__cargas = []
-        self.__mat_especial = mat_especial
+        self.__material_especial = material_especial
         self.__disponible = True
         self.__cant_de_veces_comple_y_carga_unica = 0
+        self.__estado = None
 
         #algo hay que hacer con este punto:
         # Un contenedor sin características especiales no puede transportar material especial.
         #Creo que con un booleano de si es apto para material especial en el contructor podría ir este punto así 
     
     'Getters y Setters:'
+    def set_estado(self, estado):
+        self.__estado = estado
+    def get_estado(self):
+        return self.__estado
+    estado = property(get_estado,set_estado)
+
+    def set_tipo(self, tipo):
+        self.__tipo = tipo
+    def get_tipo(self):
+        return self.__tipo
+    tipo = property(get_tipo,set_tipo)
     
     def get_id(self):
         return self.__id
@@ -42,17 +65,17 @@ class Contenedor(ABC):
         self.__disponible = dispo
     disponible = property(get_disponible,set_disponible)
     
-    def get_precio_adicional(self):
-        return self.__precio_adicional
-    def set_precio_adicional(self, p):
-        self.__precio_adicional = p
-    precio_adicional = property(get_precio_adicional,set_precio_adicional)
+    def get_precio_transporte_base(self):
+        return self.__precio_transporte_base
+    def set_precio_transporte_base(self, precio):
+        self.__precio_transporte_base = precio
+    precio_transporte_base = property(get_precio_transporte_base,set_precio_transporte_base)
     
-    def get_mat_especial(self):
-        return self.__mat_especial
-    def set_mat_especial(self, mat):
-        self.__mat_especial = mat
-    mat_especial = property(get_mat_especial,set_mat_especial)
+    def get_material_especial(self):
+        return self.__material_especial
+    def set_material_especial(self, mat):
+        self.__material_especial = mat
+    material_especial = property(get_material_especial,set_material_especial)
     'mat especial es un booleano para diferencias si el container puede llevar una carga especial como explosivos.'
 
     def get_medidas_interior(self):
@@ -84,81 +107,86 @@ class Contenedor(ABC):
     
     def get_cargas(self):
         return self.__cargas
-    def set_cargas(self, c):
-        self.__cargas.append(c)
-    cargas = property(get_cargas,set_cargas)
+    
+    
+    cargas = property(get_cargas)
     'Fin Getters y Setters'
     
+    def peso_contenedor(self):
+        peso = 0
+        for carga in self.cargas: 
+            peso+= carga.get_peso()
+        return peso
+    
+    #-------------------------------ESTA RESPONSABILIDAD FUE MOVIDA AL MANEJADOR DE CARGAS -------------------------------------------------------------------
     #Cualquier carga cuyas  medidas o peso supere lo definido en el container no podrá 
     # ser trasladada en el mismo.
-    def verificar_carga(self, carga):
+    '''def verificar_carga(self, carga):
         # este metodo la usa esta misma clase
         
-        no_supera_medidas = False
-        no_supera_peso_max = False
-        no_supera_vol_max = False
-        try:            
-            if self.medidas_interior.comparar_medidas(carga.get_medidas()):
-                no_supera_medidas = True
+        try:
+            if "basico" in self.tipo.lower() and carga.get_material_especial() != None: #En vez de que vea si es instancia de barco_basico_abstracto lo vemos por el tipo de barco
+                raise el_contenedor_basico_no_puede_mat_especial("Un contenedor basico no puede cargar un material especial")
 
-            if carga.get_peso() < self.get_peso_max():
-                no_supera_peso_max = True
-
-            if carga.get_volumen() < self.get_volumen_max():
-                no_supera_vol_max = True
-            
-            if (no_supera_peso_max and no_supera_medidas and no_supera_vol_max):
+            if self.medidas_interior.comparar_medidas(carga.get_medidas()) and \
+                    carga.get_peso() <= self.get_peso_max() and \
+                    carga.get_volumen() <= self.get_volumen_max():
                 return True
+            raise contenedor_no_puede_llevar_carga("La carga no puede ser transportada por este contenedor")
         except medidas_incorrectas as e:
-            print(str(e))
+            raise contenedor_no_puede_llevar_carga(str(e))'''
         
-            #excepcion catcheada en calcular_precio_adicional de esta misma clase
-        raise contenedor_no_puede_llevar_carga("La carga no puede ser transportada por este contenedor")
 
-    def calcular_precio_adicional(self, distancia):
+    
+    def calcular_precio(self, distancia):
         # distancia se llena con un num del moduloGPS
         # este metodo la usaria la clase empresa
         try:
-            carga = self.get_cargas()
-            if carga is None:
+            if (distancia is None or isinstance(distancia, int) is False):
+                # excepcion catcheada en esta misma funcion, segun lo que encontre se podia
+                raise distancia_incorrecta("La distancia especificada no cumplen con ningún caso")    
+            
+            cargas = self.get_cargas()
+            if cargas is None:
                 # excepcion catcheada en esta misma funcion, segun lo que encontre se podia
                 raise no_existe_carga("No existe una carga")
             
-            if distancia < 100 and self.verificar_carga() and self.medidas.comparar_medidas(carga.medidas):
-                self.set_precio_adicional(200000)
-            elif distancia < 100 and self.verificar_carga() and not self.medidas.comparar_medidas(carga.medidas):
-                self.set_precio_adicional(1000 * (carga.peso // 100))
-            elif distancia < 1000 and self.verificar_carga() and self.medidas.comparar_medidas(carga.medidas):
-                self.set_precio_adicional(210000)
-            elif distancia < 1000 and self.verificar_carga() and not self.medidas.comparar_medidas(carga.medidas):
-                self.set_precio_adicional(1100 * (carga.peso // 100))
-            elif distancia < 10000 and self.verificar_carga() and self.medidas.comparar_medidas(carga.medidas):
-                self.set_precio_adicional(230000)
-            elif distancia < 10000 and self.verificar_carga() and not self.medidas.comparar_medidas(carga.medidas):
-                self.set_precio_adicional(1150 * (carga.peso // 100))
-            elif distancia > 10000 and self.verificar_carga() and self.medidas.comparar_medidas(carga.medidas):
-                self.set_precio_adicional(250000)
-            elif distancia > 10000 and self.verificar_carga() and not self.medidas.comparar_medidas(carga.medidas):
-                self.set_precio_adicional(1500 * (carga.peso // 100))
+            estado = EstadoMenor100(self)
+            # esto es nada mas para cambiar el precio por distancia, que si al principio es uno siempre va a ser ese
+            # no importa que carga le metas, siempre va al mismo lado el contenedor
+            # IMPORTANTE EN METODO VIAJAR EMPRESA SETEAR ESTADO CONTENEDOR A NONE
+            precio_aux = 0
+            # Ver si en este if capaz se puede poner un estado.transicion(distancia) en lugar de todo esto
+            for carga in cargas:
+                #if estado is None or (estado is not None and not estado.condicion(distancia)):
+                #    self.set_estado(self.buscar_estado(distancia, carga))
+                #estado = self.get_estado()
+                precio_aux += estado.transicion(distancia, carga)
+                
+                # aca el contenedor ya va a estar lleno o con pedido listo
+                
+            
+            
+            
+            precio_aux += self.get_precio_transporte_base()
+            
+            return precio_aux
+            
+            
             
         except contenedor_no_puede_llevar_carga as e:
             print(str(e))
         except no_existe_carga as e2:
             print(str(e2))
-        else:
-            if (distancia is None or isinstance(distancia, int)):
-                # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
-                raise distancia_incorrecta("La distancia especificada no cumplen con ningún caso")    
+        except distancia_incorrecta as e:
+            print(str(e))
             
-            precio = (self.get_precio_adicional() + self.carga.get_precio()) 
-
-            return precio
+            
     
-    """
-    esto creo que no sirve, osea para esto esta el set_carga
+    
+    ''' esto creo que no sirve, osea para esto esta el set_carga
     def cargar(self, carga):
         if self.verificar_carga(carga):
             self.carga = carga
-    """
-    def peso_contenedor(self):
-        return self.carga.get_peso()
+    '''
+    

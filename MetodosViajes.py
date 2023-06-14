@@ -1,10 +1,13 @@
-import abc #para hacerla clase abstracta
+from abc import ABC, abstractmethod
 
-class MetodosViajes(abc.ABC):
-    @abc.abstractmethod
-    def viajar():
+class MetodosViajes(ABC):
+    @abstractmethod
+    def viajar(self):
         pass
     
-    @abc.abstractmethod
-    def definirPrecioViaje():
+    @abstractmethod
+    def definirPrecioViaje(self,pedido):
         pass
+    
+    
+    # ambas funciones estan en barco, empresa y contenedores. Capaz hay que acomodar esto

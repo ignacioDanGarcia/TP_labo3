@@ -3,6 +3,7 @@ class Camion:
         self.__costo = 20000
         self.__disponible = True #si lo instancias es porque no tiene nada
         self.__id = id
+        self.__contenedor = None
     
     'Getters y setters:'
     def get_id(self):
@@ -22,3 +23,14 @@ class Camion:
     def set_disponible(self,d):
         self.__disponible = d
     disponible = property(get_disponible,set_disponible)
+    
+    def get_contenedor(self):
+        return self.__contenedor
+    def set_contenedor(self,cont):
+        self.__contenedor = cont
+    contenedor = property(get_contenedor,set_contenedor)
+    
+    def viajar(self):
+        print("El camion ya entrego el pedido")
+        self.set_disponible(False)
+        self.set_contenedor(None)

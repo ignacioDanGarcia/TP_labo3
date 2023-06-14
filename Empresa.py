@@ -14,14 +14,13 @@ Pero para definir precios de viajes, calcular kilometros, aceptar y gestionar pe
 que de eso se deberia encargar esta clase.
 """
 
-class Empresa:
-    def __init__(self):
-        self.__barcos = []
+class Empresa(MetodosViajes):
+    def __init__(self, barcos):
         self.__camiones = []
         for i in range(5):
             camion = Camion(i)
             self.__camiones.append(camion)
-        for barco in self.__barcos:
+        for barco in barcos:
             self.__barcos.append(barco)
         
         # para puntos 3 y 4 de SE PIDE
@@ -59,47 +58,46 @@ class Empresa:
     
     def get_barcos(self):
         return self.__barcos
+    
     def set_barcos(self, barcos):
         self.__barcos = barcos
     barcos = property(get_barcos,set_barcos)
     
     def get_camiones(self):
         return self.__camiones
+    
     def set_camiones(self, camiones):
         self.__camiones = camiones
     camiones = property(get_camiones,set_camiones)
+
     
     def get_barco_con_mas_km(self):
+        
         return self.__barco_con_mas_km
+    
     def set_barco_con_mas_km(self, barcos):
         self.__barco_con_mas_km = barcos
     barco_con_mas_km = property(get_barco_con_mas_km,set_barco_con_mas_km)
+
+
     
     def get_barco_con_menos_km(self):
+      
         return self.__barco_con_menos_km
+    
     def set_barco_con_menos_km(self, barcos):
         self.__barco_con_menos_km = barcos
-    __barco_con_menos_km = property(get_barco_con_menos_km,set_barco_con_menos_km)
+    barco_con_menos_km = property(get_barco_con_menos_km,set_barco_con_menos_km)
     
     
     
-    def moduloGPS(self):
-        """
-        para "calcular" distancias
-        segun la tabla de precios las distancias minimas estan abajo de 100, y las maximas arriba de 10 mil
-        por eso puse que me devuelva una distancia en km del 1 al 20 mil y fue
-        
-        Tratemos de ignorar las sedes como tal porque si tenemos que guardar las sedes y la cantidad que tiene
-        cada una sobre la otra vamos a estar mil años
-        """
-        
-        return random.randint(1, 20000)
+    
     
     def camion_disponible(self):          
         for camion in self.camiones:
-            if (camion.disponible):
+            if (camion.get_disponible()):
                 #segun la teoria, esto afecta a la lista de empresa de self.camiones en cualquier parte del codigo
-                camion.disponible = False
+                camion.set_disponible = False
                 return camion
         # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
         raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")
@@ -121,22 +119,19 @@ class Empresa:
         
         return
     
-    
-    def definirPrecioViaje(Camion, contenedor):
-        #peso por transportar de cada contenedor dentro de un barco + el precio de la carga
-        pass
-    def definirPrecioViaje(Barco, listaContenedores):
-        #implementacion
-        pass
+                
+           
+    #El container que mayor cantidad de veces viajó completo con una única carga.
+    def container_con_mas_viajes_con_una_carga(self):
+        container_mas_viajes = Contenedor()
+        aux = 0
 
-    def misma_carga_mas_veces(self):
-        # falta implementar
-        pass
+        for barco in self.__barcos:
 
-    def insertCargar(self, carga):
-        for barco in self.get_barcos():
-            for contenedor in barco.get_contenedores():
-                if contenedor.verificar_carga(carga):
-                    contenedor.set_cargas(carga)
-                    return True
-        raise Exception("Ningún barco puede transportar esta carga")
+            for container in barco.get_contenedores():
+
+                if container.get_cant_de_veces_comple_y_carga_unica() > aux:
+                    aux = container.get_cant_de_veces_comple_y_carga_unica()
+                    container_mas_viajes = container
+        
+        return container_mas_viajes
