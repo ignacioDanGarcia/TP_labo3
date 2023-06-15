@@ -3,7 +3,7 @@ from unittest.mock import Mock, patch, MagicMock
 import mock
 
 from pytest import raises
-from Carga import Carga
+from Cargas.Carga import Carga
 from Excepciones.exceptions import medidas_incorrectas
 from Medidas import Medidas
 

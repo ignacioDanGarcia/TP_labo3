@@ -10,7 +10,7 @@ from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderCont
 from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
 from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
 from Pedidos import Pedidos
-from Carga import Carga
+from Cargas.Carga import Carga
 from Medidas import Medidas
 
 class TestEstados(TestCase):

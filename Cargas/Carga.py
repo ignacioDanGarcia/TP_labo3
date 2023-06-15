@@ -1,13 +1,12 @@
 from Medidas import Medidas
-from TasadorDeCargas import TasadorDeCargas
-
+from Cargas.Categorias import Categoria
 class Carga:
 
-    def __init__(self, medidas, peso, material_especial):
+    def __init__(self, medidas : Medidas, peso, categoria : Categoria):
 
         self.__medidas = medidas
         self.__peso = peso
-        self.__material_especial = material_especial
+        self.__categoria = categoria
         #falta id de carga, y sino sacar el getter
     
     'Getters y setters'
@@ -28,11 +27,11 @@ class Carga:
         self.__peso = peso
     peso = property(get_peso,set_peso)
     
-    def get_material_especial(self):
-        return self.__material_especial
-    def set_material_especial(self,mat):
-        self.__material_especial = mat
-    material_especial = property(get_material_especial,set_material_especial)
+    def get_categoria(self):
+        return self.__categoria
+    def set_categoria(self,categoria):
+        self.__categoria = categoria
+    material_especial = property(get_categoria,set_categoria)
     
     def get_volumen(self):
         volumen = self.medidas.get_alto() * self.medidas.get_ancho() * self.medidas.get_largo()

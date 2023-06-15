@@ -1,10 +1,9 @@
 from abc import ABC, abstractmethod
-from Carga import Carga
+from Cargas.Carga import Carga
 from Medidas import Medidas
 from Excepciones.exceptions import contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga, distancia_incorrecta
 from GenerarId import GenerarId
 from TasadorDeCargas import TasadorDeCargas
-
 from .Estados.EstadoContenedorAbstracta import EstadoContenedorAbstracta
 from .Estados.EstadoMenor100 import EstadoMenor100
 from .Estados.EstadoMenor1000 import EstadoMenor1000
@@ -15,6 +14,7 @@ from ModuloGPS import ModuloGPS
 class Contenedor():
 
     def __init__(self, material_especial):
+        #Si el container True el material_especial es que va a poder cargar contenidos con caracteristicas especiales, es decir, químicos.
         gen = GenerarId()
         self.__id = gen.generar_numeros_distintos()
         self.__tipo = ''
@@ -25,7 +25,7 @@ class Contenedor():
         self.__peso_max = 0.0
         self.__medidas_interior = None
         self.__medidas_exterior = None
-        self.__cargas = []
+        self.__cargas = [] 
         self.__material_especial = material_especial
         self.__disponible = True
         self.__cant_de_veces_comple_y_carga_unica = 0

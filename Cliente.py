@@ -1,6 +1,6 @@
 # este es un comentario a ver si me funciona la branch correctamente
 from Pedidos import Pedidos
-from Carga import Carga
+from Carga.Carga import Carga
 from GenerarId import GenerarId
 
 

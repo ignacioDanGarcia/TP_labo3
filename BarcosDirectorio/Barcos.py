@@ -5,6 +5,8 @@ from GenerarId import GenerarId
 class Barco(Cargable, ABC):
     gen = GenerarId()
     
+
+
     def __init__(self, peso_max, cant_contenedores_max, lleva_mat_esp, nombre):
         self.__id = Barco.gen.generar_numeros_distintos()
         self.__disponible = True
