@@ -1,36 +1,25 @@
 from BarcosDirectorio.Barcos import Barco
 from Camion import Camion
 from Contenedores import Contenedor
+from Estados import EstadoMenor100, EstadoMenor1000, EstadoMas10000, EstadoMenor10000
 from Pedidos import Pedidos
-from MetodosViajes import MetodosViajes
-# corregir directorio de estas dos
 from Excepciones.exceptions import *
 
-from Estados import EstadoMenor100, EstadoMenor1000, EstadoMas10000, EstadoMenor10000
-
-
 from typing import List
-
-
 import random
 
 """
-Esta clase es la que deberia controlar todo calculo. En el diagrama no la habiamos hecho.
-Pero para definir precios de viajes, calcular kilometros, aceptar y gestionar pedidos, creo
-que de eso se deberia encargar esta clase.
+ESTA CLASE CONTIENE LOS DATOS IMPORTANTES DE EMPRESA A USAR. COMO LOS BARCOS, CAMIONES, Y CONTENEDORES A
+DISPOCISION, JUNTO CON METODOS COMO actualizar_barco_trotamundo_o_sedentario() POR EJEMPLO, PARA
+RESOLVER COSAS QUE SE PIDEN EXPLICITAMENTE PARA LA APLICACION.
 """
 
 
-# Estos metodos de empresa podrian formar parte de una clase tipo EmpresaDatos que debuelva esas cosas como
-# actualizar_barco_trotamundo_o_sedentario, camion_disponible etc.
-
-# habria que hacer otra para la parte de procesar pedidos
-class Empresa(MetodosViajes):
+class EmpresaData():
     def __init__(self, barcos: List[Barco], camiones: List[Camion]):
-        self.__camiones = []
-        self.__camiones.append(camiones)
-        self.__barcos = []
-        self.__barcos.append(barcos)
+        self.__camiones = camiones
+        self.__barcos = barcos
+        
         
         # para puntos 3 y 4 de SE PIDE
         self.__barco_con_mas_km = None
@@ -84,12 +73,19 @@ class Empresa(MetodosViajes):
         self.__barco_con_menos_km = barcos
     barco_con_menos_km = property(get_barco_con_menos_km,set_barco_con_menos_km)
     
+    def devolver_un_barco_disponible(self):          
+        for barco in self.get_barcos():
+            if (barco.get_disponible()):
+                #segun la teoria, esto afecta a la lista de empresa de self.camiones en cualquier parte del codigo
+                barco.set_disponible = False
+                return barco
+        # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
+        raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")
     
     
     
-    
-    def camion_disponible(self):          
-        for camion in self.camiones:
+    def devolver_un_camion_disponible(self):          
+        for camion in self.get_camiones():
             if (camion.get_disponible()):
                 #segun la teoria, esto afecta a la lista de empresa de self.camiones en cualquier parte del codigo
                 camion.set_disponible = False
