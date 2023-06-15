@@ -121,12 +121,9 @@ class Empresa(MetodosViajes):
         container_mas_viajes = Contenedor()
         aux = 0
 
-        for barco in self.__barcos:
-
-            for container in barco.get_contenedores():
-
-                if container.get_cant_de_veces_comple_y_carga_unica() > aux:
-                    aux = container.get_cant_de_veces_comple_y_carga_unica()
-                    container_mas_viajes = container
+        for contenedor in self.contenedores:
+            if contenedor.get_cant_de_veces_comple_y_carga_unica() > aux:
+                aux = contenedor.get_cant_de_veces_comple_y_carga_unica()
+                container_mas_viajes = contenedor
         
         return container_mas_viajes
