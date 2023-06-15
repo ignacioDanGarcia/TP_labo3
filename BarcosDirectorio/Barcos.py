@@ -2,20 +2,20 @@ from BarcosDirectorio.Cargable import Cargable
 from abc import ABC, abstractmethod
 from GenerarId import GenerarId
 
-
 class Barco(Cargable, ABC):
+    gen = GenerarId()
     
-    
-    def __init__(self, peso_max, cant_contenedores_max, lleva_material_especial): 
-        #Si lleva material especial va a poder llevar una carga química.
-        gen = GenerarId()
-        self.__id = gen.generar_numeros_distintos()
+
+
+    def __init__(self, peso_max, cant_contenedores_max, lleva_mat_esp, nombre):
+        self.__id = Barco.gen.generar_numeros_distintos()
         self.__disponible = True
         self.__peso_max = peso_max
         self.__cant_contenedores_max = cant_contenedores_max
         self.__kmRecorridos = 0
-        self.__lleva_material_especial = lleva_material_especial
+        self.__lleva_mat_esp = lleva_mat_esp
         self.__contenedores = []
+        self.__nombre = nombre
         
         #saque las vriables de medidas interior y exterior ya que el enunciado solo habla de las medidas de 
         # los contenedores contenedores.
@@ -41,11 +41,11 @@ class Barco(Cargable, ABC):
         self.__cant_contenedores_max = cant
     cant_contenedores_max = property(get_cant_contenedores_max,set_cant_contenedores_max)
     
-    def get_lleva_material_especial(self):
-        return self.__lleva_material_especial
-    def set_lleva_material_especial(self, lleva):
-        self.__lleva_material_especial = lleva
-    lleva_material_especial = property(get_lleva_material_especial,set_lleva_material_especial)
+    def get_lleva_mat_esp(self):
+        return self.__lleva_mat_esp
+    def set_lleva_mat_esp(self, lleva):
+        self.__lleva_mat_esp = lleva
+    lleva_mat_esp = property(get_lleva_mat_esp,set_lleva_mat_esp)
     
     def get_disponible(self):
         return self.__disponible
@@ -62,7 +62,7 @@ class Barco(Cargable, ABC):
     def get_contenedores(self):
         return self.__contenedores
     def set_contenedores(self,contenedor):
-        self.__contenedores.append(contenedor)
+        self.contenedores.append(contenedor)
     contenedores = property(get_contenedores,set_contenedores)
         
     
