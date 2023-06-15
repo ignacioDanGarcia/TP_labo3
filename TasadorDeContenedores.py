@@ -20,5 +20,5 @@ class TasadorDeContenedores():
     def __init__(self) -> None:
         pass
     
-    def setear_precio_contenedor(self):
+    def setear_precio_contenedor():
         return random.randint(1, 20000)
