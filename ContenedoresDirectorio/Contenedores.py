@@ -15,8 +15,8 @@ class Contenedor():
 
     def __init__(self, material_especial):
         #Si el container True el material_especial es que va a poder cargar contenidos con caracteristicas especiales, es decir, químicos.
-        gen = GenerarId()
-        self.__id = gen.generar_numeros_distintos()
+        
+        self.__id = GenerarId.generar_numeros_distintos()
         self.__tipo = ''
         tas = TasadorDeCargas()
         p = tas.setear_precio_carga()
