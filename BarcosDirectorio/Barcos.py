@@ -6,7 +6,8 @@ from GenerarId import GenerarId
 class Barco(Cargable, ABC):
     
     
-    def __init__(self, peso_max, cant_contenedores_max, lleva_material_especial):
+    def __init__(self, peso_max, cant_contenedores_max, lleva_material_especial): 
+        #Si lleva material especial va a poder llevar una carga química.
         gen = GenerarId()
         self.__id = gen.generar_numeros_distintos()
         self.__disponible = True

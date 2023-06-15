@@ -3,6 +3,8 @@ from unittest.mock import Mock
 from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderContenedorBasicoHC
 from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderContenedorBasico
 from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
+from ContenedoresDirectorio.Builder.BuilderContenedorVentilado import BuilderContenedorVentilado
+
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from ContenedoresDirectorio.Contenedores import Contenedor
 from Medidas import Medidas
@@ -74,3 +76,22 @@ class ContenedorBuilderTest(TestCase):
         director.change_builder(builder2)
         
         assert isinstance(director.builder, BuilderContenedorBasico) == True
+    
+    def test_contenedor_ventilado1(self):
+        builder = BuilderContenedorVentilado()
+        director = Contenedor_director(builder)
+        contenedorVentilado = director.crear_contenedor(True)
+        assert isinstance(contenedorVentilado, Contenedor) == True
+        assert contenedorVentilado.tipo == "Ventilado"
+        assert contenedorVentilado.volumen_max == 32.6
+        assert contenedorVentilado.peso_max == 24000
+        
+        assert contenedorVentilado.get_medidas_interior().alto == 2.3
+        assert contenedorVentilado.get_medidas_interior().ancho == 2.35
+        assert contenedorVentilado.get_medidas_interior().largo == 6.0
+        
+        assert contenedorVentilado.get_medidas_exterior().alto == 2.6
+        assert contenedorVentilado.get_medidas_exterior().ancho == 2.45
+        assert contenedorVentilado.get_medidas_exterior().largo == 6.1
+        
+    
