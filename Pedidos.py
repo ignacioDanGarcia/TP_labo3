@@ -1,4 +1,4 @@
-from Carga.Carga import Carga
+
 import random
 from GenerarId import GenerarId
 

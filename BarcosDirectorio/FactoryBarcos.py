@@ -10,11 +10,11 @@ class FactoryBarcos:
         return tipos_barcos
 
     @staticmethod
-    def crear_barco(tipo_barco):
+    def crear_barco(tipo_barco, *args, **kwargs):
         subclases_barco = Barco.__subclasses__()
 
         for subclase in subclases_barco:
             if subclase.__name__ == tipo_barco:
-                return subclase()
+                return subclase(*args, **kwargs)
 
-        return None
+        raise ValueError(f"No se encontró una subclase de Barco con el nombre '{tipo_barco}'")

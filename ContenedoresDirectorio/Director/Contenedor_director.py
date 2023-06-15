@@ -1,6 +1,6 @@
 from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
 from GenerarId import GenerarId
-from TasadorDeCargas import TasadorDeCargas
+from TasadorDeContenedores import TasadorDeContenedores
 
 class Contenedor_director:
     def __init__(self, builder : Contenedor_builder) -> None:
