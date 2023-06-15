@@ -3,7 +3,7 @@ from Cargas.Carga import Carga
 from Medidas import Medidas
 from Excepciones.exceptions import contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga, distancia_incorrecta
 from GenerarId import GenerarId
-from TasadorDeCargas import TasadorDeCargas
+from TasadorDeContenedores import TasadorDeContenedores
 from .Estados.EstadoContenedorAbstracta import EstadoContenedorAbstracta
 from .Estados.EstadoMenor100 import EstadoMenor100
 from .Estados.EstadoMenor1000 import EstadoMenor1000
@@ -18,9 +18,7 @@ class Contenedor():
         
         self.__id = GenerarId.generar_numeros_distintos()
         self.__tipo = ''
-        tas = TasadorDeCargas()
-        p = tas.setear_precio_carga()
-        self.__precio_transporte_base = p
+        self.__precio_transporte_base = TasadorDeContenedores.setear_precio_contenedor()
         self.__volumen_max = 0.0
         self.__peso_max = 0.0
         self.__medidas_interior = None

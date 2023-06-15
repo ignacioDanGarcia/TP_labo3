@@ -16,6 +16,9 @@ Por eso pusimos que devuelva un numero random.
 """
 
 
-class TasadorDeCargas():
-    def setear_precio_carga(self):
+class TasadorDeContenedores():
+    def __init__(self) -> None:
+        pass
+    
+    def setear_precio_contenedor(self):
         return random.randint(1, 20000)
