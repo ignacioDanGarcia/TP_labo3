@@ -9,7 +9,7 @@ from ContenedoresDirectorio.EstrategiaCargaMaquinaria import CargaMaquinariaEstr
 from Medidas import Medidas
 class TestEstrategiaDeCargas(TestCase):
     
-    def test_estrategia_alimenticia(self):
+    def test_manejador_de_cargas_setea_estrategia_alimenticia_a_una_carga(self):
         manejador_de_cargas = ManejadorDeCargas()
         carga_mock = Mock()
         
@@ -23,7 +23,7 @@ class TestEstrategiaDeCargas(TestCase):
         assert isinstance(manejador_de_cargas.get_estrategia(), CargaAlimenticiaEstrategy)
         #assert manejador_de_cargas.estrategia_por_categoria(carga.get_categoria()) == estrategia_alimenticia
     
-    def test_estrategia_quimica(self):
+    def test_manejador_de_cargas_setea_estrategia_quimica_a_una_carga(self):
         manejador_de_cargas = ManejadorDeCargas()
         carga_mock = Mock()
         
@@ -36,7 +36,7 @@ class TestEstrategiaDeCargas(TestCase):
         
         assert isinstance(manejador_de_cargas.get_estrategia(), CargaQuimicaEstrategy)
         
-    def test_estrategia_maquinaria(self):
+    def test_manejador_de_cargas_setea_estrategia_maquinaria_a_una_carga(self):
         manejador_de_cargas = ManejadorDeCargas()
         carga_mock = Mock()
         

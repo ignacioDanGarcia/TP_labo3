@@ -1,6 +1,7 @@
 from BarcosDirectorio.Cargable import Cargable
 from abc import ABC, abstractmethod
 from GenerarId import GenerarId
+from Interfaces.ViajeraInterfaz import ViajeraInterfaz
 
 class Barco(Cargable, ABC):
     

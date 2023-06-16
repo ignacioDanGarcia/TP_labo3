@@ -12,7 +12,7 @@ from Medidas import Medidas
 
 class ContenedorBuilderTest(TestCase):
     
-    def test_crear_contenedor_simple(self):
+    def test_crear_contenedor_basico_con_builder_chequea_sus_atributos_y_metodos(self):
         builder = BuilderContenedorBasico()
         director = Contenedor_director(builder)
         contenedor = director.crear_contenedor(None)
@@ -34,7 +34,7 @@ class ContenedorBuilderTest(TestCase):
         
         
         
-    def test_crear_contenedor_hc(self):
+    def test_crear_contenedor_hc_con_builder_chequea_sus_atributos_y_metodos(self):
         builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
         contenedor = director.crear_contenedor(None)
@@ -53,7 +53,7 @@ class ContenedorBuilderTest(TestCase):
         assert contenedor.get_medidas_exterior().largo == 12.1
         
         
-    def test_crear_contenedor_flatrack(self):
+    def test_crear_contenedor_flatrack_con_builder_chequea_sus_atributos_y_metodos(self):
         builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
         contenedor = director.crear_contenedor(None)
@@ -69,7 +69,7 @@ class ContenedorBuilderTest(TestCase):
         assert contenedor.get_medidas_exterior().ancho == 100000
         assert contenedor.get_medidas_exterior().largo == 6.1
         
-    def test_change_builder(self):
+    def test_cambio_de_builder_teniendo_otro_builder_previamente(self):
         builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
         builder2 = BuilderContenedorBasico()
@@ -77,7 +77,7 @@ class ContenedorBuilderTest(TestCase):
         
         assert isinstance(director.builder, BuilderContenedorBasico) == True
     
-    def test_contenedor_ventilado1(self):
+    def test_crear_contenedor_ventilado_con_builder_chequea_sus_atributos_y_metodos(self):
         builder = BuilderContenedorVentilado()
         director = Contenedor_director(builder)
         contenedorVentilado = director.crear_contenedor(True)

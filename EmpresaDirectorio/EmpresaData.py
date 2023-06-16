@@ -16,22 +16,19 @@ RESOLVER COSAS QUE SE PIDEN EXPLICITAMENTE PARA LA APLICACION.
 
 
 class EmpresaData():
-    def __init__(self, barcos: List[Barco], camiones: List[Camion]):
+    def __init__(self, barcos: List[Barco], camiones: List[Camion], contenedores: List[Contenedor]):
         self.__camiones = camiones
         self.__barcos = barcos
-        
+        self.__contenedores = contenedores
         
         # para puntos 3 y 4 de SE PIDE
         self.__barco_con_mas_km = None
         self.__barco_con_menos_km = None
         
-        self.__contenedores = []
-        
-        
 
 
-    'Getters y Setters'
-    
+
+    # Getters y Setters
     
     def get_contenedores(self):
         return self.__contenedores
@@ -54,7 +51,6 @@ class EmpresaData():
         self.__camiones = camiones
     camiones = property(get_camiones,set_camiones)
 
-    
     def get_barco_con_mas_km(self):
         
         return self.__barco_con_mas_km
@@ -62,8 +58,6 @@ class EmpresaData():
     def set_barco_con_mas_km(self, barcos):
         self.__barco_con_mas_km = barcos
     barco_con_mas_km = property(get_barco_con_mas_km,set_barco_con_mas_km)
-
-
     
     def get_barco_con_menos_km(self):
       
@@ -73,6 +67,11 @@ class EmpresaData():
         self.__barco_con_menos_km = barcos
     barco_con_menos_km = property(get_barco_con_menos_km,set_barco_con_menos_km)
     
+    # Fin Getters y Setters
+    
+    
+    # Vehiculos disponibles
+    
     def devolver_un_barco_disponible(self):          
         for barco in self.get_barcos():
             if (barco.get_disponible()):
@@ -81,7 +80,6 @@ class EmpresaData():
                 return barco
         # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
         raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")
-    
     
     
     def devolver_un_camion_disponible(self):          
@@ -103,23 +101,24 @@ class EmpresaData():
             # actualizo barco sedentario
             if barco.get_km_recorridos() < bmenos or bmenos.get_km_recorridos() == 0:
                 self.set_barco_con_menos_km(barco)
+                bmenos = barco
             
             # actualizo barco trotamundo
             if barco.get_km_recorridos() > bmas:
                 self.set_barco_con_mas_km(barco)
+                bmas = barco
         
         return
     
                 
            
-    #El container que mayor cantidad de veces viajó completo con una única carga.
+    #El contenedor que mayor cantidad de veces viajó completo con una única carga
+    
     def container_con_mas_viajes_con_una_carga(self):
-        container_mas_viajes = Contenedor()
         aux = 0
-
-        for contenedor in self.contenedores:
+        for contenedor in self.get_contenedores():
             if contenedor.get_cant_de_veces_comple_y_carga_unica() > aux:
                 aux = contenedor.get_cant_de_veces_comple_y_carga_unica()
-                container_mas_viajes = contenedor
+                contenedor_mas_viajes = contenedor
         
-        return container_mas_viajes
+        return contenedor_mas_viajes
