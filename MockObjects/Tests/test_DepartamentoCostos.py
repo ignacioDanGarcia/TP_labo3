@@ -9,6 +9,7 @@ from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderConten
 from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderContenedorBasicoHC
 from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
 from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
+from Excepciones.exceptions import distancia_incorrecta
 from Pedidos import Pedidos
 from Cargas.Carga import Carga
 from Cargas.Categorias import Categoria
@@ -166,4 +167,44 @@ class TestDepartamentoCostos(TestCase):
         
         assert oficina.calcular_precio(mock_contenedor, distancia) == 250500
         
+        """Distancia 0"""
+    def test_distancia_es_0_por_peso_calcular_precio(self):
+        medidas = Medidas(3,2,2)
+        carga = Carga(medidas,50,Categoria.MAQUINARIA)
+        
+        cargas = [carga]
+        
+        
+        mock_contenedor = Mock()
+        mock_contenedor.get_cargas.return_value = cargas
+        mock_contenedor.get_precio_transporte_base.return_value = 500
+        mock_contenedor.get_medidas_interior.return_value = Medidas(12.0,2.35,2.3)
     
+        distancia = 0
+        oficina = EmpresaOficina()
+        
+        
+        with self.assertRaises(distancia_incorrecta):
+            oficina.calcular_precio(mock_contenedor, distancia)
+    
+    """Distancia es menor a 0"""
+    def test_distancia_es_menor_a_0_por_peso_calcular_precio(self):
+        medidas = Medidas(3,2,2)
+        carga = Carga(medidas,50,Categoria.MAQUINARIA)
+        
+        cargas = [carga]
+        
+        
+        mock_contenedor = Mock()
+        mock_contenedor.get_cargas.return_value = cargas
+        mock_contenedor.get_precio_transporte_base.return_value = 500
+        mock_contenedor.get_medidas_interior.return_value = Medidas(12.0,2.35,2.3)
+    
+        distancia = -100
+        oficina = EmpresaOficina()
+        
+        
+        with self.assertRaises(distancia_incorrecta):
+            oficina.calcular_precio(mock_contenedor, distancia)
+        
+        

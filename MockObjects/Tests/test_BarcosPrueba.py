@@ -7,7 +7,7 @@ from BarcosDirectorio.BarcoBasico import BarcoBasico
 from BarcosDirectorio.BarcoEspecial import BarcoEspecial
 from BarcosDirectorio.FactoryBarcos import FactoryBarcos
 from Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_exception, Material_no_compatible_con_barco_Exceptionn, Peso_excedido_exception
-
+from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
 
 class test_barcos(TestCase):
     
