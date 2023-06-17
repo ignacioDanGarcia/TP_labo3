@@ -2,13 +2,15 @@ from ContenedoresDirectorio.Estrategy import Estrategia
 from ContenedoresDirectorio.Contenedores import Contenedor
 from Cargas.Categorias import Categoria
 from Cargas.Carga import Carga
+from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
 
 class CargaAlimenticiaEstrategy(Estrategia):
     
     def verificar_carga(self, carga : Carga, contenedor : Contenedor):
         puede_llevarla = True
         entra = False
-        if contenedor.get_tipo().lower() != "ventilado": #Si el contenedor no es ventilado no puede llevar una carga alimenticia
+        #V1: if contenedor.get_tipo().lower() != "ventilado": #Si el contenedor no es ventilado no puede llevar una carga alimenticia
+        if contenedor.get_tipo() != TipoContenedor.VENTILADO:
             puede_llevarla = False
         
         if(self.hay_carga_quimica(contenedor)):

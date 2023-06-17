@@ -14,4 +14,4 @@ class CargaMaquinariaEstrategy(Estrategia):
                     carga.get_volumen() <= contenedor.get_volumen_max():
                 entra = True
         
-        return (entra) # Si entra en el contenedor la carga pasa. No hay conflicto con otros tipos de cargas. 
+        return entra # Si entra en el contenedor la carga pasa. No hay conflicto con otros tipos de cargas. 

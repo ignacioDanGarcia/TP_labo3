@@ -1,12 +1,12 @@
 from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
 from Medidas import Medidas
-
+from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
 class BuilderContenedorFlatRack(Contenedor_builder):
     def __init__(self) -> None:
         super().__init__()
         
     def set_tipo(self):
-        self.contenedor.set_tipo("Flat Rack")
+        self.contenedor.set_tipo(TipoContenedor.FLATRACK)
         return self
     def set_volumen_maximo(self):
         self.contenedor.set_volumen_max(33)

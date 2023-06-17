@@ -1,5 +1,6 @@
 from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
 from Medidas import Medidas
+from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
 
 class BuilderContenedorBasico(Contenedor_builder):
     def __init__(self) -> None:
@@ -7,7 +8,7 @@ class BuilderContenedorBasico(Contenedor_builder):
     
     
     def set_tipo(self):
-        self.contenedor.set_tipo("Basico estandar")
+        self.contenedor.set_tipo(TipoContenedor.BASICO)
         return self
     def set_volumen_maximo(self):
         self.contenedor.set_volumen_max(32.6)
