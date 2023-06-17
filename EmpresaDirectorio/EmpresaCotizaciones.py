@@ -11,20 +11,20 @@ class EmpresaCotizaciones():
     def __init__(self) -> None:
         pass
     
-    def calcular_precio(self, contenedor, distancia, cargas_adicionales=None):
+    def calcular_precio(self, contenedor, distancia, cargas_totales_cliente=None):
         if distancia is None or not isinstance(distancia, int):
             raise distancia_incorrecta("La distancia especificada no cumple con ningún caso")
         
-        cargas_cliente = []
-        cargas_totales = contenedor.get_cargas()
+        cargas_cliente_en_este_contenedor = []
+        cargas_contenedor = contenedor.get_cargas()
 
-        if cargas_totales is None:
+        if cargas_contenedor is None:
             raise no_existe_carga("No existe una carga en el contenedor")
 
-        if cargas_adicionales is not None:
+        if cargas_totales_cliente is not None:
             # Filtrar las cargas adicionales que pertenecen al cliente correspondiente
             # que se encuentran en este contenedor
-            cargas_cliente = [carga for carga in cargas_adicionales if carga in cargas_totales]
+            cargas_cliente_en_este_contenedor = [carga for carga in cargas_totales_cliente if carga in cargas_contenedor]
         else: 
             raise no_existe_carga("No existen cargas del cliente")
         
@@ -38,7 +38,7 @@ class EmpresaCotizaciones():
 
         
         precio_aux = 0
-        for carga in cargas_cliente:
+        for carga in cargas_cliente_en_este_contenedor:
             
             precio_aux += la_calcu.calcular_precio_adicional_estado(carga)
         
