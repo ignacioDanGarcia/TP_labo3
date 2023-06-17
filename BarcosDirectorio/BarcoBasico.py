@@ -26,7 +26,4 @@ class BarcoBasico(Barco):
     def cargar(self, contenedor):
         if self.puede_cargar_esta_carga(contenedor) and self.tiene_lugar(contenedor):
             self.contenedores.append(contenedor)
-    
-    
-    'Probando'
-    
+ 

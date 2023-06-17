@@ -7,8 +7,8 @@ class Contenedor_builder(ABC):
     def __init__(self) -> None:
       pass
 
-    def reset(self, material_especial):
-      self.contenedor = Contenedor(material_especial)
+    def reset(self, id, material_especial):
+      self.contenedor = Contenedor(id, material_especial)
       return self
     
     def get_contenedor(self):

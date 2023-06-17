@@ -1,8 +1,11 @@
-class Camion:
+from Interfaces.ViajeraInterfaz import ViajeraInterfaz
+from GenerarId import GenerarId
+
+class Camion():
     def __init__(self, id):
         self.__costo = 20000
         self.__disponible = True #si lo instancias es porque no tiene nada
-        self.__id = id
+        self.__id = GenerarId.generar_numeros_distintos()
         self.__contenedor = None
     
     'Getters y setters:'
@@ -30,7 +33,8 @@ class Camion:
         self.__contenedor = cont
     contenedor = property(get_contenedor,set_contenedor)
     
+    # El metodo de la interfaz
     def viajar(self):
-        print("El camion ya entrego el pedido")
-        self.set_disponible(False)
+        print("El camion entrego el pedido")
+        self.set_disponible(True)
         self.set_contenedor(None)

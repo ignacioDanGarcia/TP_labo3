@@ -7,19 +7,14 @@ class Carga:
         self.__medidas = medidas
         self.__peso = peso
         self.__categoria = categoria
-        #falta id de carga, y sino sacar el getter
     
     'Getters y setters'
-    def get_id(self):
-        return self.__id
-    
+        
     def get_medidas(self):
         return self.__medidas
     def set_medidas(self,m):
         self.__medidas = m
     medidas = property(get_medidas,set_medidas)
-    
-
     
     def get_peso(self):
         return self.__peso
@@ -37,4 +32,4 @@ class Carga:
         volumen = self.medidas.get_alto() * self.medidas.get_ancho() * self.medidas.get_largo()
         return volumen
     
-    
+    'Fin getters y setters'

@@ -4,10 +4,9 @@ from GenerarId import GenerarId
 
 class Pedidos:
     def __init__(self, retira_en_puerto, contenedor_completo, cargas, necesita_transporte_camion):
-        gen = GenerarId()
         self.__retira_en_puerto = retira_en_puerto #bool
         self.__contenedor_completo = contenedor_completo #bool
-        self.__id = gen.generar_numeros_distintos()
+        self.__id = GenerarId.generar_numeros_distintos()
         self.__cargas = cargas
         self.__containers = None #necesitamos que el pedido tenga los containers asociados a las cargas
         self.__necesita_transporte_camion = necesita_transporte_camion #bool si es False no sumamos el precio de 

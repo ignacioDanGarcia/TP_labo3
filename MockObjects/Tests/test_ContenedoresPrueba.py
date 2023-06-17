@@ -20,13 +20,15 @@ from Medidas import Medidas
 
 class TestContenedoresPrueba(TestCase):
      
-    """ 5. Cualquier carga cuyas dimensiones, volumen o peso supere lo definido en el container no podrá ser trasladada en el mismo.
-    6. Un contenedor sin características especiales no puede transportar material especial. """
+    """ 
+    5. Cualquier carga cuyas dimensiones, volumen o peso supere lo definido en el container no podrá ser trasladada en el mismo.
+    6. Un contenedor sin características especiales no puede transportar material especial.
+    """
         
-    def test_verificar_carga_por_dimensioneshc1(self):
+    def test_manejador_de_cargas_no_puede_cargar_carga_maquinaria_en_contenedor_hc_por_medidas_superiores(self):
         builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(False)
+        contenedor = director.crear_contenedor(1,False)
         
         medidas = Medidas(100,3,5)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
@@ -34,14 +36,12 @@ class TestContenedoresPrueba(TestCase):
         
         
         assert manejadorDeCarga.puede_cargar(carga, contenedor) == False
-        'medidas superiores'
         
     
-    
-    def test_verificar_carga_por_dimensioneshc2(self):
+    def test_manejador_de_cargas_puede_cargar_carga_maquinaria_en_contenedor_hc(self):
         builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(False)
+        contenedor = director.crear_contenedor(1,False)
         
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
@@ -55,28 +55,24 @@ class TestContenedoresPrueba(TestCase):
         manejadorDeCarga.cargar(carga, contenedor)
         assert len(contenedor.get_cargas()) == 2
 
-        
-    'Tiene medidas que si entran, el contenedor no puede llevar materiales especiales y se le pasa maquinaria'
     
     
-    def test_verificar_carga_por_material_especialhc1(self):
+    def test_manejador_de_cargas_puede_cargar_carga_quimica_en_contenedor_hc(self):
         builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(True)
+        contenedor = director.crear_contenedor(1,True)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.QUIMICA)
         
         manejadorDeCarga = ManejadorDeCargas()
 
         assert manejadorDeCarga.puede_cargar(carga, contenedor) == True
-        'Tiene medidas que entran y es una carga química.'
     
     
-    
-    def test_verificar_carga_por_material_especial_flatrack1(self):
+    def test_manejador_de_cargas_puede_cargar_carga_quimica_en_contenedor_flatrack(self):
         builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(True)
+        contenedor = director.crear_contenedor(1,True)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.QUIMICA)
         
@@ -86,14 +82,12 @@ class TestContenedoresPrueba(TestCase):
         assert len(contenedor.get_cargas()) == 1
         manejadorDeCarga.cargar(carga,contenedor)
         assert len(contenedor.get_cargas()) == 2
-        'Tiene medidas que entran y el contenido es especial en un especial.'
     
     
-    
-    def test_verificar_carga_por_material_especial_flatrack2(self):
+    def test_manejador_de_cargas_puede_cargar_carga_maquinaria_en_contenedor_flatrack(self):
         builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(True)
+        contenedor = director.crear_contenedor(1,True)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
         
@@ -104,14 +98,12 @@ class TestContenedoresPrueba(TestCase):
         assert(manejadorDeCarga.verificar_carga(carga, contenedor)) == True
         manejadorDeCarga.cargar(carga,contenedor)
         assert len(contenedor.get_cargas()) == 1
-        'Tiene medidas que entran y el contenido no es especial en un especial.'
     
     
-    
-    def test_verificar_carga_por_dimensiones_flatrack(self):
+    def test_manejador_de_cargas_no_puede_cargar_carga_maquinaria_en_contenedor_flatrack_por_medidas_superiores(self):
         builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(False)
+        contenedor = director.crear_contenedor(1,False)
         medidas = Medidas(100,3,5)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
         
@@ -120,13 +112,12 @@ class TestContenedoresPrueba(TestCase):
         assert manejadorDeCarga.verificar_carga(carga, contenedor) == False
             
         assert manejadorDeCarga.cargar(carga,contenedor) == False
-        'medidas superiores'
         
     
-    def test_verificar_carga_por_dimensiones_basico_y_carga_con_material_especial(self):
+    def test_manejador_de_cargas_no_puede_cargar_carga_quimica_en_contenedor_flatrack_porque_ya_habia_carga_maquinaria(self):
         builder = BuilderContenedorBasico()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(False)
+        contenedor = director.crear_contenedor(1,False)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
         manejadorDeCarga = ManejadorDeCargas()
@@ -143,13 +134,11 @@ class TestContenedoresPrueba(TestCase):
 
         assert len(contenedor.get_cargas()) == 2
 
-        
-    'Tiene medidas que si entran'
     
-    def test_contenedor_ventilado1(self):
+    def test_manejador_de_cargas_no_puede_cargar_carga_quimica_en_contenedor_ventilado_porque_ya_habia_carga_alimenticia(self):
         builder = BuilderContenedorVentilado()
         director = Contenedor_director(builder)
-        contenedorVentilado = director.crear_contenedor(True)
+        contenedorVentilado = director.crear_contenedor(1,True)
         
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.ALIMENTICIA)
@@ -162,12 +151,11 @@ class TestContenedoresPrueba(TestCase):
         assert(manejadorDeCarga.verificar_carga(carga_quimica,contenedorVentilado)) == False 
         assert manejadorDeCarga.cargar(carga_quimica, contenedorVentilado) == False
 
-        # COmo tiene una carga alimenticia después no puedo cargar una ventilada.
     
-    def test_contenedor_con_carga_quimica(self):
+    def test_manejador_de_cargas_no_puede_cargar_carga_alimenticia_en_contenedor_hc_porque_ya_habia_carga_quimica(self):
         builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedorhc = director.crear_contenedor(True)
+        contenedorhc = director.crear_contenedor(1,True)
         
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.QUIMICA)
@@ -177,4 +165,5 @@ class TestContenedoresPrueba(TestCase):
         manejadorDeCarga.cargar(carga, contenedorhc)
         
         carga_quimica = Carga(medidas,1,Categoria.ALIMENTICIA)
-        assert(manejadorDeCarga.verificar_carga(carga_quimica,contenedorhc)) == False # COmo tiene una carga quimica después no puedo cargar una alimenticia.
+        assert(manejadorDeCarga.verificar_carga(carga_quimica,contenedorhc)) == False
+        
