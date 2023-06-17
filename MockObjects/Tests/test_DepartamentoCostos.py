@@ -100,6 +100,13 @@ class TestDepartamentoCostos(TestCase):
         
         assert oficina.calcular_precio(mock_contenedor, distancia) == 210500
 
+    #---------------------------------------------------------------------
+    #---------------------------------------------------------------------
+    #---------------------------------------------------------------------
+    #---------------------------------------------------------------------
+    #---------------------------------------------------------------------
+    
+    """MENOR A DIEZ MIL"""
     
     def test_distancia_menor_10000_por_peso_calcular_precio(self):
         medidas = Medidas(3,2,2)
@@ -132,6 +139,13 @@ class TestDepartamentoCostos(TestCase):
         
         assert oficina.calcular_precio(mock_contenedor, distancia) == 230500
     
+    #---------------------------------------------------------------------
+    #---------------------------------------------------------------------
+    #---------------------------------------------------------------------
+    #---------------------------------------------------------------------
+    #---------------------------------------------------------------------
+    
+    """MAYOR A DIEZ MIL"""
     
     def test_distancia_mas_10000_por_peso_calcular_precio(self):
         medidas = Medidas(3,2,2)
@@ -167,7 +181,12 @@ class TestDepartamentoCostos(TestCase):
         
         assert oficina.calcular_precio(mock_contenedor, distancia) == 250500
         
-        """Distancia 0"""
+    #---------------------------------------------------------------------
+    #---------------------------------------------------------------------
+    #---------------------------------------------------------------------
+    #---------------------------------------------------------------------
+    #---------------------------------------------------------------------
+    """EXCEPCION DISTANCIA 0 o MENOR A 0"""
     def test_distancia_es_0_por_peso_calcular_precio(self):
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
@@ -187,7 +206,7 @@ class TestDepartamentoCostos(TestCase):
         with self.assertRaises(distancia_incorrecta):
             oficina.calcular_precio(mock_contenedor, distancia)
     
-    """Distancia es menor a 0"""
+    
     def test_distancia_es_menor_a_0_por_peso_calcular_precio(self):
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)

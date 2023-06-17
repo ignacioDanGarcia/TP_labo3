@@ -13,6 +13,7 @@ from ContenedoresDirectorio.Builder.BuilderContenedorVentilado import BuilderCon
 
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
+from ContenedoresDirectorio.SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga
 
 from pytest import raises
 from Excepciones.exceptions import *
@@ -32,10 +33,10 @@ class TestContenedoresPrueba(TestCase):
         
         medidas = Medidas(100,3,5)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
-        manejadorDeCarga = ManejadorDeCargas()
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
         
         
-        assert manejadorDeCarga.puede_cargar(carga, contenedor) == False
+        assert manejador_de_cargas.puede_cargar(carga, contenedor) == False
         
     
     def test_manejador_de_cargas_puede_cargar_carga_maquinaria_en_contenedor_hc(self):
@@ -46,13 +47,13 @@ class TestContenedoresPrueba(TestCase):
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
         
-        manejadorDeCarga = ManejadorDeCargas()
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
         
-        assert manejadorDeCarga.puede_cargar(carga, contenedor) == True
+        assert manejador_de_cargas.puede_cargar(carga, contenedor) == True
         
-        manejadorDeCarga.cargar(carga, contenedor)
+        manejador_de_cargas.cargar(carga, contenedor)
         assert len(contenedor.get_cargas()) == 1
-        manejadorDeCarga.cargar(carga, contenedor)
+        manejador_de_cargas.cargar(carga, contenedor)
         assert len(contenedor.get_cargas()) == 2
 
     
@@ -64,9 +65,9 @@ class TestContenedoresPrueba(TestCase):
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.QUIMICA)
         
-        manejadorDeCarga = ManejadorDeCargas()
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
 
-        assert manejadorDeCarga.puede_cargar(carga, contenedor) == True
+        assert manejador_de_cargas.puede_cargar(carga, contenedor) == True
     
     
     def test_manejador_de_cargas_puede_cargar_carga_quimica_en_contenedor_flatrack(self):
@@ -76,11 +77,11 @@ class TestContenedoresPrueba(TestCase):
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.QUIMICA)
         
-        manejadorDeCarga = ManejadorDeCargas()
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
 
-        manejadorDeCarga.cargar(carga,contenedor)
+        manejador_de_cargas.cargar(carga,contenedor)
         assert len(contenedor.get_cargas()) == 1
-        manejadorDeCarga.cargar(carga,contenedor)
+        manejador_de_cargas.cargar(carga,contenedor)
         assert len(contenedor.get_cargas()) == 2
     
     
@@ -91,12 +92,12 @@ class TestContenedoresPrueba(TestCase):
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
         
-        manejadorDeCarga = ManejadorDeCargas()
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
 
         assert len(contenedor.get_cargas()) == 0
         
-        assert(manejadorDeCarga.verificar_carga(carga, contenedor)) == True
-        manejadorDeCarga.cargar(carga,contenedor)
+        assert(manejador_de_cargas.verificar_carga(carga, contenedor)) == True
+        manejador_de_cargas.cargar(carga,contenedor)
         assert len(contenedor.get_cargas()) == 1
     
     
@@ -107,11 +108,11 @@ class TestContenedoresPrueba(TestCase):
         medidas = Medidas(100,3,5)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
         
-        manejadorDeCarga = ManejadorDeCargas()
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
         
-        assert manejadorDeCarga.verificar_carga(carga, contenedor) == False
+        assert manejador_de_cargas.verificar_carga(carga, contenedor) == False
             
-        assert manejadorDeCarga.cargar(carga,contenedor) == False
+        assert manejador_de_cargas.cargar(carga,contenedor) == False
         
     
     def test_manejador_de_cargas_no_puede_cargar_carga_quimica_en_contenedor_flatrack_porque_ya_habia_carga_maquinaria(self):
@@ -120,17 +121,17 @@ class TestContenedoresPrueba(TestCase):
         contenedor = director.crear_contenedor(1,False)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
-        manejadorDeCarga = ManejadorDeCargas()
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
 
-        assert(manejadorDeCarga.verificar_carga(carga, contenedor)) == True
+        assert(manejador_de_cargas.verificar_carga(carga, contenedor)) == True
 
-        manejadorDeCarga.cargar(carga, contenedor)
+        manejador_de_cargas.cargar(carga, contenedor)
         assert len(contenedor.get_cargas()) == 1
-        manejadorDeCarga.cargar(carga, contenedor)
+        manejador_de_cargas.cargar(carga, contenedor)
         assert len(contenedor.get_cargas()) == 2
 
         carga_especial = Carga(medidas,50,Categoria.QUIMICA)
-        assert manejadorDeCarga.cargar(carga_especial, contenedor) == False
+        assert manejador_de_cargas.cargar(carga_especial, contenedor) == False
 
         assert len(contenedor.get_cargas()) == 2
 
@@ -138,18 +139,18 @@ class TestContenedoresPrueba(TestCase):
     def test_manejador_de_cargas_no_puede_cargar_carga_quimica_en_contenedor_ventilado_porque_ya_habia_carga_alimenticia(self):
         builder = BuilderContenedorVentilado()
         director = Contenedor_director(builder)
-        contenedorVentilado = director.crear_contenedor(1,True)
+        contenedor_ventilado = director.crear_contenedor(1,True)
         
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.ALIMENTICIA)
-        manejadorDeCarga = ManejadorDeCargas()
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
         
-        assert(manejadorDeCarga.verificar_carga(carga,contenedorVentilado)) == True
-        manejadorDeCarga.cargar(carga, contenedorVentilado)
+        assert(manejador_de_cargas.verificar_carga(carga,contenedor_ventilado)) == True
+        manejador_de_cargas.cargar(carga, contenedor_ventilado)
         
         carga_quimica = Carga(medidas,1,Categoria.QUIMICA)
-        assert(manejadorDeCarga.verificar_carga(carga_quimica,contenedorVentilado)) == False 
-        assert manejadorDeCarga.cargar(carga_quimica, contenedorVentilado) == False
+        assert(manejador_de_cargas.verificar_carga(carga_quimica,contenedor_ventilado)) == False 
+        assert manejador_de_cargas.cargar(carga_quimica, contenedor_ventilado) == False
 
     
     def test_manejador_de_cargas_no_puede_cargar_carga_alimenticia_en_contenedor_hc_porque_ya_habia_carga_quimica(self):
@@ -159,11 +160,11 @@ class TestContenedoresPrueba(TestCase):
         
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.QUIMICA)
-        manejadorDeCarga = ManejadorDeCargas()
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
         
-        assert(manejadorDeCarga.verificar_carga(carga,contenedorhc)) == True
-        manejadorDeCarga.cargar(carga, contenedorhc)
+        assert(manejador_de_cargas.verificar_carga(carga,contenedorhc)) == True
+        manejador_de_cargas.cargar(carga, contenedorhc)
         
         carga_quimica = Carga(medidas,1,Categoria.ALIMENTICIA)
-        assert(manejadorDeCarga.verificar_carga(carga_quimica,contenedorhc)) == False
+        assert(manejador_de_cargas.verificar_carga(carga_quimica,contenedorhc)) == False
         
