@@ -6,11 +6,12 @@ from Cargas.Categorias import Categoria
 from ContenedoresDirectorio.EstrategiaCargaAlimenticia import CargaAlimenticiaEstrategy
 from ContenedoresDirectorio.EstrategiaCargaQuimica import CargaQuimicaEstrategy
 from ContenedoresDirectorio.EstrategiaCargaMaquinaria import CargaMaquinariaEstrategy
+from ContenedoresDirectorio.SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga
 from Medidas import Medidas
 class TestEstrategiaDeCargas(TestCase):
     
     def test_manejador_de_cargas_setea_estrategia_alimenticia_a_una_carga(self):
-        manejador_de_cargas = ManejadorDeCargas()
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
         carga_mock = Mock()
         
         carga_mock.get_categoria.return_value = Categoria.ALIMENTICIA
@@ -24,7 +25,7 @@ class TestEstrategiaDeCargas(TestCase):
         #assert manejador_de_cargas.estrategia_por_categoria(carga.get_categoria()) == estrategia_alimenticia
     
     def test_manejador_de_cargas_setea_estrategia_quimica_a_una_carga(self):
-        manejador_de_cargas = ManejadorDeCargas()
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
         carga_mock = Mock()
         
         carga_mock.get_categoria.return_value = Categoria.QUIMICA
@@ -37,7 +38,7 @@ class TestEstrategiaDeCargas(TestCase):
         assert isinstance(manejador_de_cargas.get_estrategia(), CargaQuimicaEstrategy)
         
     def test_manejador_de_cargas_setea_estrategia_maquinaria_a_una_carga(self):
-        manejador_de_cargas = ManejadorDeCargas()
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
         carga_mock = Mock()
         
         carga_mock.get_categoria.return_value = Categoria.MAQUINARIA
