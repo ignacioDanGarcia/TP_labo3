@@ -1,4 +1,5 @@
 import random
+from ContenedoresDirectorio.Contenedores import Contenedor
 """
 Llegamos a la conclusion de que debería ser otro objeto especifico que se encargue
 de settear un precio de una carga, para cumplir con el principio de responsabilidad
@@ -20,5 +21,6 @@ class TasadorDeContenedores():
     def __init__(self) -> None:
         pass
     
-    def setear_precio_contenedor():
-        return random.randint(1, 20000)
+    def setear_precio_contenedor(contenedor):
+        contenedor.set_precio_transporte_base(random.randint(1, 20000))
+        return

@@ -4,9 +4,6 @@ from GenerarId import GenerarId
 from Interfaces.ViajeraInterfaz import ViajeraInterfaz
 
 class Barco(Cargable, ABC):
-    
-    
-
 
     def __init__(self, peso_max, cant_contenedores_max, lleva_material_especial, nombre):
         self.__id = GenerarId.generar_numeros_distintos()
@@ -18,17 +15,22 @@ class Barco(Cargable, ABC):
         self.__contenedores = []
         self.__nombre = nombre
         
-        #saque las vriables de medidas interior y exterior ya que el enunciado solo habla de las medidas de 
-        # los contenedores contenedores.
-
-
+        
         #CONTAINER MATERIAL ESPECIAL (explosivos, desechos químicos o radioactivos) 
         # sólo puede ser transportado por un barco diseñado para tal fin.
         #los barcos de tipo básico, soportan contenedores con medidas del tipo basico
         # los barcos soportan cualquier contenedor cuyas medidas sean mayores a las de un contenedor básico. 
-        #mi idea es resolver eso en puee_cargar_contenedor (cheque las medidas)
     
-    'Agrego getters y setters'
+    'Getters y setters'
+    
+    def get_id(self):
+        return self.__id
+    
+    def get_nombre(self):
+        return self.__nombre
+    def set_nombre(self,nombre):
+        self.__nombre = nombre
+    nombre = property(get_nombre,set_nombre)
     
     def get_peso_max(self):
         return self.__peso_max
@@ -66,7 +68,7 @@ class Barco(Cargable, ABC):
         self.contenedores.append(contenedor)
     contenedores = property(get_contenedores,set_contenedores)
         
-    
+    'Fin getters y Setters'
     
     
     def obtener_peso_actual(self):

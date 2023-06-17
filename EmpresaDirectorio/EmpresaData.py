@@ -1,7 +1,6 @@
 from BarcosDirectorio.Barcos import Barco
 from Camion import Camion
 from Contenedores import Contenedor
-from Estados import EstadoMenor100, EstadoMenor1000, EstadoMas10000, EstadoMenor10000
 from Pedidos import Pedidos
 from Excepciones.exceptions import *
 
@@ -52,7 +51,6 @@ class EmpresaData():
     camiones = property(get_camiones,set_camiones)
 
     def get_barco_con_mas_km(self):
-        
         return self.__barco_con_mas_km
     
     def set_barco_con_mas_km(self, barcos):
@@ -60,13 +58,11 @@ class EmpresaData():
     barco_con_mas_km = property(get_barco_con_mas_km,set_barco_con_mas_km)
     
     def get_barco_con_menos_km(self):
-      
         return self.__barco_con_menos_km
     
     def set_barco_con_menos_km(self, barcos):
         self.__barco_con_menos_km = barcos
     barco_con_menos_km = property(get_barco_con_menos_km,set_barco_con_menos_km)
-    
     # Fin Getters y Setters
     
     

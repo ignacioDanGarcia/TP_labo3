@@ -41,9 +41,9 @@ class Contenedor_director:
       .set_volumen_maximo_flatrack() \
       .get_contenedor()'''
             
-    def crear_contenedor(self, material_especial):
+    def crear_contenedor(self, id, material_especial):
       self.builder \
-      .reset(material_especial) 
+      .reset(id, material_especial) 
       return self.builder \
       .set_tipo() \
       .set_peso_maximo() \

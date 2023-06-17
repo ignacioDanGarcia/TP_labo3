@@ -1,24 +1,16 @@
-from abc import ABC, abstractmethod
+
 from Cargas.Carga import Carga
 from Medidas import Medidas
-from Excepciones.exceptions import contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga, distancia_incorrecta
-from GenerarId import GenerarId
-from TasadorDeContenedores import TasadorDeContenedores
-from .Estados.EstadoContenedorAbstracta import EstadoContenedorAbstracta
-from .Estados.EstadoMenor100 import EstadoMenor100
-from .Estados.EstadoMenor1000 import EstadoMenor1000
-from .Estados.EstadoMenor10000 import EstadoMenor10000
-from .Estados.EstadoMas10000 import EstadoMas10000
-from ModuloGPS import ModuloGPS
+
 
 class Contenedor():
 
-    def __init__(self, material_especial):
+    def __init__(self, id, material_especial):
         #Si el container True el material_especial es que va a poder cargar contenidos con caracteristicas especiales, es decir, químicos.
         
-        self.__id = GenerarId.generar_numeros_distintos()
+        self.__id = id # GenerarId.generar_numeros_distintos()
         self.__tipo = ''
-        self.__precio_transporte_base = TasadorDeContenedores.setear_precio_contenedor()
+        self.__precio_transporte_base = 0 
         self.__volumen_max = 0.0
         self.__peso_max = 0.0
         self.__medidas_interior = None
@@ -28,10 +20,7 @@ class Contenedor():
         self.__disponible = True
         self.__cant_de_veces_comple_y_carga_unica = 0
         self.__estado = None
-
-        #algo hay que hacer con este punto:
-        # Un contenedor sin características especiales no puede transportar material especial.
-        #Creo que con un booleano de si es apto para material especial en el contructor podría ir este punto así 
+ 
     
     'Getters y Setters:'
     def set_estado(self, estado):
@@ -74,7 +63,6 @@ class Contenedor():
     def set_material_especial(self, mat):
         self.__material_especial = mat
     material_especial = property(get_material_especial,set_material_especial)
-    'mat especial es un booleano para diferencias si el container puede llevar una carga especial como explosivos.'
 
     def get_medidas_interior(self):
         return self.__medidas_interior
@@ -82,20 +70,17 @@ class Contenedor():
         self.__medidas_interior = m
     medidas_interior = property(get_medidas_interior,set_medidas_interior)
     
-    
     def get_medidas_exterior(self):
         return self.__medidas_exterior
     def set_medidas_exterior(self, me):
         self.__medidas_exterior = me
     medidas_exterior = property(get_medidas_exterior,set_medidas_exterior)
     
-    
     def get_volumen_max(self):
         return self.__volumen_max
     def set_volumen_max(self, v):
         self.__volumen_max = v
     volumen_max = property(get_volumen_max,set_volumen_max)
-    
     
     def get_peso_max(self):
         return self.__peso_max
@@ -105,8 +90,6 @@ class Contenedor():
     
     def get_cargas(self):
         return self.__cargas
-    
-    
     cargas = property(get_cargas)
     'Fin Getters y Setters'
     
@@ -115,76 +98,4 @@ class Contenedor():
         for carga in self.cargas: 
             peso+= carga.get_peso()
         return peso
-    
-    #-------------------------------ESTA RESPONSABILIDAD FUE MOVIDA AL MANEJADOR DE CARGAS -------------------------------------------------------------------
-    #Cualquier carga cuyas  medidas o peso supere lo definido en el container no podrá 
-    # ser trasladada en el mismo.
-    '''def verificar_carga(self, carga):
-        # este metodo la usa esta misma clase
-        
-        try:
-            if "basico" in self.tipo.lower() and carga.get_material_especial() != None: #En vez de que vea si es instancia de barco_basico_abstracto lo vemos por el tipo de barco
-                raise el_contenedor_basico_no_puede_mat_especial("Un contenedor basico no puede cargar un material especial")
-
-            if self.medidas_interior.comparar_medidas(carga.get_medidas()) and \
-                    carga.get_peso() <= self.get_peso_max() and \
-                    carga.get_volumen() <= self.get_volumen_max():
-                return True
-            raise contenedor_no_puede_llevar_carga("La carga no puede ser transportada por este contenedor")
-        except medidas_incorrectas as e:
-            raise contenedor_no_puede_llevar_carga(str(e))'''
-        
-
-    
-    def calcular_precio(self, distancia):
-        # distancia se llena con un num del moduloGPS
-        # este metodo la usaria la clase empresa
-        try:
-            if (distancia is None or isinstance(distancia, int) is False):
-                # excepcion catcheada en esta misma funcion, segun lo que encontre se podia
-                raise distancia_incorrecta("La distancia especificada no cumplen con ningún caso")    
-            
-            cargas = self.get_cargas()
-            if cargas is None:
-                # excepcion catcheada en esta misma funcion, segun lo que encontre se podia
-                raise no_existe_carga("No existe una carga")
-            
-            estado = EstadoMenor100(self)
-            # esto es nada mas para cambiar el precio por distancia, que si al principio es uno siempre va a ser ese
-            # no importa que carga le metas, siempre va al mismo lado el contenedor
-            # IMPORTANTE EN METODO VIAJAR EMPRESA SETEAR ESTADO CONTENEDOR A NONE
-            precio_aux = 0
-            # Ver si en este if capaz se puede poner un estado.transicion(distancia) en lugar de todo esto
-            for carga in cargas:
-                #if estado is None or (estado is not None and not estado.condicion(distancia)):
-                #    self.set_estado(self.buscar_estado(distancia, carga))
-                #estado = self.get_estado()
-                precio_aux += estado.transicion(distancia, carga)
-                
-                # aca el contenedor ya va a estar lleno o con pedido listo
-                
-            
-            
-            
-            precio_aux += self.get_precio_transporte_base()
-            
-            return precio_aux
-            
-            
-            
-        except contenedor_no_puede_llevar_carga as e:
-            print(str(e))
-        except no_existe_carga as e2:
-            print(str(e2))
-        except distancia_incorrecta as e:
-            print(str(e))
-            
-            
-    
-    
-    ''' esto creo que no sirve, osea para esto esta el set_carga
-    def cargar(self, carga):
-        if self.verificar_carga(carga):
-            self.carga = carga
-    '''
     

@@ -6,4 +6,4 @@ class Categoria(Enum):
     QUIMICA = 3
     
     #print(Categoria.ALIMENTICIA)  # Imprime: Categoria.ALIMENTICIA
-    #print(Categoria.ALIMENTICIA.value)  # Imprime: Alimenticia
+    #print(Categoria.ALIMENTICIA.value)  # Imprime: 2

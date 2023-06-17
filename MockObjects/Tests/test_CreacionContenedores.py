@@ -15,7 +15,7 @@ class ContenedorBuilderTest(TestCase):
     def test_crear_contenedor_basico_con_builder_chequea_sus_atributos_y_metodos(self):
         builder = BuilderContenedorBasico()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(None)
+        contenedor = director.crear_contenedor(1,None)
         
         assert isinstance(contenedor, Contenedor) == True
         assert contenedor.tipo == "Basico estandar"
@@ -37,7 +37,7 @@ class ContenedorBuilderTest(TestCase):
     def test_crear_contenedor_hc_con_builder_chequea_sus_atributos_y_metodos(self):
         builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(None)
+        contenedor = director.crear_contenedor(1,None)
         
         assert isinstance(contenedor, Contenedor) == True
         assert contenedor.tipo == "Basico HC"
@@ -56,7 +56,7 @@ class ContenedorBuilderTest(TestCase):
     def test_crear_contenedor_flatrack_con_builder_chequea_sus_atributos_y_metodos(self):
         builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(None)
+        contenedor = director.crear_contenedor(1,None)
 
         assert isinstance(contenedor, Contenedor) == True
         assert contenedor.tipo == "Flat Rack"
@@ -80,7 +80,7 @@ class ContenedorBuilderTest(TestCase):
     def test_crear_contenedor_ventilado_con_builder_chequea_sus_atributos_y_metodos(self):
         builder = BuilderContenedorVentilado()
         director = Contenedor_director(builder)
-        contenedorVentilado = director.crear_contenedor(True)
+        contenedorVentilado = director.crear_contenedor(1,None)
         assert isinstance(contenedorVentilado, Contenedor) == True
         assert contenedorVentilado.tipo == "Ventilado"
         assert contenedorVentilado.volumen_max == 32.6

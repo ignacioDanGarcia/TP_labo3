@@ -1,10 +1,11 @@
 from Interfaces.ViajeraInterfaz import ViajeraInterfaz
+from GenerarId import GenerarId
 
 class Camion():
     def __init__(self, id):
         self.__costo = 20000
         self.__disponible = True #si lo instancias es porque no tiene nada
-        self.__id = id
+        self.__id = GenerarId.generar_numeros_distintos()
         self.__contenedor = None
     
     'Getters y setters:'

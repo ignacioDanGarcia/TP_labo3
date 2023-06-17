@@ -28,7 +28,7 @@ class TestContenedoresPrueba(TestCase):
     def test_manejador_de_cargas_no_puede_cargar_carga_maquinaria_en_contenedor_hc_por_medidas_superiores(self):
         builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(False)
+        contenedor = director.crear_contenedor(1,False)
         
         medidas = Medidas(100,3,5)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
@@ -41,7 +41,7 @@ class TestContenedoresPrueba(TestCase):
     def test_manejador_de_cargas_puede_cargar_carga_maquinaria_en_contenedor_hc(self):
         builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(False)
+        contenedor = director.crear_contenedor(1,False)
         
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
@@ -60,7 +60,7 @@ class TestContenedoresPrueba(TestCase):
     def test_manejador_de_cargas_puede_cargar_carga_quimica_en_contenedor_hc(self):
         builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(True)
+        contenedor = director.crear_contenedor(1,True)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.QUIMICA)
         
@@ -72,7 +72,7 @@ class TestContenedoresPrueba(TestCase):
     def test_manejador_de_cargas_puede_cargar_carga_quimica_en_contenedor_flatrack(self):
         builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(True)
+        contenedor = director.crear_contenedor(1,True)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.QUIMICA)
         
@@ -87,7 +87,7 @@ class TestContenedoresPrueba(TestCase):
     def test_manejador_de_cargas_puede_cargar_carga_maquinaria_en_contenedor_flatrack(self):
         builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(True)
+        contenedor = director.crear_contenedor(1,True)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
         
@@ -103,7 +103,7 @@ class TestContenedoresPrueba(TestCase):
     def test_manejador_de_cargas_no_puede_cargar_carga_maquinaria_en_contenedor_flatrack_por_medidas_superiores(self):
         builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(False)
+        contenedor = director.crear_contenedor(1,False)
         medidas = Medidas(100,3,5)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
         
@@ -117,7 +117,7 @@ class TestContenedoresPrueba(TestCase):
     def test_manejador_de_cargas_no_puede_cargar_carga_quimica_en_contenedor_flatrack_porque_ya_habia_carga_maquinaria(self):
         builder = BuilderContenedorBasico()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(False)
+        contenedor = director.crear_contenedor(1,False)
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
         manejadorDeCarga = ManejadorDeCargas()
@@ -138,7 +138,7 @@ class TestContenedoresPrueba(TestCase):
     def test_manejador_de_cargas_no_puede_cargar_carga_quimica_en_contenedor_ventilado_porque_ya_habia_carga_alimenticia(self):
         builder = BuilderContenedorVentilado()
         director = Contenedor_director(builder)
-        contenedorVentilado = director.crear_contenedor(True)
+        contenedorVentilado = director.crear_contenedor(1,True)
         
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.ALIMENTICIA)
@@ -155,7 +155,7 @@ class TestContenedoresPrueba(TestCase):
     def test_manejador_de_cargas_no_puede_cargar_carga_alimenticia_en_contenedor_hc_porque_ya_habia_carga_quimica(self):
         builder = BuilderContenedorBasicoHC()
         director = Contenedor_director(builder)
-        contenedorhc = director.crear_contenedor(True)
+        contenedorhc = director.crear_contenedor(1,True)
         
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.QUIMICA)
