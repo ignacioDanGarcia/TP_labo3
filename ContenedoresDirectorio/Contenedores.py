@@ -1,7 +1,7 @@
 
 from Cargas.Carga import Carga
 from Medidas import Medidas
-
+from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
 
 class Contenedor():
 
@@ -9,7 +9,7 @@ class Contenedor():
         #Si el container True el material_especial es que va a poder cargar contenidos con caracteristicas especiales, es decir, químicos.
         
         self.__id = id # GenerarId.generar_numeros_distintos()
-        self.__tipo = ''
+        self.__tipo :TipoContenedor =  None
         self.__precio_transporte_base = 0 
         self.__volumen_max = 0.0
         self.__peso_max = 0.0

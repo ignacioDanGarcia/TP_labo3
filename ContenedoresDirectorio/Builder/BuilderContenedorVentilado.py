@@ -1,13 +1,13 @@
 from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
 from Medidas import Medidas
-
+from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
 class BuilderContenedorVentilado(Contenedor_builder):
     def __init__(self) -> None:
         super().__init__()
     
     
     def set_tipo(self):
-        self.contenedor.set_tipo("Ventilado")
+        self.contenedor.set_tipo(TipoContenedor.VENTILADO)
         return self
     def set_volumen_maximo(self):
         self.contenedor.set_volumen_max(32.6)
