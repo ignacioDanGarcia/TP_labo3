@@ -27,8 +27,7 @@ class EmpresaData():
 
 
 
-    # Getters y Setters
-    
+    'Getters y Setters'
     def get_contenedores(self):
         return self.__contenedores
     
@@ -63,7 +62,7 @@ class EmpresaData():
     def set_barco_con_menos_km(self, barcos):
         self.__barco_con_menos_km = barcos
     barco_con_menos_km = property(get_barco_con_menos_km,set_barco_con_menos_km)
-    # Fin Getters y Setters
+    'Fin Getters y Setters'
     
     
     # Vehiculos disponibles
@@ -108,7 +107,7 @@ class EmpresaData():
     
                 
            
-    #El contenedor que mayor cantidad de veces viajó completo con una única carga
+    # El contenedor que mayor cantidad de veces viajó completo con una única carga
     
     def container_con_mas_viajes_con_una_carga(self):
         aux = 0

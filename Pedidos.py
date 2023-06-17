@@ -3,20 +3,23 @@ import random
 from GenerarId import GenerarId
 
 class Pedidos:
-    def __init__(self, retira_en_puerto, contenedor_completo, cargas, necesita_transporte_camion):
+    def __init__(self, retira_en_puerto, cargas, necesita_transporte_camion, distancia):
         self.__retira_en_puerto = retira_en_puerto #bool
-        self.__contenedor_completo = contenedor_completo #bool
         self.__id = GenerarId.generar_numeros_distintos()
         self.__cargas = cargas
-        self.__containers = None #necesitamos que el pedido tenga los containers asociados a las cargas
+        self.__containers = [] #necesitamos que el pedido tenga los containers asociados a las cargas
         self.__necesita_transporte_camion = necesita_transporte_camion #bool si es False no sumamos el precio de 
                                                        #transporte carga x camion en el costo total del pedido
+        self.__distancia = distancia
         self.__precio_final_pedido = 0
-        'pruebas de git'
     
     'Getters y setters:'
-
-
+    def get_distancia(self):
+        return self.__distancia
+    def set_distancia(self, distancia):
+        self.__distancia = distancia
+    distancia = property(get_distancia,set_distancia)
+    
     def get_precio_final_pedido(self):
         return self.__precio_final_pedido
     def set_precio_final_pedido(self, precio):
@@ -28,7 +31,7 @@ class Pedidos:
         return self.__containers
     
     def get_cant_containers(self):
-        cant = len(self.get_containers)
+        cant = len(self.get_containers())
         return cant
 
     def get_necesita_transporte_camion(self):
