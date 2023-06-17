@@ -9,4 +9,7 @@ class EmpresaEnvios(ViajeraInterfaz):
     def __init__(self) -> None:
         pass
     
-    
+        """
+        recibe los barcos o camiones llenos y los hace "viajar"
+        o los pone en modo viajando que seria disponible = False
+        """

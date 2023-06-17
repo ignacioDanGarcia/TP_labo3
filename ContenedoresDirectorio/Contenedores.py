@@ -19,16 +19,9 @@ class Contenedor():
         self.__material_especial = material_especial
         self.__disponible = True
         self.__cant_de_veces_comple_y_carga_unica = 0
-        self.__estado = None
  
     
     'Getters y Setters:'
-    def set_estado(self, estado):
-        self.__estado = estado
-    def get_estado(self):
-        return self.__estado
-    estado = property(get_estado,set_estado)
-
     def set_tipo(self, tipo):
         self.__tipo = tipo
     def get_tipo(self):

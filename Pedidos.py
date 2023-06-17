@@ -5,7 +5,6 @@ from GenerarId import GenerarId
 class Pedidos:
     def __init__(self, retira_en_puerto, contenedor_completo, cargas, necesita_transporte_camion):
         self.__retira_en_puerto = retira_en_puerto #bool
-        self.__contenedor_completo = contenedor_completo #bool
         self.__id = GenerarId.generar_numeros_distintos()
         self.__cargas = cargas
         self.__containers = None #necesitamos que el pedido tenga los containers asociados a las cargas
@@ -15,8 +14,6 @@ class Pedidos:
         'pruebas de git'
     
     'Getters y setters:'
-
-
     def get_precio_final_pedido(self):
         return self.__precio_final_pedido
     def set_precio_final_pedido(self, precio):

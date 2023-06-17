@@ -10,5 +10,7 @@ O CAMIONES PARA PODER ENVIARLOS AL SECTOR DE DISTRIBUCION
 class EmpresaDeposito():
     def __init__(self) -> None:
         pass
-    
-    
+    """
+    usa metodos de EmpresaData como devolver_un_camion_disponible o devolver_un_barco_disponible
+    y le catchea las excepciones
+    """
