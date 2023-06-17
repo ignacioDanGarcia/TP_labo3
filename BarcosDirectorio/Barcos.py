@@ -5,13 +5,12 @@ from Interfaces.ViajeraInterfaz import ViajeraInterfaz
 
 class Barco(Cargable, ABC):
 
-    def __init__(self, peso_max, cant_contenedores_max, lleva_material_especial, nombre):
+    def __init__(self, peso_max, cant_contenedores_max, nombre):
         self.__id = GenerarId.generar_numeros_distintos()
         self.__disponible = True
         self.__peso_max = peso_max
         self.__cant_contenedores_max = cant_contenedores_max
         self.__kmRecorridos = 0
-        self.__lleva_material_especial = lleva_material_especial
         self.__contenedores = []
         self.__nombre = nombre
         
@@ -22,7 +21,6 @@ class Barco(Cargable, ABC):
         # los barcos soportan cualquier contenedor cuyas medidas sean mayores a las de un contenedor básico. 
     
     'Getters y setters'
-    
     def get_id(self):
         return self.__id
     
@@ -44,12 +42,6 @@ class Barco(Cargable, ABC):
         self.__cant_contenedores_max = cant
     cant_contenedores_max = property(get_cant_contenedores_max,set_cant_contenedores_max)
     
-    def get_lleva_material_especial(self):
-        return self.__lleva_material_especial
-    def set_lleva_material_especial(self, lleva):
-        self.__lleva_material_especial = lleva
-    lleva_material_especial = property(get_lleva_material_especial,set_lleva_material_especial)
-    
     def get_disponible(self):
         return self.__disponible
     def set_disponible(self,dispo):
@@ -67,7 +59,6 @@ class Barco(Cargable, ABC):
     def set_contenedores(self,contenedor):
         self.contenedores.append(contenedor)
     contenedores = property(get_contenedores,set_contenedores)
-        
     'Fin getters y Setters'
     
     

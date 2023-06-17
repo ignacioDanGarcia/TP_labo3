@@ -1,14 +1,14 @@
 from Excepciones.exceptions import *
 from BarcosDirectorio.Barcos import Barco
-from Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_exception, Material_no_compatible_con_barco_Exceptionn, Peso_excedido_exception
+from Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_exception, Peso_excedido_exception
 from ContenedoresDirectorio.Contenedores import Contenedor
 
 class BarcoBasico(Barco):
-    def __init__(self, peso_max, cant_contenedores_max, lleva_material_especial):
-        super().__init__(peso_max, cant_contenedores_max, lleva_material_especial, "Basico")
+    def __init__(self, peso_max, cant_contenedores_max):
+        super().__init__(peso_max, cant_contenedores_max, "Basico")
     
-    def puede_cargar_esta_carga(self, carga: Contenedor):
-        if not carga.get_tipo().lower().find('basico') != -1:
+    def puede_cargar_esta_carga(self, contenedor: Contenedor):
+        if not contenedor.get_tipo().value in [1, 2]:
             raise Contenedor_no_aceptado_exception("Este barco solo puede llevar contenedores básicos")
         #Hay que ver como manejamos en la carga si lleva alguna carga especial o no.
         
