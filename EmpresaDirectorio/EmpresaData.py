@@ -70,10 +70,12 @@ class EmpresaData():
     def devolver_un_barco_disponible(self):          
         for barco in self.get_barcos():
             if (barco.get_disponible()):
-                #segun la teoria, esto afecta a la lista de empresa de self.camiones en cualquier parte del codigo
-                barco.set_disponible = False
+                #segun la teoria, esto afecta a la lista de empresa de self.barcos en cualquier parte del codigo
+                if len(barco.get_contenedores()) > barco.get_cant_contenedores_max():
+                    # excepcion caatcheada en cargar_barco de EmpresaDeposito
+                    raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")
                 return barco
-        # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
+        # excepcion caatcheada en cargar_barco de EmpresaDeposito
         raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")
     
     
@@ -83,9 +85,15 @@ class EmpresaData():
                 #segun la teoria, esto afecta a la lista de empresa de self.camiones en cualquier parte del codigo
                 camion.set_disponible = False
                 return camion
-        # falta ver donde se catchea esta excepcion (sacar este comentario cuando ya este)
+        # excepcion caatcheada en cargar_camion de EmpresaDeposito
         raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")
     
+    def get_contenedores_disponibles(self):
+        conts = []
+        for cont in self.get_contenedores():
+            if (cont.get_disponible()):
+                conts.append(cont)
+                return conts
     
     def actualizar_barco_trotamundo_o_sedentario(self):
         

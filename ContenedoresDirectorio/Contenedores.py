@@ -84,6 +84,8 @@ class Contenedor():
     def get_cargas(self):
         return self.__cargas
     cargas = property(get_cargas)
+    def agregar_carga(self, carga):
+        self.__cargas.append(carga)
     'Fin Getters y Setters'
     
     def peso_contenedor(self):
