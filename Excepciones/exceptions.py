@@ -24,7 +24,11 @@ class Cantidad_contenedores_maxima_alcanzada_exception(Exception):
     def __str__(self) -> str:
         return self.mensaje
     
-
+class TipoDeBarcoInvalido(Exception):
+    def __init__(self, mensaje) -> None:
+        self.mensaje = mensaje
+    def __str__(self) -> str:
+        return self.mensaje
  # Excepciones Empresa... esto habria que cambiarlo de lugar pero por ahora lo dejo aca
  
 class No_hay_camiones_disponibles(Exception):
