@@ -13,7 +13,7 @@ class test_creacion_de_barcos_con_factory_method(TestCase):
         
         creador_barcos_basicos = selector_de_factoria.crear_factoria(TiposBarcos.BASICO)
         
-        barco = creador_barcos_basicos.crear_barco(500,3)
+        barco = creador_barcos_basicos.crear_barco(500,3,500)
         assert isinstance(barco,BarcoBasico)
         assert barco.get_peso_max() == 500
         assert barco.get_cant_contenedores_max() == 3
@@ -22,7 +22,7 @@ class test_creacion_de_barcos_con_factory_method(TestCase):
         selector_de_factoria = SelectorCreador()
         creador_barcos_especiales = selector_de_factoria.crear_factoria(TiposBarcos.ESPECIAL)
         
-        barco = creador_barcos_especiales.crear_barco(500,3)
+        barco = creador_barcos_especiales.crear_barco(500,3,500)
         assert isinstance(barco,BarcoEspecial)
         assert barco.get_peso_max() == 500
         assert barco.get_cant_contenedores_max() == 3

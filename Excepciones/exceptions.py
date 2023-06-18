@@ -29,6 +29,11 @@ class TipoDeBarcoInvalido(AttributeError):
         self.mensaje = mensaje
     def __str__(self) -> str:
         return self.mensaje
+class CombustibleInsuficienteException(Exception):
+    def __init__(self, mensaje) -> None:
+        self.mensaje = mensaje
+    def __str__(self) -> str:
+        return self.mensaje
  # Excepciones Empresa... esto habria que cambiarlo de lugar pero por ahora lo dejo aca
  
 class No_hay_camiones_disponibles(Exception):
