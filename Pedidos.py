@@ -1,11 +1,13 @@
 
 import random
+from typing import List
+from Cargas.Carga import Carga
 from GenerarId import GenerarId
 
 class Pedidos:
-    def __init__(self, retira_en_puerto, cargas, necesita_transporte_camion, distancia):
+    def __init__(self, id, cargas: List[Carga], necesita_transporte_camion, retira_en_puerto, distancia):
         self.__retira_en_puerto = retira_en_puerto #bool
-        self.__id = GenerarId.generar_numeros_distintos()
+        self.__id = id #GenerarId.generar_numeros_distintos()
         self.__cargas = cargas
         self.__containers = [] #necesitamos que el pedido tenga los containers asociados a las cargas
         self.__necesita_transporte_camion = necesita_transporte_camion #bool si es False no sumamos el precio de 
@@ -36,6 +38,9 @@ class Pedidos:
 
     def get_necesita_transporte_camion(self):
         return self.__necesita_transporte_camion
+    def set_necesita_transporte_camion(self, necesita_transporte_camion):
+        self.__necesita_transporte_camion = necesita_transporte_camion
+    necesita_transporte_camion = property(get_necesita_transporte_camion,set_necesita_transporte_camion)
 
     def get_id(self):
         return self.__id
