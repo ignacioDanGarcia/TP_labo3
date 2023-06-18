@@ -4,8 +4,8 @@ from Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_except
 from ContenedoresDirectorio.Contenedores import Contenedor
 from BarcosDirectorio.TiposDeBarcos import TiposBarcos
 class BarcoBasico(Barco):
-    def __init__(self, peso_max, cant_contenedores_max):
-        super().__init__(peso_max, cant_contenedores_max, TiposBarcos.BASICO)
+    def __init__(self, peso_max, cant_contenedores_max, combustible_maximo,tipoBarco=None,  sensor_viento=None):
+        super().__init__(peso_max, cant_contenedores_max, combustible_maximo, TiposBarcos.BASICO, sensor_viento)
     
     def puede_cargar_esta_carga(self, contenedor: Contenedor):
         if not contenedor.get_tipo().value in [1, 2]:
@@ -26,4 +26,4 @@ class BarcoBasico(Barco):
     def cargar(self, contenedor):
         if self.puede_cargar_esta_carga(contenedor) and self.tiene_lugar(contenedor):
             self.contenedores.append(contenedor)
- 
+    
