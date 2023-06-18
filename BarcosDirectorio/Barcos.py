@@ -5,15 +5,15 @@ from Interfaces.ViajeraInterfaz import ViajeraInterfaz
 
 class Barco(Cargable, ABC):
 
-    def __init__(self, peso_max, cant_contenedores_max, nombre):
+    def __init__(self, peso_max, cant_contenedores_max, tipoBarco = None):
         self.__id = GenerarId.generar_numeros_distintos()
         self.__disponible = True
         self.__peso_max = peso_max
         self.__cant_contenedores_max = cant_contenedores_max
         self.__kmRecorridos = 0
         self.__contenedores = []
-        self.__nombre = nombre
-        
+        self.tipoBarco = tipoBarco
+        #¿Por qué el nombre? Tenemos un id para identificarlo.
         
         #CONTAINER MATERIAL ESPECIAL (explosivos, desechos químicos o radioactivos) 
         # sólo puede ser transportado por un barco diseñado para tal fin.
@@ -24,11 +24,11 @@ class Barco(Cargable, ABC):
     def get_id(self):
         return self.__id
     
-    def get_nombre(self):
-        return self.__nombre
-    def set_nombre(self,nombre):
-        self.__nombre = nombre
-    nombre = property(get_nombre,set_nombre)
+    def get_tipoBarco(self):
+        return self.__tipoBarco
+    def set_tipoBarco(self,tipoBarco):
+        self.__tipoBarco = tipoBarco
+    tipoBarco = property(get_tipoBarco,set_tipoBarco)
     
     def get_peso_max(self):
         return self.__peso_max
