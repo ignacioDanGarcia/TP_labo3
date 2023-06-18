@@ -24,7 +24,7 @@ class Cantidad_contenedores_maxima_alcanzada_exception(Exception):
     def __str__(self) -> str:
         return self.mensaje
     
-class TipoDeBarcoInvalido(Exception):
+class TipoDeBarcoInvalido(AttributeError):
     def __init__(self, mensaje) -> None:
         self.mensaje = mensaje
     def __str__(self) -> str:
