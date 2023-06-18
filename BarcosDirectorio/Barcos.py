@@ -3,7 +3,8 @@ from abc import ABC, abstractmethod
 from GenerarId import GenerarId
 from Interfaces.ViajeraInterfaz import ViajeraInterfaz
 from BarcosDirectorio.SistemasNavegacion.AMotor import AMotor
-from Excepciones.exceptions import CombustibleInsuficienteException
+from Excepciones.exceptions import CombustibleInsuficienteException, distancia_incorrecta, tiempo_incorrecto
+from ModuloGPS import ModuloGPS
 
 class Barco(Cargable, ABC):
 
@@ -100,16 +101,20 @@ class Barco(Cargable, ABC):
         for contenedor in self.contenedores:
             peso += contenedor.peso_contenedor()
         return peso
-    def navegar(self, horas): #Modulo gps
+    
+    def navegar(self, modulo_gps :ModuloGPS): #Modulo gps
         
+        modulo_gps.check_valores()
+        horas = modulo_gps.calcular_tiempo()
         for hora in range(horas):
             if self.sensor_viento != None:
                 self.sensor_viento.medir_viento_favorable(self)
-            
-            
             self.sistema_navegacion.navegar(1)
+        self.set_km_recorridos(self.get_km_recorridos() + modulo_gps.calcular_distancia())
         
-    def puede_navegar(self, horas):
+    def puede_navegar(self, modulo_gps :ModuloGPS):
+        modulo_gps.check_valores()
+        horas = modulo_gps.calcular_tiempo()
         gastonafta = self.get_gasto_por_hora() * horas
         
         if gastonafta > self.get_combustible_actual():
