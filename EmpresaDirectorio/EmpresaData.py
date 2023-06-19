@@ -72,10 +72,10 @@ class EmpresaData():
             if (barco.get_disponible()):
                 #segun la teoria, esto afecta a la lista de empresa de self.barcos en cualquier parte del codigo
                 if len(barco.get_contenedores()) > barco.get_cant_contenedores_max():
-                    # excepcion caatcheada en cargar_barco de EmpresaDeposito
+                    # excepcion caatcheada en cargar_barco de CargadorVehiculos
                     raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")
                 return barco
-        # excepcion caatcheada en cargar_barco de EmpresaDeposito
+        # excepcion caatcheada en cargar_barco de CargadorVehiculos
         raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")
     
     
@@ -85,7 +85,7 @@ class EmpresaData():
                 #segun la teoria, esto afecta a la lista de empresa de self.camiones en cualquier parte del codigo
                 camion.set_disponible = False
                 return camion
-        # excepcion caatcheada en cargar_camion de EmpresaDeposito
+        # excepcion caatcheada en cargar_camion de CargadorVehiculos
         raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")
     
     def get_contenedores_disponibles(self):

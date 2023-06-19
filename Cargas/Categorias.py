@@ -1,9 +1,9 @@
 from enum import Enum
 
 class Categoria(Enum):
-    MAQUINARIA = 1
-    ALIMENTICIA = 2
-    QUIMICA = 3
+    ALIMENTICIA = 1
+    QUIMICA = 2
+    MAQUINARIA = 3
     
     #print(Categoria.ALIMENTICIA)  # Imprime: Categoria.ALIMENTICIA
-    #print(Categoria.ALIMENTICIA.value)  # Imprime: 2
+    #print(Categoria.ALIMENTICIA.value)  # Imprime: 1

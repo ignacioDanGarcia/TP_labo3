@@ -64,3 +64,6 @@ class Pedidos:
     def get_cant_contenedores(self):
         cant = len(self.get_contenedores())
         return cant
+    
+    def agregar_contenedor(self, c):
+        self.__contenedores.append(c)
