@@ -7,7 +7,7 @@ from ContenedoresDirectorio.EstrategiaCargaAlimenticia import CargaAlimenticiaEs
 from ContenedoresDirectorio.EstrategiaCargaMaquinaria import CargaMaquinariaEstrategy
 from ContenedoresDirectorio.EstrategiaCargaQuimica import CargaQuimicaEstrategy
 from ContenedoresDirectorio.SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga
-
+from Excepciones.exceptions import no_existe_carga
 class ManejadorDeCargas():
     def __init__(self, selectora: SelectoraEstrategiaPorCarga) -> None:
         self.__estrategia = None
@@ -43,3 +43,17 @@ class ManejadorDeCargas():
     def verificar_carga(self, carga : Carga, contenedor):
         self.settear_estrategia(carga)
         return self.__estrategia.verificar_carga(carga,contenedor)
+    
+    def vaciar_contenedor(self, contenedor :Contenedor):
+        cargas = []
+        for carga in contenedor.get_cargas():
+            cargas.append(carga)
+        contenedor.get_cargas().clear()
+        return cargas
+    
+    def traer_carga(self, contenedor: Contenedor, carga: Carga):
+        cargas = contenedor.get_cargas()
+        if carga in cargas:
+            cargas.remove(carga)
+            return carga
+        raise(no_existe_carga("No existe la carga buscada."))

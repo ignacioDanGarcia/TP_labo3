@@ -14,7 +14,7 @@ from ContenedoresDirectorio.Builder.BuilderContenedorVentilado import BuilderCon
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
 from ContenedoresDirectorio.SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga
-
+from Excepciones.exceptions import no_existe_carga
 from pytest import raises
 from Excepciones.exceptions import *
 from Medidas import Medidas
@@ -167,4 +167,61 @@ class TestContenedoresPrueba(TestCase):
         
         carga_quimica = Carga(medidas,1,Categoria.ALIMENTICIA)
         assert(manejador_de_cargas.verificar_carga(carga_quimica,contenedorhc)) == False
+    
+    def test_manejador_de_cargas_elimina_cargas(self):
+        
+        builder = BuilderContenedorBasicoHC()
+        director = Contenedor_director(builder)
+        contenedorhc = director.crear_contenedor(1,True)
+        
+        medidas = Medidas(3,2,2)
+        carga = Carga(medidas,50,Categoria.QUIMICA)
+        carga2 = Carga(medidas,10,Categoria.MAQUINARIA)
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
+        assert(manejador_de_cargas.verificar_carga(carga,contenedorhc)) == True
+        manejador_de_cargas.cargar(carga, contenedorhc)
+        manejador_de_cargas.cargar(carga2,contenedorhc)
+        
+        assert len(contenedorhc.get_cargas()) == 2
+        cargas_contenedor = manejador_de_cargas.vaciar_contenedor(contenedorhc)
+        assert len(cargas_contenedor) == 2
+        
+        assert cargas_contenedor.pop(0) == carga
+        assert cargas_contenedor.pop(0) == carga2
+    
+    def test_manejador_de_cargas_trae_la_carga_que_pidas_especificamente(self):
+        builder = BuilderContenedorBasicoHC()
+        director = Contenedor_director(builder)
+        contenedorhc = director.crear_contenedor(1,True)
+        
+        medidas = Medidas(3,2,2)
+        carga = Carga(medidas,50,Categoria.QUIMICA)
+        carga2 = Carga(medidas,10,Categoria.MAQUINARIA)
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
+        assert(manejador_de_cargas.verificar_carga(carga,contenedorhc)) == True
+        manejador_de_cargas.cargar(carga, contenedorhc)
+        manejador_de_cargas.cargar(carga2,contenedorhc)
+        
+        carga = manejador_de_cargas.traer_carga(contenedorhc,carga2)
+        
+        assert carga == carga2
+    
+    def test_manejador_de_cargas_tira_exception_si_la_carga_no_existe(self):
+        builder = BuilderContenedorBasicoHC()
+        director = Contenedor_director(builder)
+        contenedorhc = director.crear_contenedor(1,True)
+        
+        medidas = Medidas(3,2,2)
+        carga = Carga(medidas,50,Categoria.QUIMICA)
+        carga2 = Carga(medidas,10,Categoria.MAQUINARIA)
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
+        assert(manejador_de_cargas.verificar_carga(carga,contenedorhc)) == True
+        manejador_de_cargas.cargar(carga, contenedorhc)
+        
+        with self.assertRaises(no_existe_carga):
+            carga = manejador_de_cargas.traer_carga(contenedorhc,carga2)
+        
+        
+
+        
         
