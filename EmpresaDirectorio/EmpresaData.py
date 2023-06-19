@@ -88,7 +88,7 @@ class EmpresaData():
     
     
     def actualizar_barco_trotamundo_o_sedentario(self):
-        
+        #Podríamos cambiar este nombre no? Es raro
         bmenos = self.get_barco_con_menos_km()
         bmas = self.get_barco_con_mas_km()
         
