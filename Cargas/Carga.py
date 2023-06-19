@@ -32,4 +32,5 @@ class Carga:
         volumen = self.medidas.get_alto() * self.medidas.get_ancho() * self.medidas.get_largo()
         return volumen
     
+    
     'Fin getters y setters'

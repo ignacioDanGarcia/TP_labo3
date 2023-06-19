@@ -1,13 +1,18 @@
 import random
+from Excepciones.exceptions import tiempo_incorrecto,distancia_incorrecta
 class ModuloGPS:
-    def __init__(self):
-            """
-            para "calcular" distancias
-            segun la tabla de precios las distancias minimas estan abajo de 100, y las maximas arriba de 10 mil
-            por eso puse que me devuelva una distancia en km del 1 al 20 mil y fue
-            
-            Tratemos de ignorar las sedes como tal porque si tenemos que guardar las sedes y la cantidad que tiene
-            cada una sobre la otra vamos a estar mil años
-            """
-            
-            return random.randint(1, 20000)
+    def __init__(self) -> None:
+          pass
+   
+    def calcular_distancia(self):
+        return random.randint(1, 20000) #KMS
+    def calcular_tiempo(self):
+        return random.randint(1, 1200) #HS Tiempo promedio de viajes de barcos con contenedores de carga según Google
+    
+    def check_valores(self):
+        horas = self.calcular_tiempo()
+        if horas <= 0:
+            raise tiempo_incorrecto("No es posible viajar esta distancia")
+        distancia = self.calcular_distancia()
+        if distancia <= 0:
+            raise distancia_incorrecta("No es posible viajar distancia negativa o 0 kms")
