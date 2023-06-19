@@ -59,6 +59,13 @@ class tiempo_incorrecto(Exception):
     def __str__(self) -> str:
         return self.mensaje
     
+class Hay_cargas_que_no_entraron_en_contenedores(Exception):
+    def __init__(self, mensaje) -> None:
+        self.mensaje = mensaje
+    def __str__(self) -> str:
+        return self.mensaje
+    
+    
 # excepcion contenedor basico abstracto
 class el_contenedor_basico_no_puede_mat_especial(Exception):
     def __init__(self, mensaje) -> None:

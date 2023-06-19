@@ -1,7 +1,9 @@
+from EmpresaDirectorio.EmpresaDeposito import EmpresaDeposito
+from EmpresaDirectorio.TipoVehiculo import TipoVehiculo
 from Pedidos import Pedidos
 from ContenedoresDirectorio.DepartamentoDeEstimacionDeCostos.CalculadoraPrecioCargas import CalculadoraPrecioCargas
 from ContenedoresDirectorio.DepartamentoDeEstimacionDeCostos.SelectoraEstrategiaPrecio import SelectoraEstrategiaPrecio
-from Excepciones.exceptions import contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga, distancia_incorrecta
+from Excepciones.exceptions import Hay_cargas_que_no_entraron_en_contenedores, contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga, distancia_incorrecta
 from EmpresaData import EmpresaData
 """
 CLASE QUE RECIBE PEDIDOS Y DEVUELVE PRECIO A PAGAR    
@@ -11,8 +13,16 @@ USA EMPRESACOTIZACIONES PARA CALCULAR PRECIO POR CONTENEDOR
 """
 
 class EmpresaOficina():
-    def __init__(self, empresa_data: EmpresaData) -> None:
+    def __init__(self, empresa_data: EmpresaData, empresa_deposito: EmpresaDeposito) -> None:
         self.__empresa_data = empresa_data
+        self.__empresa_deposito = empresa_deposito
+    
+    def get_empresa_deposito(self):
+        return self.__empresa_deposito
+    
+    def set_empresa_deposito(self, empresa_deposito):
+        self.__empresa_deposito = empresa_deposito
+    empresa_deposito = property(get_empresa_deposito,set_empresa_deposito)
     
     def get_empresa_data(self):
         return self.__empresa_data
@@ -28,19 +38,35 @@ class EmpresaOficina():
     # y si todo sale bien, mandarle vehiculos a EmpresaEnvios para que ejecute viajar
     
     def procesar_pedido(self, pedido: Pedidos):
-        # pedirle a empresa deposito que traten de llenar los contenedores
-        # chequeando las cargas con los contenedores que tiene la empresa, en empresa data
+        try:
+            # se llenan los contenedores y se guardan en el pedido de paso
+            contenedores_usados = self.get_empresa_deposito().llenar_contenedores(pedido)
+            pedido.set_contenedores(contenedores_usados)
+            
+            tipos_transportes = pedido.get_tipo_vehiculos() 
+            # es una lista que puede tener CAMION, BARCO, O AMBOS
+            
+            carga_funciones = {
+                TipoVehiculo.CAMION: self.get_empresa_deposito().cargar_camion,
+                TipoVehiculo.BARCO: self.get_empresa_deposito().cargar_barco
+            }
+
+            
+            if tipos_transportes not in carga_funciones:
+                # falta ver donde se catchea esto y crear bien una excepcion, calculo que será en pedido o algo asi
+                raise ValueError("Tipo de transporte no válido.")
+            
+            for tipo in tipos_transportes:
+                funcion_carga = carga_funciones[tipo]
+                funcion_carga(contenedores_usados)
+            
+            
+            # si sale todo bien, ejecutas self.calcular_precio_pedido que es el metodo de abajo
+            return self.calcular_precio_pedido(pedido, pedido.get_distancias())
+                
+        except Hay_cargas_que_no_entraron_en_contenedores as e:
+            print(str(e))
         
-        # guardas los contenedores usados en pedido.contenedores
-        
-        # si sale bien chequear si tenemos los vehiculos del tipo de viaje que quiere
-        
-        # si sale bien los contenedores en los barcos o camiones, con los que estan en empresa data
-        
-        # si sale bien, ejecutas self.calcular_precio_pedido que es el metodo de abajo
-        
-        
-        pass
     
     
     def calcular_precio_pedido(self, pedido, distancia):
