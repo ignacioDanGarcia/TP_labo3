@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Barco{
+
+}
+
+class BarcoBasico extends Barco{
+
+}
+
+
+class BarcoEspecial extends Barco{
+
+}
+
+abstract class CreadorBarcos extends Barco{
+
+    +crear_barco() :Barco
+}
+
+class CreadorBarcoBasico extends CreadorBarcos{
+    +crear_barco(): Barco
+}
+
+class CreadorBarcoEspecial extends CreadorBarcos{
+    +crear_barco() : Barco
+}
+
+note bottom of CreadorBarcoBasico: return new BarcoBasico()
+note bottom of CreadorBarcoEspecial: return new BarcoEspecial()
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/class-diagram
+title Sistema de navegación -simil de estados. Si cambia el sistema de navegacion cambia como navega.
+package SistemasDeNavegacion {
+class Barcos{
+    -combustibleMaximo :Float
+    -combustibleActual: Float
+    -gastoPorHora: Float
+    -sistemaNavegacion : SistemaNavegacion
+    -Sensor_de_viento
+}
+
+abstract class SistemaNavegacion{
+    -barco : Barcos
+    +set_barco(Barco)
+    +navegar(distancia)
+    +mostrar_tipo()
+}
+class A_motor extends SistemaNavegacion{
+    -barco : Barcos
+    +set_barco(Barco)
+    +navegar(distancia)
+    +mostrar_tipo()
+}
+class A_vela extends SistemaNavegacion{
+    -barco : Barcos
+    +set_barco(Barco)
+    +navegar(distancia)
+    +mostrar_tipo()
+}
+interface Sensores{
+    +medir()
+}
+class SensorVientoInteligente implements Sensores{
+    +medirVientoFavorable() :True - False
+    +notificar(barco,vientoFavorable)
+}
+
+class ControladorDeSistemaDeNavegacion{
+    +optimizarNavegacion(barco, vientoFavorable(Booleano))
+}
+note bottom of SensorVientoInteligente: Avisamos las condiciones \n del viento al controlador
+note bottom of ControladorDeSistemaDeNavegacion: SI el viento es favorable cambia a vela el sistema \nde navegacion del barco. Si no lo es lo deja o \ncambia a motor.
+
+Barcos *-- SistemaNavegacion
+Barcos o-- Sensores
+ SensorVientoInteligente *-r-  ControladorDeSistemaDeNavegacion
+ControladorDeSistemaDeNavegacion *-l- Barcos
+}
+@enduml
