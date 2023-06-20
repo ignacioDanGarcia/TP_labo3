@@ -3,7 +3,6 @@ from Cargas.Categorias import Categoria
 class Carga:
 
     def __init__(self, medidas : Medidas, peso, categoria : Categoria):
-
         self.__medidas = medidas
         self.__peso = peso
         self.__categoria = categoria

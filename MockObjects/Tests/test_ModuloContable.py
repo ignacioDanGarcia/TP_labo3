@@ -31,7 +31,7 @@ class TestModuloContable(TestCase):
         creador_barcos_basicos = selector_de_factoria.crear_factoria(TiposBarcos.BASICO)
         
         #Seteo un barco:
-        barco = creador_barcos_basicos.crear_barco(500,3,500)
+        barco = creador_barcos_basicos.crear_barco(1,500,3,500)
         modulo_gps_mock = Mock()
         modulo_gps_mock.calcular_distancia.return_value = 99
         barco.set_combustible_gastado(100)
@@ -66,7 +66,7 @@ class TestModuloContable(TestCase):
         creador_barcos_basicos = selector_de_factoria.crear_factoria(TiposBarcos.BASICO)
         
         #Seteo un barco:
-        barco = creador_barcos_basicos.crear_barco(500,3,500)
+        barco = creador_barcos_basicos.crear_barco(1,500,3,500)
         modulo_gps_mock = Mock()
         modulo_gps_mock.calcular_distancia.return_value = 99
         barco.set_combustible_gastado(100)
@@ -102,7 +102,7 @@ class TestModuloContable(TestCase):
         creador_barcos_basicos = selector_de_factoria.crear_factoria(TiposBarcos.BASICO)
         
         #Seteo un barco:
-        barco = creador_barcos_basicos.crear_barco(500,3,500)
+        barco = creador_barcos_basicos.crear_barco(1,500,3,500)
         modulo_gps_mock = Mock()
         modulo_gps_mock.calcular_distancia.return_value = 99
         barco.set_combustible_gastado(100)

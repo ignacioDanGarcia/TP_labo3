@@ -105,7 +105,7 @@ class ContenedorBuilderTest(TestCase):
         contenedorOpenTop = director.crear_contenedor(1,True)
         assert isinstance(contenedorOpenTop, Contenedor) == True
         assert contenedorOpenTop.tipo == TipoContenedor.OPENTOP
-        assert contenedorOpenTop.volumen_max == 33
+        assert contenedorOpenTop.volumen_max == 67.7
         assert contenedorOpenTop.peso_max == 45000
         
         assert contenedorOpenTop.get_medidas_interior().largo == 12.0

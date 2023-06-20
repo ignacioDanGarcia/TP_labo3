@@ -6,10 +6,10 @@ from GenerarId import GenerarId
 
 class Cliente:
 
-    def __init__(self, apellido, nombre):
+    def __init__(self, id, apellido, nombre):
         self.__apellido = apellido
         self.__nombre = nombre
-        self.__id = GenerarId.generar_numeros_distintos()
+        self.__id = id # GenerarId.generar_numeros_distintos()
         self.__pedido = None
         self.__cargas = []
         
@@ -17,6 +17,9 @@ class Cliente:
     'Getters y Setters:'
     def get_id(self):
         return self.__id
+    def set_id(self,id):
+        self.__id = id
+    id = property(get_id, set_id)
     
     def get_apellido(self):
         return self.__apellido

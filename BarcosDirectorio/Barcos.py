@@ -8,8 +8,8 @@ from ModuloGPS import ModuloGPS
 
 class Barco(Cargable, ABC):
 
-    def __init__(self, peso_max, cant_contenedores_max, combustible_maximo, tipoBarco = None, sensor_viento = None ):
-        self.__id = GenerarId.generar_numeros_distintos()
+    def __init__(self, id, peso_max, cant_contenedores_max, combustible_maximo, tipoBarco = None, sensor_viento = None ):
+        self.__id = id # GenerarId.generar_numeros_distintos()
         self.__disponible = True
         self.__peso_max = peso_max
         self.__cant_contenedores_max = cant_contenedores_max

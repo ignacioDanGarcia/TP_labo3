@@ -19,7 +19,7 @@ class tests_sistemasNavegacion(TestCase):
     def test_prueba_instanciar_barco_y_navegar_tiempo_suficiente(self):
         selector = SelectorCreador()
         factoria = selector.crear_factoria(TiposBarcos.BASICO)
-        barco = factoria.crear_barco(400,3,40)
+        barco = factoria.crear_barco(1,400,3,40)
         modulo_gps = Mock()
         modulo_gps.calcular_tiempo.return_value = 5
         modulo_gps.calcular_distancia.return_value = 200
@@ -37,7 +37,7 @@ class tests_sistemasNavegacion(TestCase):
     def test_prueba_instanciar_barco_y_navegar_mas_tiempo_que_aguanta_su_nafta(self):
         selector = SelectorCreador()
         factoria = selector.crear_factoria(TiposBarcos.ESPECIAL)
-        barco = factoria.crear_barco(400,3,10)
+        barco = factoria.crear_barco(1,400,3,10)
         
         modulo_gps = Mock()
         modulo_gps.calcular_tiempo.return_value = 3
@@ -53,7 +53,7 @@ class tests_sistemasNavegacion(TestCase):
         sensor_viento = SensorViento()
         selector = SelectorCreador()
         factoria = selector.crear_factoria(TiposBarcos.BASICO)
-        barco = factoria.crear_barco(400,3,600,sensor_viento)
+        barco = factoria.crear_barco(1,400,3,600,sensor_viento)
         
         modulo_gps = Mock()
         modulo_gps.calcular_tiempo.return_value = 10
@@ -74,7 +74,7 @@ class tests_sistemasNavegacion(TestCase):
         sensor_viento_mock = Mock()
         selector = SelectorCreador()
         factoria = selector.crear_factoria(TiposBarcos.BASICO)
-        barco = factoria.crear_barco(400,3,600,sensor_viento_mock)
+        barco = factoria.crear_barco(1,400,3,600,sensor_viento_mock)
         
         modulo_gps = Mock()
         modulo_gps.calcular_tiempo.return_value = 10
@@ -121,7 +121,7 @@ class tests_sistemasNavegacion(TestCase):
     def test_prueba_navegar_tiempo_es_0(self):
         selector = SelectorCreador()
         factoria = selector.crear_factoria(TiposBarcos.BASICO)
-        barco = factoria.crear_barco(400,3,40)
+        barco = factoria.crear_barco(1,400,3,40)
 
         modulo_gps_real = ModuloGPS()
         with mock.patch.object(modulo_gps_real, 'calcular_tiempo', return_value= -10):
@@ -132,7 +132,7 @@ class tests_sistemasNavegacion(TestCase):
     def test_prueba_navegar_distancia_0(self):
         selector = SelectorCreador()
         factoria = selector.crear_factoria(TiposBarcos.BASICO)
-        barco = factoria.crear_barco(400,3,40)
+        barco = factoria.crear_barco(1,400,3,40)
         
         modulo_gps_real = ModuloGPS()
         with mock.patch.object(modulo_gps_real, 'calcular_distancia', return_value= -10):
