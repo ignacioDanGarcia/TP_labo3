@@ -2,7 +2,7 @@ def agregar_precio_adicional_open_top(builder_class):
     class BuilderContenedorOpenTopDecorator(builder_class):
         def __init__(self):
             super().__init__()
-            self.precio_adicional = 10000  # Precio adicional fijo inicializado en 10000
+            self.precio_adicional = 10000
 
         def set_precio_adicional(self, precio_adicional):
             self.precio_adicional = precio_adicional

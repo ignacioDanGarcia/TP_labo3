@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from GenerarId import GenerarId
 from Interfaces.ViajeraInterfaz import ViajeraInterfaz
 from BarcosDirectorio.SistemasNavegacion.AMotor import AMotor
-from Excepciones.exceptions import CombustibleInsuficienteException, distancia_incorrecta, tiempo_incorrecto
+from Excepciones.exceptions import CombustibleInsuficienteException, tiempo_incorrecto
 from ModuloGPS import ModuloGPS
 
 class Barco(Cargable, ABC):

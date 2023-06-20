@@ -26,9 +26,6 @@ class Medidas:
     largo = property(get_largo,set_largo)
     
     def comparar_medidas(self, medidas):
-        # Devuelve False si las medidas pasadas por parámetro son mayores o iguales a las de la instancia
-        # Devuelve True si las medidas pasadas por parámetro son menores estrictamente a las de la instancia
-
         alto = False
         largo = False
         ancho = False

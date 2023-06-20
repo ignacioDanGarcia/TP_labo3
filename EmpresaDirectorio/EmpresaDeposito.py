@@ -9,10 +9,6 @@ from ManejadorDeCargas import ManejadorDeCargas
 from Pedidos import Pedidos
 from SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga
 
-"""
-CLASE QUE VERIFICA QUE SE PUEDAN CARGAR LOS CONTENEDORES EN LOS BARCOS 
-O CAMIONES PARA PODER ENVIARLOS AL SECTOR DE DISTRIBUCION  
-"""
 
 class EmpresaDeposito():
     def __init__(self, empresa_data: EmpresaData):
@@ -21,7 +17,6 @@ class EmpresaDeposito():
     'Getters y Setters'
     def get_empresa_data(self):
         return self.__empresa_data
-    
     def set_empresa_data(self, empresa_data):
         self.__empresa_data = empresa_data
     empresa_data = property(get_empresa_data,set_empresa_data)
@@ -39,8 +34,7 @@ class EmpresaDeposito():
 
 
     def llenar_contenedores(self, pedido: Pedidos):
-        # llena contenedores con cargas, y mete contenedores usados en el pedido
-        # capaz podriamos meter solo el id del contenedor para no guardar tanta info
+        # llena contenedores con cargas, y mete ids contenedores usados en el pedido
         cargas_pedido = pedido.get_cargas()
         self.ordenar_por_categoria(cargas_pedido)
         

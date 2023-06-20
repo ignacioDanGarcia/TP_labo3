@@ -14,7 +14,7 @@ class BuilderContenedorOpenTop(Contenedor_builder):
         self.contenedor.set_tipo(TipoContenedor.OPENTOP)
         return self
     def set_volumen_maximo(self):
-        self.contenedor.set_volumen_max(67.7) # = flatrack
+        self.contenedor.set_volumen_max(67.7) # = hc
         return self
     def set_peso_maximo(self):
         self.contenedor.set_peso_max(45000) # = flatrack

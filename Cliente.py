@@ -15,12 +15,6 @@ class Cliente:
         
     
     'Getters y Setters:'
-    def get_id(self):
-        return self.__id
-    def set_id(self,id):
-        self.__id = id
-    id = property(get_id, set_id)
-    
     def get_apellido(self):
         return self.__apellido
     def set_apellido(self,a):
@@ -32,6 +26,13 @@ class Cliente:
     def set_nombre(self,nombre):
         self.__nombre = nombre
     nombre = property(get_nombre,set_nombre)
+    
+    def get_id(self):
+        return self.__id
+    def set_id(self,id):
+        self.__id = id
+    id = property(get_id, set_id)
+    'Fin getters y setters'
     
     
     # Variable de cargas para poder armarme un pedido con la cantidad de cargas que se le cante al cliente

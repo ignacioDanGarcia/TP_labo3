@@ -1,5 +1,5 @@
 from ContenedoresDirectorio.Estrategy import Estrategia
-from Excepciones.exceptions import contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga, distancia_incorrecta
+from Excepciones.exceptions import contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga
 from Cargas.Carga import Carga
 from ContenedoresDirectorio.Contenedores import Contenedor
 from Cargas.Categorias import Categoria

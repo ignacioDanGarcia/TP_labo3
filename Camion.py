@@ -27,6 +27,7 @@ class Camion():
     contenedor = property(get_contenedor,set_contenedor)
     'Fin Getters y setters:'
     
+    
     # El metodo de la interfaz
     def viajar(self):
         print("El camion entrego el pedido")
