@@ -86,6 +86,9 @@ class Contenedor():
     
     def get_cant_de_veces_comple_y_carga_unica(self):
         return self.__cant_de_veces_comple_y_carga_unica
+    def set_cant_de_veces_comple_y_carga_unica(self,cantidad):
+        self.__cant_de_veces_comple_y_carga_unica = cantidad
+    cant_de_veces_comple_y_carga_unica = property(get_cant_de_veces_comple_y_carga_unica,set_cant_de_veces_comple_y_carga_unica)
     def COUNTER_cant_de_veces_comple_y_carga_unica(self):
         # en otra funcion habria que hacer preguntar si el contenedor esta lleno en medidas, y tiene una sola carga, y ahi ejecutar este
         self.__cant_de_veces_comple_y_carga_unica += 1

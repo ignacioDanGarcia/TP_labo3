@@ -1,6 +1,6 @@
 from BarcosDirectorio.Barcos import Barco
 from Camion import Camion
-from Contenedores import Contenedor
+from ContenedoresDirectorio.Contenedores import Contenedor
 from Pedidos import Pedidos
 from Excepciones.exceptions import *
 
@@ -79,7 +79,7 @@ class EmpresaData():
         for cont in self.get_contenedores():
             if (cont.get_disponible()):
                 conts.append(cont)
-                return conts
+        return conts
     
     def actualizar_barco_trotamundo_o_sedentario(self):
         #Podríamos cambiar este nombre no? Es raro
@@ -87,13 +87,17 @@ class EmpresaData():
         bmas = self.get_barco_con_mas_km()
         
         for barco in self.get_barcos():
+            if bmenos == None:
+                bmenos = barco
+            if bmas == None:
+                bmas = barco
             # actualizo barco sedentario
-            if barco.get_km_recorridos() < bmenos or bmenos.get_km_recorridos() == 0:
+            if barco.get_km_recorridos() < (bmenos.get_km_recorridos()):
                 self.set_barco_con_menos_km(barco)
                 bmenos = barco
             
             # actualizo barco trotamundo
-            if barco.get_km_recorridos() > bmas:
+            if barco.get_km_recorridos() > bmas.get_km_recorridos():
                 self.set_barco_con_mas_km(barco)
                 bmas = barco
         
