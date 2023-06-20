@@ -6,12 +6,12 @@ class Medidas:
         self.__ancho = ancho
         self.__alto = alto
 
-    def get_alto(self):
-        return self.__alto
-    def set_alto(self, al):
-        self.__alto = al
-    alto = property(get_alto,set_alto)
     
+    def get_largo(self):
+        return self.__largo
+    def set_largo(self,lar):
+        self.__largo = lar
+    largo = property(get_largo,set_largo)
     
     def get_ancho(self):
         return self.__ancho
@@ -19,11 +19,13 @@ class Medidas:
         self.__ancho = an
     ancho = property(get_ancho,set_ancho)
     
-    def get_largo(self):
-        return self.__largo
-    def set_largo(self,lar):
-        self.__largo = lar
-    largo = property(get_largo,set_largo)
+    def get_alto(self):
+        return self.__alto
+    def set_alto(self, al):
+        self.__alto = al
+    alto = property(get_alto,set_alto)
+    'Fin getters y setters'
+
     
     def comparar_medidas(self, medidas):
         alto = False

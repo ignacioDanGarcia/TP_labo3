@@ -5,7 +5,7 @@ from Cargas.Carga import Carga
 from GenerarId import GenerarId
 
 class Pedidos:
-    def __init__(self, id, cargas: List[Carga], distancia, puerta_a_puerta):
+    def __init__(self, id, cargas: List[Carga], distancia, puerta_a_puerta: bool):
         self.__id = id # GenerarId.generar_numeros_distintos()
         self.__puerta_a_puerta = puerta_a_puerta #bool
         self.__cargas = cargas
