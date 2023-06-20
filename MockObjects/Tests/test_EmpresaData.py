@@ -131,7 +131,7 @@ class TestEmpresaData(TestCase):
         assert empresa_data.barco_con_mas_km == barco9
         assert empresa_data.barco_con_menos_km == barco2
     
-    def test_empresa_trae_barco_con_mayores_y_menores_KMS_recorridos(self):
+    def test_empresa_data_devuelve_contenedor_que_viajo_con_una_sola_carga_y_completo_mas_veces(self):
         mock_camiones = Mock()
         mock_barcos = Mock()
         cont1 = Contenedor(1,True)
