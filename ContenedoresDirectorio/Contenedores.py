@@ -19,6 +19,7 @@ class Contenedor():
         self.__material_especial = material_especial
         self.__disponible = True
         self.__cant_de_veces_comple_y_carga_unica = 0
+        self.__precio_adicional = 0 # solo se usa para los opentop con decorator
  
     
     'Getters y Setters:'
@@ -27,6 +28,12 @@ class Contenedor():
     def get_tipo(self):
         return self.__tipo
     tipo = property(get_tipo,set_tipo)
+    
+    def get_precio_adicional(self):
+        return self.__precio_adicional
+    def set_precio_adicional(self,p):
+        self.__precio_adicional = p
+    precio_adicional = property(get_precio_adicional,set_precio_adicional)
     
     def get_id(self):
         return self.__id

@@ -10,6 +10,7 @@ from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderConten
 from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderContenedorBasicoHC
 from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
 from ContenedoresDirectorio.Builder.BuilderContenedorVentilado import BuilderContenedorVentilado
+from ContenedoresDirectorio.Builder.BuilderContenedorOpenTop import BuilderContenedorOpenTop
 
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
@@ -220,8 +221,46 @@ class TestContenedoresPrueba(TestCase):
         
         with self.assertRaises(no_existe_carga):
             carga = manejador_de_cargas.traer_carga(contenedorhc,carga2)
+            
+    def test_manejador_de_cargas_no_puede_cargar_carga_maquinaria_en_contenedor_opentop_por_medidas_superiores(self):
+        builder = BuilderContenedorOpenTop()
+        director = Contenedor_director(builder)
+        contenedor = director.crear_contenedor(1,False)
+        
+        medidas = Medidas(100,3,5)
+        carga = Carga(medidas,50,Categoria.MAQUINARIA)
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
         
         
+        assert manejador_de_cargas.puede_cargar(carga, contenedor) == False
+        
+    def test_manejador_de_cargas_puede_cargar_carga_maquinaria_muy_alta_en_contenedor_opentop(self):
+        builder = BuilderContenedorOpenTop()
+        director = Contenedor_director(builder)
+        contenedor = director.crear_contenedor(5,False)
 
+        medidas = Medidas(1,1,65)
+        carga = Carga(medidas,100,Categoria.MAQUINARIA)
         
+        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
+        
+        assert manejador_de_cargas.puede_cargar(carga, contenedor) == True
+        
+        manejador_de_cargas.cargar(carga, contenedor)
+        assert len(contenedor.get_cargas()) == 1
+        manejador_de_cargas.cargar(carga, contenedor)
+        assert len(contenedor.get_cargas()) == 2
+    
+    def test_utilizar_precio_adicional_del_contenedor_open_top_sin_usar_en_otros_contenedores(self):
+        builder = BuilderContenedorOpenTop()
+        director = Contenedor_director(builder)
+        contenedor = director.crear_contenedor(5,False)
+        
+        assert contenedor.get_precio_adicional() == 10000
+        
+        builder_dos = BuilderContenedorBasico()
+        director.change_builder(builder_dos)
+        contenedor_dos = director.crear_contenedor(5,False)
+        
+        assert contenedor_dos.get_precio_adicional() == 0
         
