@@ -2,30 +2,29 @@
 import random
 from typing import List
 from Cargas.Carga import Carga
-from EmpresaDirectorio.TipoVehiculo import TipoVehiculo
 from GenerarId import GenerarId
 
 class Pedidos:
-    def __init__(self, id, cargas: List[Carga], tipo_vehiculos: List[TipoVehiculo], distancias: List[int]):
+    def __init__(self, id, cargas: List[Carga], distancia, puerta_a_puerta):
         self.__id = id #GenerarId.generar_numeros_distintos()
+        self.__puerta_a_puerta = puerta_a_puerta #bool
         self.__cargas = cargas
-        self.__tipo_vehiculos = tipo_vehiculos
-        self.__contenedores = [] #necesitamos que el pedido tenga los containers asociados a las cargas
-        self.__distancias = distancias
+        self.__contenedores_ids = [] 
+        self.__distancia = distancia
         self.__precio_final_pedido = 0
     
-    'Getters y setters:'
-    def get_tipo_vehiculos(self):
-        return self.__tipo_vehiculos
-    def set_tipo_vehiculos(self, tipo_vehiculos):
-        self.__tipo_vehiculos = tipo_vehiculos
-    tipo_vehiculos = property(get_tipo_vehiculos,set_tipo_vehiculos)
+    'Getters y setters:'    
+    def get_puerta_a_puerta(self):
+        return self.__puerta_a_puerta
+    def set_puerta_a_puerta(self, puerta_a_puerta):
+        self.__puerta_a_puerta = puerta_a_puerta
+    puerta_a_puerta = property(get_puerta_a_puerta,set_puerta_a_puerta)
     
-    def get_distancias(self):
-        return self.__distancias
-    def set_distancias(self, distancias):
-        self.__distancias = distancias
-    distancias = property(get_distancias,set_distancias)
+    def get_distancia(self):
+        return self.__distancia
+    def set_distancia(self, distancia):
+        self.__distancia = distancia
+    distancia = property(get_distancia,set_distancia)
     
     def get_precio_final_pedido(self):
         return self.__precio_final_pedido
@@ -33,11 +32,11 @@ class Pedidos:
         self.__precio_final_pedido = precio
     precio_final_pedido = property(get_precio_final_pedido,set_precio_final_pedido)
     
-    def get_contenedores(self):
-        return self.__contenedores
-    def set_contenedores(self, c):
-        self.__contenedores = c
-    contenedores = property(get_contenedores,set_contenedores)
+    def get_contenedores_ids(self):
+        return self.__contenedores_ids
+    def set_contenedores_ids(self, c):
+        self.__contenedores_ids = c
+    contenedores_ids = property(get_contenedores_ids,set_contenedores_ids)
 
     def get_necesita_transporte_camion(self):
         return self.__necesita_transporte_camion
@@ -47,12 +46,9 @@ class Pedidos:
 
     def get_id(self):
         return self.__id
-    
-    def get_retira_en_puerto(self):
-        return self.__retira_en_puerto
-    def set_retira_en_puerto(self, ret):
-        self.__retira_en_puerto = ret
-    retira_en_puerto = property(get_retira_en_puerto,set_retira_en_puerto)
+    def set_id(self, id):
+        self.__id = id
+    id = property(get_id,set_id)
     
     def get_cargas(self):
         return self.__cargas
@@ -62,8 +58,8 @@ class Pedidos:
     'Fin getters y setters'
     
     def get_cant_contenedores(self):
-        cant = len(self.get_contenedores())
+        cant = len(self.get_contenedores_ids())
         return cant
     
-    def agregar_contenedor(self, c):
-        self.__contenedores.append(c)
+    def agregar_contenedor(self, id):
+        self.__contenedores_ids.append(id)

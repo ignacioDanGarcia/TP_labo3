@@ -32,9 +32,9 @@ class TestDepartamentoCostos(TestCase):
         mock_contenedor.get_medidas_interior.return_value = Medidas(12.0,2.35,2.3)
     
         distancia = 99
-        oficina = EmpresaCotizaciones()
+        cotizaciones = EmpresaCotizaciones()
         
-        assert oficina.calcular_precio(mock_contenedor, distancia, cargas) == 1000
+        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 1000
     
         
     def test_distancia_menor_100_contenedor_completo_calcular_precio(self):
@@ -52,9 +52,9 @@ class TestDepartamentoCostos(TestCase):
         mock_contenedor.get_precio_transporte_base.return_value = 500
         mock_contenedor.get_medidas_interior.return_value = medidas
         distancia = 99
-        oficina = EmpresaCotizaciones()
+        cotizaciones = EmpresaCotizaciones()
         
-        assert oficina.calcular_precio(mock_contenedor, distancia, cargas) == 200500
+        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 200500
     
     #---------------------------------------------------------------------
     #---------------------------------------------------------------------
@@ -78,9 +78,9 @@ class TestDepartamentoCostos(TestCase):
         
         # 550 + 500
         distancia = 999
-        oficina = EmpresaCotizaciones()
+        cotizaciones = EmpresaCotizaciones()
         
-        assert oficina.calcular_precio(mock_contenedor, distancia, cargas) == 1050
+        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 1050
     
     
     def test_distancia_menor_1000_contenedor_completo_calcular_precio(self):
@@ -96,9 +96,9 @@ class TestDepartamentoCostos(TestCase):
         mock_contenedor.get_medidas_interior.return_value = medidas
         
         distancia = 999
-        oficina = EmpresaCotizaciones()
+        cotizaciones = EmpresaCotizaciones()
         
-        assert oficina.calcular_precio(mock_contenedor, distancia, cargas) == 210500
+        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 210500
 
     #---------------------------------------------------------------------
     #---------------------------------------------------------------------
@@ -118,9 +118,9 @@ class TestDepartamentoCostos(TestCase):
         mock_contenedor.get_medidas_interior.return_value = Medidas(12.0,2.35,2.3)
         
         distancia = 9999
-        oficina = EmpresaCotizaciones()
+        cotizaciones = EmpresaCotizaciones()
         
-        assert oficina.calcular_precio(mock_contenedor, distancia, cargas) == 1075
+        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 1075
     
     def test_distancia_menor_10000_contenedor_completo_calcular_precio(self):
         medidas = Medidas(12.0,2.35,2.3)
@@ -135,9 +135,9 @@ class TestDepartamentoCostos(TestCase):
         mock_contenedor.get_medidas_interior.return_value = medidas
         
         distancia = 9999
-        oficina = EmpresaCotizaciones()
+        cotizaciones = EmpresaCotizaciones()
         
-        assert oficina.calcular_precio(mock_contenedor, distancia, cargas) == 230500
+        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 230500
     
     #---------------------------------------------------------------------
     #---------------------------------------------------------------------
@@ -159,9 +159,9 @@ class TestDepartamentoCostos(TestCase):
         
         # 750 + 500 = 1250
         distancia = 99999
-        oficina = EmpresaCotizaciones()
+        cotizaciones = EmpresaCotizaciones()
         
-        assert oficina.calcular_precio(mock_contenedor, distancia, cargas) == 1250
+        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 1250
     
     
     def test_distancia_mas_10000_contenedor_completo_calcular_precio(self):
@@ -177,9 +177,9 @@ class TestDepartamentoCostos(TestCase):
         mock_contenedor.get_medidas_interior.return_value = medidas
         
         distancia = 99999
-        oficina = EmpresaCotizaciones()
+        cotizaciones = EmpresaCotizaciones()
         
-        assert oficina.calcular_precio(mock_contenedor, distancia, cargas) == 250500
+        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 250500
         
     #---------------------------------------------------------------------
     #---------------------------------------------------------------------
@@ -200,11 +200,11 @@ class TestDepartamentoCostos(TestCase):
         mock_contenedor.get_medidas_interior.return_value = Medidas(12.0,2.35,2.3)
     
         distancia = 0
-        oficina = EmpresaCotizaciones()
+        cotizaciones = EmpresaCotizaciones()
         
         
         with self.assertRaises(distancia_incorrecta):
-            oficina.calcular_precio(mock_contenedor, distancia, cargas)
+            cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas)
     
     
     def test_distancia_es_menor_a_0_por_peso_calcular_precio(self):
@@ -220,10 +220,10 @@ class TestDepartamentoCostos(TestCase):
         mock_contenedor.get_medidas_interior.return_value = Medidas(12.0,2.35,2.3)
     
         distancia = -100
-        oficina = EmpresaCotizaciones()
+        cotizaciones = EmpresaCotizaciones()
         
         
         with self.assertRaises(distancia_incorrecta):
-            oficina.calcular_precio(mock_contenedor, distancia, cargas)
+            cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas)
         
         

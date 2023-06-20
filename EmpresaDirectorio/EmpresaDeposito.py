@@ -30,6 +30,14 @@ class EmpresaDeposito():
     def ordenar_por_categoria(cargas: List[Carga]):
         cargas.sort(key=lambda carga: carga.get_categoria().value)
 
+    def obtener_contenedores_pedido(self, pedido: Pedidos):
+        contenedores_completos = self.get_empresa_data().get_contenedores()
+        ids_deseados = pedido.get_contenedores_ids()
+
+        contenedores_deseados = [contenedor for contenedor in contenedores_completos if contenedor.get_id() in ids_deseados]
+        return contenedores_deseados
+
+
     def llenar_contenedores(self, pedido: Pedidos):
         # llena contenedores con cargas, y mete contenedores usados en el pedido
         # capaz podriamos meter solo el id del contenedor para no guardar tanta info
@@ -42,7 +50,7 @@ class EmpresaDeposito():
             asignada = False
             
             if pedido.get_cant_contenedores() != 0:
-                for contenedor in pedido.get_contenedores():
+                for contenedor in self.obtener_contenedores_pedido(pedido):
                     if manejador_de_cargas.puede_cargar(carga, contenedor):
                         manejador_de_cargas.cargar(carga, contenedor)
                         cargas_pedido.remove(carga)
@@ -56,7 +64,7 @@ class EmpresaDeposito():
                 if manejador_de_cargas.puede_cargar(carga, contenedor):
                     manejador_de_cargas.cargar(carga, contenedor)
                     cargas_pedido.remove(carga)
-                    pedido.agregar_contenedor(contenedor) # aca se guardan los contenedores en el pedido
+                    pedido.agregar_contenedor(contenedor.get_id()) # aca se guardan los id contenedores en el pedido
                     break
         
         if len(cargas_pedido) is not 0:
