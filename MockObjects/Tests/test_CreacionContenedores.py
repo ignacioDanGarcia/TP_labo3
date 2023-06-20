@@ -4,6 +4,7 @@ from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderCont
 from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderContenedorBasico
 from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
 from ContenedoresDirectorio.Builder.BuilderContenedorVentilado import BuilderContenedorVentilado
+from ContenedoresDirectorio.Builder.BuilderContenedorOpenTop import BuilderContenedorOpenTop
 
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from ContenedoresDirectorio.Contenedores import Contenedor
@@ -30,9 +31,6 @@ class ContenedorBuilderTest(TestCase):
         assert contenedor.get_medidas_exterior().alto == 2.6
         assert contenedor.get_medidas_exterior().ancho == 2.45
         assert contenedor.get_medidas_exterior().largo == 6.1
-        
-
-        
         
         
     def test_crear_contenedor_hc_con_builder_chequea_sus_atributos_y_metodos(self):
@@ -99,4 +97,19 @@ class ContenedorBuilderTest(TestCase):
         assert contenedorVentilado.get_medidas_exterior().ancho == 2.45
         assert contenedorVentilado.get_medidas_exterior().largo == 6.1
         
-    
+    def test_crear_contenedor_opentop_con_builder_chequea_sus_atributos_y_metodos(self):
+        builder = BuilderContenedorOpenTop()
+        director = Contenedor_director(builder)
+        contenedorOpenTop = director.crear_contenedor(1,True)
+        assert isinstance(contenedorOpenTop, Contenedor) == True
+        assert contenedorOpenTop.tipo == TipoContenedor.OPENTOP
+        assert contenedorOpenTop.volumen_max == 33
+        assert contenedorOpenTop.peso_max == 45000
+        
+        assert contenedorOpenTop.get_medidas_interior().largo == 12.0
+        assert contenedorOpenTop.get_medidas_interior().ancho == 2.35
+        assert contenedorOpenTop.get_medidas_interior().alto == 100000
+        
+        assert contenedorOpenTop.get_medidas_exterior().largo == 12.1
+        assert contenedorOpenTop.get_medidas_exterior().ancho == 2.45
+        assert contenedorOpenTop.get_medidas_exterior().alto == 100000    
