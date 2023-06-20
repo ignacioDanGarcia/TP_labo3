@@ -19,7 +19,7 @@ from BarcosDirectorio.BarcoBasico import BarcoBasico
 from EmpresaDirectorio.EmpresaCotizaciones import EmpresaCotizaciones
 from Camion import Camion
 class TestEmpresaData(TestCase):
-    def test_empresa_trae_barco_disponible_y_camion_disponible(self):
+    def test_empresa_trae_barco_disponible_con_distancia_cero_y_camion_disponible(self):
         
         barco1 = BarcoBasico(1,100,4,500)
         barco2 = BarcoBasico(2,100,4,500)
@@ -41,9 +41,10 @@ class TestEmpresaData(TestCase):
         mock_camiones = Mock()
         mock_contenedores = Mock()
         empresa_data = EmpresaData(barcos, camiones, [mock_contenedores])
-        barco_disponible = empresa_data.devolver_un_barco_disponible()
+        barco_disponible = empresa_data.get_barco_disponible_distancia_cero()
         assert barco_disponible == barco2
         assert barco_disponible.get_id() == 2
+        assert barco_disponible.get_distancia() == 0
         
         camion_disponible = empresa_data.devolver_un_camion_disponible()
         assert camion_disponible == camion7
@@ -64,9 +65,8 @@ class TestEmpresaData(TestCase):
         mock_camiones = Mock()
         mock_contenedores = Mock()
         empresa_data = EmpresaData(barcos, [mock_camiones], [mock_contenedores])
-        with self.assertRaises(No_hay_barcos_disponibles):
-        
-            barco_disponible = empresa_data.devolver_un_barco_disponible()
+        assert empresa_data.get_barcos_disponible_misma_distancia(1) == []
+        assert empresa_data.get_barco_disponible_distancia_cero() == None
     
     def test_empresa_tira_exception_si_no_hay_camiones_disponibles(self):
         mock_contenedores = Mock()
@@ -127,7 +127,7 @@ class TestEmpresaData(TestCase):
         barcos = [barco1,barco2,barco3,barco9,barco15,barco10]
         empresa_data = EmpresaData(barcos, mock_camiones, mock_contenedores)
         
-        empresa_data.actualizar_barco_trotamundo_o_sedentario()
+        empresa_data.actualizar_barco_con_mas_y_con_menos_km()
         assert empresa_data.barco_con_mas_km == barco9
         assert empresa_data.barco_con_menos_km == barco2
     

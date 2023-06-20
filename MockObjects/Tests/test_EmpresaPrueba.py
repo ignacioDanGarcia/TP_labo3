@@ -26,14 +26,6 @@ class TestEmpresaPrueba(TestCase):
         # falta implementar
         pass
     
-    # BARCO CANT KM
-    def test_barco_mayor_cant_km(self):
-        # falta implementar
-        pass
-    def test_barco_menor_cant_km(self):
-        # falta implementar
-        pass
-    
     
         
 """ TEST generales de funciones de empresa """

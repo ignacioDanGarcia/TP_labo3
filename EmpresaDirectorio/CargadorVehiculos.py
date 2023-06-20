@@ -32,16 +32,15 @@ class CargadorVehiculos:
         except No_hay_camiones_disponibles as e:
             print(str(e))
             
-
-    def cargar_barcos(self, contenedores: List[Contenedor]):
+    # una vez que se carga un contenedor en un barco se debe setear la distancia del barco como la distancia del pedido
+    def cargar_barcos(self, barco, contenedor: Contenedor):
         try:
-            barco = self.get_empresa_data().devolver_un_barco_disponible() # este metodo libera excepcion
-            for contenedor in contenedores:
-                if len(barco.get_contenedores()) < barco.get_cant_contenedores_max():
-                
-                    barco.set_contenedores(contenedor) # esto seria un append
-                else:
-                    barco = self.get_empresa_data().devolver_un_barco_disponible() # este metodo libera excepcion
+            
+            if len(barco.get_contenedores()) < barco.get_cant_contenedores_max():
+               
+                barco.agregar_contenedores(contenedor) # esto seria un append
+            else:
+                barco = self.get_empresa_data().devolver_un_barco_disponible() # este metodo libera excepcion
             # si no libera excepcion termina de 10
             return
         except No_hay_barcos_disponibles as e:
