@@ -1,8 +1,9 @@
-from Contenedores import Contenedor
+from ContenedoresDirectorio.Contenedores import Contenedor
 from ContenedoresDirectorio.DepartamentoDeEstimacionDeCostos.CalculadoraPrecioCargas import CalculadoraPrecioCargas
 from ContenedoresDirectorio.DepartamentoDeEstimacionDeCostos.SelectoraEstrategiaPrecio import SelectoraEstrategiaPrecio
 from Excepciones.exceptions import no_existe_carga, distancia_incorrecta
-
+from ContenedoresDirectorio.ObtenedorDeIDSDeCargas import ObtenedorIDSCargas
+from ContenedoresDirectorio.LocalizadorDeCargas import LocalizadorDeCargasConID
 """
 CLASE QUE RECIBE CONTENEDORES CARGADOS Y DEVUELVE PRECIO A PAGAR
 DE ESE CONTENEDOR
@@ -41,14 +42,22 @@ class CalculadorIngresosBarco():
             # falta ver donde se catchea esto
             raise no_existe_carga("No existe una carga en el contenedor")
 
-        
         precio_aux = 0
-        for carga in cargas_contenedor:
-            
-            precio_aux += self.get_la_calcu().calcular_precio_adicional_estado(carga)
+        obtensor_de_ids = ObtenedorIDSCargas()
+        ids_cargas = obtensor_de_ids.obtener_ids_cargas(contenedor)
+        localizador = LocalizadorDeCargasConID()
+        
+        for id in ids_cargas:
+            cargas_id =localizador.traer_cargas_del_id(id, contenedor)
+            for carga in cargas_id:
+                precio_aux += self.get_la_calcu().calcular_precio_adicional_estado(carga)
+                print(f"ID: {id}")
+                print(f"Sumo {self.get_la_calcu().calcular_precio_adicional_estado(carga)}")
+            precio_aux += contenedor.get_precio_transporte_base()
+            print(f"Sumo: {contenedor.get_precio_transporte_base()}")
         
 
         
-        precio_aux += contenedor.get_precio_transporte_base()
+         #- Si cobramos una vz por usar el contenedor
         
         return precio_aux

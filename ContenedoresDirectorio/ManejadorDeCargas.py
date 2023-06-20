@@ -44,6 +44,8 @@ class ManejadorDeCargas():
         self.settear_estrategia(carga)
         return self.__estrategia.verificar_carga(carga,contenedor)
     
+    
+    
     def vaciar_contenedor(self, contenedor :Contenedor):
         cargas = []
         for carga in contenedor.get_cargas():
