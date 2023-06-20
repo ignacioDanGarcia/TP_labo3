@@ -23,7 +23,7 @@ class CargadorVehiculos:
     empresa_data = property(get_empresa_data,set_empresa_data)
     'Fin Getters y Setters'
     
-    def cargar_camion(self, contenedores: List[Contenedor]):
+    def cargar_camiones(self, contenedores: List[Contenedor]):
         try:
             for contenedor in contenedores:
                 camion = self.get_empresa_data().devolver_un_camion_disponible() # este metodo libera excepcion
@@ -34,13 +34,13 @@ class CargadorVehiculos:
             print(str(e))
             
     # el de camiones no porque son 5, pero este algoritmo esta abierto a sugerencias y cambios
-    def cargar_barco(self, contenedores: List[Contenedor]):
+    def cargar_barcos(self, contenedores: List[Contenedor]):
         try:
             barco = self.get_empresa_data().devolver_un_barco_disponible() # este metodo libera excepcion
             for contenedor in contenedores:
                 if len(barco.get_contenedores()) < barco.get_cant_contenedores_max():
                 
-                    barco.set_contenedores(contenedor)
+                    barco.set_contenedores(contenedor) # esto seria un append
                 else:
                     barco = self.get_empresa_data().devolver_un_barco_disponible() # este metodo libera excepcion
             # si no libera excepcion termina de 10
