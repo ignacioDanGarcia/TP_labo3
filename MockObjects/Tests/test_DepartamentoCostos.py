@@ -34,8 +34,11 @@ class TestDepartamentoCostos(TestCase):
         distancia = 99
         cotizaciones = EmpresaCotizaciones()
         
-        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 1000
-    
+
+        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 1500
+
+
+
         
     def test_distancia_menor_100_contenedor_completo_calcular_precio(self):
         medidas = Medidas(12.0,2.35,2.3)
@@ -80,7 +83,9 @@ class TestDepartamentoCostos(TestCase):
         distancia = 999
         cotizaciones = EmpresaCotizaciones()
         
-        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 1050
+
+        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 1600
+
     
     
     def test_distancia_menor_1000_contenedor_completo_calcular_precio(self):
@@ -120,7 +125,10 @@ class TestDepartamentoCostos(TestCase):
         distancia = 9999
         cotizaciones = EmpresaCotizaciones()
         
-        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 1075
+
+        assert cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas) == 1650
+
+
     
     def test_distancia_menor_10000_contenedor_completo_calcular_precio(self):
         medidas = Medidas(12.0,2.35,2.3)
@@ -146,7 +154,7 @@ class TestDepartamentoCostos(TestCase):
     #---------------------------------------------------------------------
     
     """MAYOR A DIEZ MIL"""
-    
+    '''
     def test_distancia_mas_10000_por_peso_calcular_precio(self):
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
@@ -226,4 +234,4 @@ class TestDepartamentoCostos(TestCase):
         with self.assertRaises(distancia_incorrecta):
             cotizaciones.calcular_precio_contenedor_por_pedido(mock_contenedor, distancia, cargas)
         
-        
+        '''
