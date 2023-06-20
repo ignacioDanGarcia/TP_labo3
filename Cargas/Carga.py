@@ -7,9 +7,15 @@ class Carga:
         self.__medidas = medidas
         self.__peso = peso
         self.__categoria = categoria
+        self.__id = 0 #Cuando tomamos un pedido seteamos el id de la carga en EmpresaDeposito cuándo cargamos un contenedor. Vinculamos la carga con el id del pedido.
     
     'Getters y setters'
-        
+    def get_id(self):
+        return self.__id
+    def set_id(self,id):
+        self.__id = id
+    id = property(get_id,set_id)
+    
     def get_medidas(self):
         return self.__medidas
     def set_medidas(self,m):
