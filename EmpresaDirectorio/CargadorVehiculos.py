@@ -17,7 +17,6 @@ class CargadorVehiculos:
     'Getters y Setters'
     def get_empresa_data(self):
         return self.__empresa_data
-    
     def set_empresa_data(self, empresa_data):
         self.__empresa_data = empresa_data
     empresa_data = property(get_empresa_data,set_empresa_data)
@@ -33,7 +32,7 @@ class CargadorVehiculos:
         except No_hay_camiones_disponibles as e:
             print(str(e))
             
-    # el de camiones no porque son 5, pero este algoritmo esta abierto a sugerencias y cambios
+
     def cargar_barcos(self, contenedores: List[Contenedor]):
         try:
             barco = self.get_empresa_data().devolver_un_barco_disponible() # este metodo libera excepcion
@@ -47,9 +46,3 @@ class CargadorVehiculos:
             return
         except No_hay_barcos_disponibles as e:
             print(str(e))
-            
-    
-    """
-    usa metodos de EmpresaData como devolver_un_camion_disponible o devolver_un_barco_disponible
-    y le catchea las excepciones
-    """

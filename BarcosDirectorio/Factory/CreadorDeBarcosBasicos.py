@@ -5,6 +5,6 @@ class CreadorBarcosBasicos(CreadorDeBarcos):
     def __init__(self) -> None:
         super().__init__()
         
-    def crear_barco(self, peso_max, cant_contenedores_max, combustible_maximo, sensor_viento = None):
-        barco = BarcoBasico(peso_max,cant_contenedores_max,combustible_maximo, TiposBarcos.BASICO, sensor_viento)
+    def crear_barco(self, id, peso_max, cant_contenedores_max, combustible_maximo, sensor_viento = None):
+        barco = BarcoBasico(id, peso_max,cant_contenedores_max,combustible_maximo, TiposBarcos.BASICO, sensor_viento)
         return barco

@@ -19,7 +19,7 @@ class CargaQuimicaEstrategy(Estrategia):
                     carga.get_volumen() <= contenedor.get_volumen_max():
                 entra = True
         
-        return (puede_llevarla and entra) # Si puede llevarla por el tipo y entra en el contenedor la carga pasa.
+        return (puede_llevarla and entra)
 
 
 

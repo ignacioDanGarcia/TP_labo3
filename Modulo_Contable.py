@@ -20,5 +20,3 @@ class ModuloContable():
             ganancia += calculadora_barco.calcular_precio(contenedor,distancia)
         ganancia = ganancia - gasto_combustible
         return ganancia
-    #Algo así debería ser me imagino. Tengo que hablar con el colo para que me explique un poco más como funciona el método ese. 
-    #-------------------------------------------------------ESTO NO ESTÁ TERMINADO---------------------------------------------------

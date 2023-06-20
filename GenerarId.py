@@ -1,7 +1,4 @@
 import random
-"""
-supuestamente esta clase siempre va a dar un id distinto
-"""
 
 class GenerarId():
     def __init__(self) -> None:

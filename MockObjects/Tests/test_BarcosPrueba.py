@@ -18,7 +18,7 @@ class test_barcos(TestCase):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
         
-        barco = creador.crear_barco(100,3,500)
+        barco = creador.crear_barco(1,100,3,500)
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.BASICO
         mock_contenedor.get_material_especial.return_value = False
@@ -29,7 +29,7 @@ class test_barcos(TestCase):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
         
-        barco = creador.crear_barco(100,3,500)
+        barco = creador.crear_barco(1,100,3,500)
         
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.BASICO
@@ -41,7 +41,7 @@ class test_barcos(TestCase):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
         
-        barco = creador.crear_barco(100,3,500)        
+        barco = creador.crear_barco(1,100,3,500)        
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.FLATRACK
         mock_contenedor.get_material_especial.return_value = True
@@ -52,7 +52,7 @@ class test_barcos(TestCase):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
         
-        barco = creador.crear_barco(100,3,500)
+        barco = creador.crear_barco(1,100,3,500)
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.FLATRACK
         mock_contenedor.get_material_especial.return_value = True
@@ -64,7 +64,7 @@ class test_barcos(TestCase):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
         
-        barco = creador.crear_barco(100,3,500) 
+        barco = creador.crear_barco(1,100,3,500) 
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.BASICO
         mock_contenedor.peso_contenedor.return_value = 10
@@ -77,7 +77,7 @@ class test_barcos(TestCase):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
         
-        barco = creador.crear_barco(100,3,500) 
+        barco = creador.crear_barco(1,100,3,500) 
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.FLATRACK
         mock_contenedor.peso_contenedor.return_value = 900
@@ -91,7 +91,7 @@ class test_barcos(TestCase):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
         
-        barco = creador.crear_barco(100,3,500) 
+        barco = creador.crear_barco(1,100,3,500) 
         mock_contenedor1=Mock()
         mock_contenedor1.peso_contenedor.return_value =1
         mock_contenedor1.get_material_especial.return_value = False
@@ -124,7 +124,7 @@ class test_barcos(TestCase):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
         
-        barco = creador.crear_barco(100,4,500) 
+        barco = creador.crear_barco(1,100,4,500) 
         mock_contenedor1=Mock()
         mock_contenedor1.peso_contenedor.return_value =25
         mock_contenedor1.get_material_especial.return_value = False
@@ -157,7 +157,7 @@ class test_barcos(TestCase):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
         
-        barco = creador.crear_barco(100,4,500)
+        barco = creador.crear_barco(1,100,4,500)
         mock_contenedor1=Mock()
         mock_contenedor1.peso_contenedor.return_value =25
         mock_contenedor1.get_material_especial.return_value = False
@@ -190,7 +190,7 @@ class test_barcos(TestCase):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
         
-        barco = creador.crear_barco(100,3,500)
+        barco = creador.crear_barco(1,100,3,500)
         mock_contenedor1=Mock()
         mock_contenedor1.peso_contenedor.return_value =1
         mock_contenedor1.get_material_especial.return_value = False
@@ -225,7 +225,7 @@ class test_barcos(TestCase):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
         
-        barco = creador.crear_barco(100,4,500)         
+        barco = creador.crear_barco(1,100,4,500)         
         assert isinstance(barco, BarcoEspecial)
         
        
@@ -235,5 +235,5 @@ class test_barcos(TestCase):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
         
-        barco = creador.crear_barco(100,4,500) 
+        barco = creador.crear_barco(1,100,4,500) 
         assert isinstance(barco, BarcoBasico)

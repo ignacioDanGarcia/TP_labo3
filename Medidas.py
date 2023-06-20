@@ -6,18 +6,6 @@ class Medidas:
         self.__ancho = ancho
         self.__alto = alto
 
-    def get_alto(self):
-        return self.__alto
-    def set_alto(self, al):
-        self.__alto = al
-    alto = property(get_alto,set_alto)
-    
-    
-    def get_ancho(self):
-        return self.__ancho
-    def set_ancho(self, an):
-        self.__ancho = an
-    ancho = property(get_ancho,set_ancho)
     
     def get_largo(self):
         return self.__largo
@@ -25,10 +13,21 @@ class Medidas:
         self.__largo = lar
     largo = property(get_largo,set_largo)
     
-    def comparar_medidas(self, medidas):
-        # Devuelve False si las medidas pasadas por parámetro son mayores o iguales a las de la instancia
-        # Devuelve True si las medidas pasadas por parámetro son menores estrictamente a las de la instancia
+    def get_ancho(self):
+        return self.__ancho
+    def set_ancho(self, an):
+        self.__ancho = an
+    ancho = property(get_ancho,set_ancho)
+    
+    def get_alto(self):
+        return self.__alto
+    def set_alto(self, al):
+        self.__alto = al
+    alto = property(get_alto,set_alto)
+    'Fin getters y setters'
 
+    
+    def comparar_medidas(self, medidas):
         alto = False
         largo = False
         ancho = False

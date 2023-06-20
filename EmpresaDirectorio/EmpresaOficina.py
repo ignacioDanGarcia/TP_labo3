@@ -6,12 +6,6 @@ from ContenedoresDirectorio.DepartamentoDeEstimacionDeCostos.CalculadoraPrecioCa
 from ContenedoresDirectorio.DepartamentoDeEstimacionDeCostos.SelectoraEstrategiaPrecio import SelectoraEstrategiaPrecio
 from Excepciones.exceptions import Hay_cargas_que_no_entraron_en_contenedores, contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga, distancia_incorrecta
 from EmpresaData import EmpresaData
-"""
-CLASE QUE RECIBE PEDIDOS Y DEVUELVE PRECIO A PAGAR    
-TASADORA DE PEDIDOS BASICAMENTE
-
-USA EMPRESACOTIZACIONES PARA CALCULAR PRECIO POR CONTENEDOR
-"""
 
 class EmpresaOficina():
     def __init__(self, empresa_data: EmpresaData, empresa_deposito: EmpresaDeposito, cargador_vehiculos: CargadorVehiculos, empresa_cotizaciones: EmpresaCotizaciones) -> None:
@@ -20,39 +14,32 @@ class EmpresaOficina():
         self.__cargador_vehiculos = cargador_vehiculos
         self.__empresa_cotizaciones = empresa_cotizaciones
     
-    def get_cargador_vehiculos(self):
-        return self.__cargador_vehiculos
-    
-    def set_cargador_vehiculos(self, cargador_vehiculos):
-        self.__cargador_vehiculos = cargador_vehiculos
-    cargador_vehiculos = property(get_cargador_vehiculos,set_cargador_vehiculos)
-    
-    def get_empresa_cotizaciones(self):
-        return self.__empresa_cotizaciones
-    
-    def set_empresa_cotizaciones(self, empresa_cotizaciones):
-        self.__empresa_cotizaciones = empresa_cotizaciones
-    empresa_cotizaciones = property(get_empresa_cotizaciones,set_empresa_cotizaciones)
-    
-    def get_empresa_deposito(self):
-        return self.__empresa_deposito
-    
-    def set_empresa_deposito(self, empresa_deposito):
-        self.__empresa_deposito = empresa_deposito
-    empresa_deposito = property(get_empresa_deposito,set_empresa_deposito)
-    
+    'Getters y setters'
     def get_empresa_data(self):
         return self.__empresa_data
-    
     def set_empresa_data(self, empresa_data):
         self.__empresa_data = empresa_data
     empresa_data = property(get_empresa_data,set_empresa_data)
     
+    def get_empresa_deposito(self):
+        return self.__empresa_deposito
+    def set_empresa_deposito(self, empresa_deposito):
+        self.__empresa_deposito = empresa_deposito
+    empresa_deposito = property(get_empresa_deposito,set_empresa_deposito)
     
-    # lo que me falta para escribir el metodo es:
-    # ver si el cliente quiere camion o no,
-    # si quiere barco, o las dos cosas
-    # y si todo sale bien, mandarle vehiculos a EmpresaEnvios para que ejecute viajar
+    def get_empresa_cotizaciones(self):
+        return self.__empresa_cotizaciones
+    def set_empresa_cotizaciones(self, empresa_cotizaciones):
+        self.__empresa_cotizaciones = empresa_cotizaciones
+    empresa_cotizaciones = property(get_empresa_cotizaciones,set_empresa_cotizaciones)
+    
+    def get_cargador_vehiculos(self):
+        return self.__cargador_vehiculos
+    def set_cargador_vehiculos(self, cargador_vehiculos):
+        self.__cargador_vehiculos = cargador_vehiculos
+    cargador_vehiculos = property(get_cargador_vehiculos,set_cargador_vehiculos)
+    'Fin getters y setters'
+    
     
     def procesar_pedido(self, pedido: Pedidos):
         try:
@@ -70,7 +57,6 @@ class EmpresaOficina():
                 
         except Hay_cargas_que_no_entraron_en_contenedores as e:
             print(str(e))
-        
     
     
     def calcular_precio_pedido(self, pedido: Pedidos, distancia):

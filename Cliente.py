@@ -6,18 +6,15 @@ from GenerarId import GenerarId
 
 class Cliente:
 
-    def __init__(self, apellido, nombre):
+    def __init__(self, id, apellido, nombre):
         self.__apellido = apellido
         self.__nombre = nombre
-        self.__id = GenerarId.generar_numeros_distintos()
+        self.__id = id # GenerarId.generar_numeros_distintos()
         self.__pedido = None
         self.__cargas = []
         
     
     'Getters y Setters:'
-    def get_id(self):
-        return self.__id
-    
     def get_apellido(self):
         return self.__apellido
     def set_apellido(self,a):
@@ -29,6 +26,13 @@ class Cliente:
     def set_nombre(self,nombre):
         self.__nombre = nombre
     nombre = property(get_nombre,set_nombre)
+    
+    def get_id(self):
+        return self.__id
+    def set_id(self,id):
+        self.__id = id
+    id = property(get_id, set_id)
+    'Fin getters y setters'
     
     
     # Variable de cargas para poder armarme un pedido con la cantidad de cargas que se le cante al cliente

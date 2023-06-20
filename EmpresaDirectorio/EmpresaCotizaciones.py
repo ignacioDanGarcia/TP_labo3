@@ -3,10 +3,6 @@ from ContenedoresDirectorio.DepartamentoDeEstimacionDeCostos.CalculadoraPrecioCa
 from ContenedoresDirectorio.DepartamentoDeEstimacionDeCostos.SelectoraEstrategiaPrecio import SelectoraEstrategiaPrecio
 from Excepciones.exceptions import contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga, distancia_incorrecta
 
-"""
-CLASE QUE RECIBE CONTENEDORES CARGADOS Y DEVUELVE PRECIO A PAGAR
-DE ESE CONTENEDOR
-"""
 
 class EmpresaCotizaciones():
     def __init__(self) -> None:
@@ -49,9 +45,7 @@ class EmpresaCotizaciones():
 
         
         precio_aux += contenedor.get_precio_transporte_base()
-        # suma de todas las cargas de un cliente en este contenedor + precio base del contenedor
-        # si un contenedor lo usan dos clientes, ambos clientes alquilan el contenedor
-        # entonces el precio base se paga dos veces
+
         return precio_aux
 
     

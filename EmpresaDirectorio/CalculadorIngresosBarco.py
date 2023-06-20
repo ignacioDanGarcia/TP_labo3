@@ -26,7 +26,7 @@ class CalculadorIngresosBarco():
         selectora = SelectoraEstrategiaPrecio()
         
         
-        (precio_cont_lleno, precio_cont_no_lleno) = selectora.estrategia_por_categoria(distancia)
+        (precio_cont_lleno, precio_cont_no_lleno) = selectora.estrategia_por_categoria(distancia) # libera excepcion distancias
         self.get_la_calcu().set_cant_por_contenedor_no_lleno(precio_cont_no_lleno)
         self.get_la_calcu().set_cant_por_contenedor_lleno(precio_cont_lleno)
     
