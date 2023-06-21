@@ -1,5 +1,5 @@
-from Interfaces.ViajeraInterfaz import ViajeraInterfaz
-from GenerarId import GenerarId
+#from Interfaces.ViajeraInterfaz import ViajeraInterfaz
+#from GenerarId import GenerarId
 
 class Camion():
     def __init__(self, id):
@@ -28,8 +28,8 @@ class Camion():
     'Fin Getters y setters:'
     
     
-    # El metodo de la interfaz
     def viajar(self):
-        print("El camion entrego el pedido")
         self.set_disponible(True)
+
+    def descargar(self):
         self.set_contenedor(None)
