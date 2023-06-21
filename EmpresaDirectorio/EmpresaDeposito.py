@@ -1,5 +1,6 @@
 from typing import List
 from BarcosDirectorio.Barcos import Barco
+from BarcosDirectorio.ManejadorDeContenedoresDirectorio.ManejadorDeContenedores import ManejadorDeContenedores
 from Camion import Camion
 from Cargas.Carga import Carga
 from ContenedoresDirectorio.Contenedores import Contenedor
@@ -11,8 +12,11 @@ from ContenedoresDirectorio.SelectoraEstrategiaPorCarga import SelectoraEstrateg
 
 
 class EmpresaDeposito():
-    def __init__(self, empresa_data: EmpresaData):
+    def __init__(self, empresa_data: EmpresaData, manejador_cargas: ManejadorDeCargas, manejador_contenedores: ManejadorDeContenedores):
         self.__empresa_data = empresa_data
+        self.__manejador_cargas = manejador_cargas
+        self.__manejador_contenedores = manejador_contenedores
+        
     
     'Getters y Setters'
     def get_empresa_data(self):
@@ -20,6 +24,18 @@ class EmpresaDeposito():
     def set_empresa_data(self, empresa_data):
         self.__empresa_data = empresa_data
     empresa_data = property(get_empresa_data,set_empresa_data)
+    
+    def get_manejador_cargas(self):
+        return self.__manejador_cargas
+    def set_manejador_cargas(self, manejador_cargas):
+        self.__manejador_cargas = manejador_cargas
+    manejador_cargas = property(get_manejador_cargas,set_manejador_cargas)
+    
+    def get_manejador_contenedores(self):
+        return self.__manejador_contenedores
+    def set_manejador_contenedores(self, manejador_contenedores):
+        self.__manejador_contenedores = manejador_contenedores
+    manejador_contenedores = property(get_manejador_contenedores,set_manejador_contenedores)
     'Fin Getters y Setters'
     
     def ordenar_por_categoria(self, cargas: List[Carga]):
@@ -32,12 +48,10 @@ class EmpresaDeposito():
         contenedores_deseados = [contenedor for contenedor in contenedores_completos if contenedor.get_id() in ids_deseados]
         return contenedores_deseados
 
-    def cargar_contenedor(self, manejador_de_cargas: ManejadorDeCargas, carga: Carga, contenedor: Contenedor, pedido: Pedidos, barco=None):
+    def cargar_contenedor(self, manejador_de_cargas: ManejadorDeCargas, carga: Carga, contenedor: Contenedor, pedido: Pedidos):
         if manejador_de_cargas.puede_cargar(carga, contenedor):
             manejador_de_cargas.cargar(carga, contenedor)
             pedido.agregar_contenedor(contenedor.get_id())
-            if barco:
-                barco.cargar(contenedor)
             return True
         return False
 
@@ -46,19 +60,18 @@ class EmpresaDeposito():
         cargas_pedido = pedido.get_cargas()
         self.ordenar_por_categoria(cargas_pedido)
 
-        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
+        
         data = self.get_empresa_data()
         barcos_misma_distancia = self.get_empresa_data().get_barcos_disponible_misma_distancia(pedido.get_distancia())
         cargas_asignadas = []
+        
         for carga in cargas_pedido:
             asignada = False
-            barco_distancia_cero = self.get_empresa_data().get_barco_disponible_distancia_cero()
             
             # primero analizo los contenedores ya usados por el pedido
             if pedido.get_cant_contenedores() != 0:
                 for contenedor in self.obtener_contenedores_pedido(pedido):
-                    if self.cargar_contenedor(manejador_de_cargas, carga, contenedor, pedido):
-                        print(carga)
+                    if self.cargar_contenedor(self.get_manejador_cargas(), carga, contenedor, pedido):
                         asignada = True
                         break
 
@@ -70,17 +83,16 @@ class EmpresaDeposito():
             for barco in barcos_misma_distancia:
                 # primero sus contenedores
                 for contenedor in barco.get_contenedores():
-                    if barco.puede_cargar_esta_carga(contenedor) and barco.tiene_lugar(contenedor):
-                        if self.cargar_contenedor(manejador_de_cargas, carga, contenedor, pedido):
-                            asignada = True
-                            break
+                    if self.cargar_contenedor(self.get_manejador_cargas(), carga, contenedor, pedido):
+                        asignada = True
+                        break
                 if asignada:
                     continue
                 # luego trato de insertarle mas contenedores
                 if len(barco.get_contenedores()) < barco.get_cant_contenedores_max():
                     for contenedor in data.get_contenedores_disponibles():
-                        if barco.puede_cargar_esta_carga(contenedor) and barco.tiene_lugar(contenedor):
-                            if self.cargar_contenedor(manejador_de_cargas, carga, contenedor, pedido, barco):
+                        if self.get_manejador_contenedores().cargar(barco, contenedor):
+                            if self.cargar_contenedor(self.get_manejador_cargas(), carga, contenedor, pedido):
                                 asignada = True
                                 break
 
@@ -88,13 +100,15 @@ class EmpresaDeposito():
                 cargas_asignadas.append(carga)
                 continue
             
+            barco_distancia_cero = self.get_empresa_data().get_barco_disponible_distancia_cero()
+            
             # si todavia quedan cargas agarro un barco disponible con distancia no asignada todavia
-            if barco_distancia_cero is None and len(barcos_misma_distancia) == 0:
+            if barco_distancia_cero is None or len(barcos_misma_distancia) == 0:
                 raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")
 
             for contenedor in data.get_contenedores_disponibles():
-                if barco_distancia_cero.puede_cargar_esta_carga(contenedor) and barco_distancia_cero.tiene_lugar(contenedor):
-                    if self.cargar_contenedor(manejador_de_cargas, carga, contenedor, pedido, barco_distancia_cero):
+                if self.get_manejador_contenedores().cargar(barco_distancia_cero, contenedor):
+                    if self.cargar_contenedor(self.get_manejador_cargas(), carga, contenedor, pedido):
                         cargas_asignadas.append(carga)
                         barco_distancia_cero.cargar(contenedor)
                         barco_distancia_cero.set_distancia(pedido.get_distancia())
