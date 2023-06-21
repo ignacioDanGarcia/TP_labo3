@@ -118,8 +118,3 @@ class EmpresaData():
     
     #este metodo lo usa la empresaEnvios, actualiza en array de contenedores de la empresa
     #cuando un contenedor ya se entrego este vacia la carga
-    def vaciar_contenedor_entregado_con_envio(self, contenedor):
-        if isinstance(self.contenedores.index(contenedor),TipoContenedor.OPENTOP):
-            self.contenedores.remove(contenedor)
-        else:
-            self.contenedores.index(contenedor).set_cargas(None)
