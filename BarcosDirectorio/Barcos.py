@@ -1,7 +1,6 @@
 from BarcosDirectorio.Cargable import Cargable
 from abc import ABC, abstractmethod
 from GenerarId import GenerarId
-from Interfaces.ViajeraInterfaz import ViajeraInterfaz
 from BarcosDirectorio.SistemasNavegacion.AMotor import AMotor
 from Excepciones.exceptions import CombustibleInsuficienteException, tiempo_incorrecto
 from ModuloGPS import ModuloGPS
@@ -103,7 +102,7 @@ class Barco(Cargable, ABC):
         return peso
     
     def navegar(self, modulo_gps :ModuloGPS): #Modulo gps
-        
+        self.set_disponible(False)
         modulo_gps.check_valores()
         horas = modulo_gps.calcular_tiempo()
         for hora in range(horas):
