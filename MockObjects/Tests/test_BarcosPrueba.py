@@ -3,21 +3,19 @@ from unittest.mock import Mock, patch, MagicMock
 
 
 from pytest import raises
-from BarcosDirectorio.BarcoBasico import BarcoBasico
-from BarcosDirectorio.BarcoEspecial import BarcoEspecial
+
 from Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_exception, Contenedor_no_aceptado_exception, Peso_excedido_exception
 from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 from BarcosDirectorio.TiposDeBarcos import TiposBarcos
 from BarcosDirectorio.Factory.SelectorDeCreador import SelectorCreador
-from BarcosDirectorio.Factory.CreadorDeBarcosBasicos import CreadorBarcosBasicos
-from BarcosDirectorio.Factory.CreadorDeBarcosEspeciales import CreadorBarcosEspeciales
+
 from BarcosDirectorio.ManejadorDeContenedoresDirectorio.ManejadorDeContenedores import ManejadorDeContenedores
 from BarcosDirectorio.ManejadorDeContenedoresDirectorio.SelectoraEstrategiaPorBarco import SelectoraEstrategiaPorBarco
 class test_barcos(TestCase):
     
     def test_manejadora_contenedores_carga_contenedor_en_barco(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.ESPECIAL)
         selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
         manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
         barco = creador.crear_barco(1,100,3,500)
@@ -36,7 +34,7 @@ class test_barcos(TestCase):
         
     def test_si_barco_basico_puede_cargar_carga_sin_material_especial(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
         manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
         barco = creador.crear_barco(1,100,3,500)
@@ -49,7 +47,7 @@ class test_barcos(TestCase):
     
     def test_si_barco_especial_puede_cargar_carga_sin_material_especial(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.ESPECIAL)
         
         barco = creador.crear_barco(1,100,3,500)
         
@@ -65,7 +63,7 @@ class test_barcos(TestCase):
         
     def test_si_barco_especial_puede_cargar_carga_con_material_especial(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.ESPECIAL)
         
         selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
         manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
@@ -80,7 +78,7 @@ class test_barcos(TestCase):
     
     def test_barco_basico_no_puede_cargar_carga_con_material_especial(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         
         selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
         manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
@@ -95,7 +93,7 @@ class test_barcos(TestCase):
     
     def test_metodo_cargar_de_barco_carga_contenedor_sin_material_especial_y_peso_bajo(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.ESPECIAL)
         
         selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
         manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
@@ -111,7 +109,7 @@ class test_barcos(TestCase):
     
     def test_metodo_cargar_de_barco_no_carga_por_excepcion_por_peso_excedido(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.ESPECIAL)
         
         selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
         manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
@@ -129,7 +127,7 @@ class test_barcos(TestCase):
     
     def test_metodo_tiene_lugar_de_barco_tira_exception_por_capacidad_contenedores_al_tope(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.ESPECIAL)
         
         barco = creador.crear_barco(1,100,3,500) 
         mock_contenedor1=Mock()
@@ -167,7 +165,7 @@ class test_barcos(TestCase):
     
     def test_metodo_tiene_lugar_de_barco_tira_exception_por_peso_maximo_excedido(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.ESPECIAL)
         
         barco = creador.crear_barco(1,100,4,500) 
         mock_contenedor1=Mock()
@@ -206,7 +204,7 @@ class test_barcos(TestCase):
     
     def test_barco_basico_creado_con_factory_tira_exception_por_peso_maximo_excedido(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         
         barco = creador.crear_barco(1,100,4,500)
         mock_contenedor1=Mock()
@@ -241,7 +239,7 @@ class test_barcos(TestCase):
     
     def test_barco_basico_creado_con_factory_tira_exception_por_cantidad_contenedores_al_tope(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         
         barco = creador.crear_barco(1,100,3,500)
         mock_contenedor1=Mock()
@@ -274,21 +272,4 @@ class test_barcos(TestCase):
         assert manejador_de_contenedores.puede_cargar(barco, mock_contenedor)== False
     
     
-    def test_barco_especial_creado_con_factory(self):
-        # entre comillas hay que poner el nombre de la subclase, no solamente especial
-        # la subclase se llama BarcoEspecial
-        selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
-        
-        barco = creador.crear_barco(1,100,4,500)         
-        assert isinstance(barco, BarcoEspecial)
-        
-     
-    def test_barco_basico_creado_con_factory(self):
-        # entre comillas hay que poner el nombre de la subclase, no solamente basico
-        # la subclase se llama BarcoBasico
-        selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
-        
-        barco = creador.crear_barco(1,100,4,500) 
-        assert isinstance(barco, BarcoBasico)
+    

@@ -30,7 +30,7 @@ class TestModuloContable(TestCase):
     def test_distancia_menor_a_100_con_cargas_de_una_persona_y_gastamos_600_en_nafta(self):
         selector_de_factoria = SelectorCreador()
             
-        creador_barcos_basicos = selector_de_factoria.crear_factoria(TiposBarcos.BASICO)
+        creador_barcos_basicos = selector_de_factoria.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         
         #Seteo un barco:
         barco = creador_barcos_basicos.crear_barco(1,500,3,500)
@@ -67,7 +67,7 @@ class TestModuloContable(TestCase):
     def test_distancia_menor_a_100_gastamos_600_en_nafta_con_cargas_de_mas_de_una_persona(self):
         selector_de_factoria = SelectorCreador()
             
-        creador_barcos_basicos = selector_de_factoria.crear_factoria(TiposBarcos.BASICO)
+        creador_barcos_basicos = selector_de_factoria.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         
         #Seteo un barco:
         barco = creador_barcos_basicos.crear_barco(1,500,3,500)
@@ -107,7 +107,7 @@ class TestModuloContable(TestCase):
     def test_distancia_menor_a_100_gastamos_600_en_nafta_con_cargas_de_mas_de_una_persona_pero_una_tuvo_mas_de_una_carga(self):
         selector_de_factoria = SelectorCreador()
             
-        creador_barcos_basicos = selector_de_factoria.crear_factoria(TiposBarcos.BASICO)
+        creador_barcos_basicos = selector_de_factoria.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         
         #Seteo un barco:
         barco = creador_barcos_basicos.crear_barco(1,500,3,500)
@@ -155,7 +155,7 @@ class TestModuloContable(TestCase):
     def test_distancia_menor_a_100_gastamos_600_en_nafta_con_cargas_de_mas_de_una_persona_y_tenemos_2_contenedores_en_el_barco(self):
         selector_de_factoria = SelectorCreador()
             
-        creador_barcos_basicos = selector_de_factoria.crear_factoria(TiposBarcos.BASICO)
+        creador_barcos_basicos = selector_de_factoria.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         
         #Seteo un barco:
         barco = creador_barcos_basicos.crear_barco(1,500,3,500)
@@ -211,7 +211,7 @@ class TestModuloContable(TestCase):
     def test_distancia_menor_a_100_gastamos_600_en_nafta_con_cargas_de_mas_de_una_persona_y_tenemos_2_contenedores_en_el_barco_con_cargas_de_mismas_personas(self):
         selector_de_factoria = SelectorCreador()
             
-        creador_barcos_basicos = selector_de_factoria.crear_factoria(TiposBarcos.BASICO)
+        creador_barcos_basicos = selector_de_factoria.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         
         #Seteo un barco:
         barco = creador_barcos_basicos.crear_barco(1,500,3,500)

@@ -19,7 +19,6 @@ from Pedidos import Pedidos
 from Cargas.Carga import Carga
 from Cargas.Categorias import Categoria
 from Medidas import Medidas
-from Camion import Camion
 from ContenedoresDirectorio.SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga
 class TestEmpresaDeposito(TestCase):
     
