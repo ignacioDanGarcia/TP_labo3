@@ -23,6 +23,7 @@ class Camion():
     def get_contenedor(self):
         return self.__contenedor
     def set_contenedor(self,cont):
+        self.__disponible = False
         self.__contenedor = cont
     contenedor = property(get_contenedor,set_contenedor)
     'Fin Getters y setters:'

@@ -2,6 +2,7 @@ from BarcosDirectorio.Barcos import Barco
 from Camion import Camion
 from EmpresaDirectorio.EmpresaData import EmpresaData
 from Excepciones.exceptions import CombustibleInsuficienteException, tiempo_incorrecto
+from ContenedoresDirectorio.Contenedores import Contenedor
 """
 CLASE QUE HACE VIAJAR A LOS VEHICULOS
 """
@@ -13,7 +14,12 @@ class EmpresaEnvios():
         """
         recibe los barcos o camiones llenos y los hace "viajar"
         o los pone en modo viajando que seria disponible = False
-        """
+      
+      """
+        
+    def get_administracion(self):
+        return self.administracion_empresaData
+
     def hacer_viajar_barcos(self, barcos, gps):
         for barco in barcos:
             try:
@@ -32,7 +38,8 @@ class EmpresaEnvios():
 
             lista_contenedores_aux = []
 
-            for contenedor in barco.get_contenedores():
+            for contenedor  in barco.get_contenedores():
+
                 contenedor.set_cargas(None)
                 contenedor.set_precio_transporte_base(0)#seteo contadores del contenedor en cero
                 contenedor.set_cant_de_veces_comple_y_carga_unica(0)
@@ -63,7 +70,8 @@ class EmpresaEnvios():
             #camion.get_contenedor().set_cargas(None)\
             #.set_cant_de_veces_comple_y_carga_unica(0)\
             #.set_precio_transporte_base(0)
-            camion.set_contenedor(cont_aux) #le cambio al camion el contenedor
+            camion.set_contenedor(cont_aux) #le cambio al camion el contenedor por el vacio
+            camion.set_disponible(True)
 
 
 
