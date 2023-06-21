@@ -65,6 +65,8 @@ class Barco(Cargable, ABC):
         return self.__contenedores
     def set_contenedores(self,contenedor):
         self.__contenedores.append(contenedor)
+    def set_lista_contenedores(self, contenedores):
+        self.__contenedores = contenedores
     contenedores = property(get_contenedores,set_contenedores)
     
     def get_combustible_gastado(self):
