@@ -21,3 +21,4 @@ class BuilderContenedorVentilado(Contenedor_builder):
     def set_medidas_exterior(self):
         self.contenedor.set_medidas_exterior(Medidas(6.1,2.45,2.6))
         return self
+    

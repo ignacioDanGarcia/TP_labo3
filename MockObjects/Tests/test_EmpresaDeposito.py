@@ -8,7 +8,7 @@ from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from ContenedoresDirectorio.Contenedores import Contenedor
 from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderContenedorBasico
-from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderContenedorBasicoHC
+from ContenedoresDirectorio.Builder.BuilderContenedorVentilado import BuilderContenedorVentilado
 from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
 from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
 from EmpresaDirectorio.EmpresaData import EmpresaData
@@ -83,22 +83,23 @@ class TestEmpresaDeposito(TestCase):
         director = Contenedor_director(builder)
         contenedor = director.crear_contenedor(1,False)
         
-        assert True == empresa_deposito.cargar_contenedor(manejador_de_cargas, carga, contenedor, cargas, pedido)
+        assert True == empresa_deposito.cargar_contenedor(manejador_de_cargas, carga, contenedor, pedido)
     
-    """
-    def test_llenar_contenedores_y_llenar_barcos(self):
+    
+    def test_llenar_contenedores_y_llenar_barcos_con_solo_contenedores_flatrack_y_cargas_maquinarias_y_quimica(self):
         medidas = Medidas(1,1,1)
         carga = Carga(medidas,5,Categoria.MAQUINARIA)
         carga1 = Carga(medidas,5,Categoria.MAQUINARIA)
         carga2 = Carga(medidas,5,Categoria.QUIMICA)
-        carga3 = Carga(medidas,5,Categoria.QUIMICA)
         
-        cargas = [carga, carga1, carga2, carga3]
+        
+        cargas = [carga, carga1, carga2]
         pedido = Pedidos(1, cargas, 3, False)
+        pedido.set_contenedores_ids([])
         
         builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
-        contenedor = director.crear_contenedor(1,False)
+        contenedor = director.crear_contenedor(1, False)
         contenedor2 = director.crear_contenedor(1,False)
         contenedor3 = director.crear_contenedor(1,False)
         
@@ -109,6 +110,57 @@ class TestEmpresaDeposito(TestCase):
         
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
+        
+        barco = creador.crear_barco(1,100,3,500)
+        barco2 = creador.crear_barco(2,100,3,500)
+        barco3 = creador.crear_barco(3,100,3,500)
+        barco4 = creador.crear_barco(3,100,3,500)
+        barco5 = creador.crear_barco(3,100,3,500)
+        
+        barco3.set_distancia(3)
+        barco2.set_distancia(2)
+        
+        barcos = [barco, barco2, barco3, barco4, barco5]
+        empresa_data = EmpresaData(barcos, [mock_camiones], contenedores)
+        
+        empresa_deposito = EmpresaDeposito(empresa_data)
+        
+        
+        barco3.agregar_contenedores(contenedor)
+        
+        assert barco.get_distancia() == 0
+        print(contenedor)
+        empresa_deposito.llenar_contenedores_y_llenar_barcos(pedido)
+        
+        assert barco3.get_contenedores() == [contenedor]
+        assert contenedor.get_cargas() == cargas
+    
+    def test_llenar_contenedores_y_llenar_barcos_con_solo_contenedores_flatrack_y_cargas_maquinarias_y_quimica(self):
+        medidas = Medidas(1,1,1)
+        carga = Carga(medidas,5,Categoria.MAQUINARIA)
+        carga1 = Carga(medidas,5,Categoria.ALIMENTICIA)
+        carga2 = Carga(medidas,5,Categoria.QUIMICA)
+        
+        
+        cargas = [carga, carga1, carga2]
+        pedido = Pedidos(1, cargas, 3, False)
+        pedido.set_contenedores_ids([])
+        
+        builder = BuilderContenedorFlatRack()
+        director = Contenedor_director(builder)
+        contenedor = director.crear_contenedor(1, True)
+        contenedor2 = director.crear_contenedor(1,False)
+        builder2 = BuilderContenedorVentilado()
+        director.change_builder(builder2)
+        contenedor3 = director.crear_contenedor(1,False)
+        
+        contenedores = [contenedor, contenedor2, contenedor3]
+        
+        mock_camiones = Mock()
+
+        
+        selector_factory = SelectorCreador()
+        creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
         
         barco = creador.crear_barco(1,100,3,500)
         barco2 = creador.crear_barco(2,100,3,500)
@@ -132,6 +184,6 @@ class TestEmpresaDeposito(TestCase):
         
         empresa_deposito.llenar_contenedores_y_llenar_barcos(pedido)
         
-        assert barco3.get_contenedores() == [contenedor]
-        assert contenedor.get_cargas() == cargas
-    """
+        assert contenedor3.get_cargas() == [carga1]
+        assert contenedor.get_cargas()
+    
