@@ -2,7 +2,7 @@ from ContenedoresDirectorio.Estrategy import Estrategia
 from ContenedoresDirectorio.Contenedores import Contenedor
 from Cargas.Categorias import Categoria
 from Cargas.Carga import Carga
-from TiposDeContenedores.TipoContenedor import TipoContenedor
+from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 
 class CargaAlimenticiaEstrategy(Estrategia):
     
