@@ -3,6 +3,7 @@ from Camion import Camion
 from ContenedoresDirectorio.Contenedores import Contenedor
 from Pedidos import Pedidos
 from Excepciones.exceptions import *
+from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
 
 from typing import List
 import random
@@ -114,3 +115,11 @@ class EmpresaData():
                 contenedor_mas_viajes = contenedor
         
         return contenedor_mas_viajes
+    
+    #este metodo lo usa la empresaEnvios, actualiza en array de contenedores de la empresa
+    #cuando un contenedor ya se entrego este vacia la carga
+    def vaciar_contenedor_entregado_con_envio(self, contenedor):
+        if isinstance(self.contenedores.index(contenedor),TipoContenedor.OPENTOP):
+            self.contenedores.remove(contenedor)
+        else:
+            self.contenedores.index(contenedor).set_cargas(None)
