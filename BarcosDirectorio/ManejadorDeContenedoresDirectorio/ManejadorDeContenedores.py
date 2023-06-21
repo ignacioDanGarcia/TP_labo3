@@ -1,10 +1,10 @@
 from BarcosDirectorio.Barcos import Barco
-from BarcosDirectorio.ManejadorDeContenedoresDirectorio.SelectoraEstrategiaPorBarco import SelectoraEstrategiaPorContenedor
+from BarcosDirectorio.ManejadorDeContenedoresDirectorio.SelectoraEstrategiaPorBarco import SelectoraEstrategiaPorBarco
 from ContenedoresDirectorio.Contenedores import Contenedor
 from Excepciones.exceptions import no_existe_carga
 
 class ManejadorDeContenedores():
-    def __init__(self, selectora: SelectoraEstrategiaPorContenedor) -> None:
+    def __init__(self, selectora: SelectoraEstrategiaPorBarco) -> None:
         self.__estrategia = None
         self.__selectora = selectora
     """
@@ -27,16 +27,18 @@ class ManejadorDeContenedores():
     
     def cargar(self, barco :Barco, contenedor :Contenedor):
         if self.puede_cargar(barco, contenedor):
-            barco.contenedores.append(contenedor)
-        return False
+            barco.get_contenedores().append(contenedor)
+        else : return False
     
     def puede_cargar(self, barco :Barco, contenedor :Contenedor):
-        self.settear_estrategia(contenedor)
-        return self.__estrategia.verificar_carga(barco,contenedor)
+        self.settear_estrategia(barco)
+        return self.__estrategia.verificar_contenedor(barco,contenedor)
     
-    def settear_estrategia(self,contenedor: Contenedor):
-        self.set_estrategia(self.__selectora.estrategia_por_categoria(contenedor.get_tipo()))
+    def settear_estrategia(self,barco: Barco):
+        self.set_estrategia(self.__selectora.estrategia_por_categoria(barco.get_tipo_barco()))
     
+    
+    '''
     def vaciar_contenedor(self, barco :Barco):
         contenedores = []
         for contenedor in barco.get_cargas():
@@ -50,4 +52,4 @@ class ManejadorDeContenedores():
             contenedores.remove(contenedor)
             return contenedor
         raise(no_existe_carga("No existe el contenedor buscado."))
-    
+    '''

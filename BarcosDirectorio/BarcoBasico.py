@@ -8,7 +8,7 @@ class BarcoBasico(Barco):
     def __init__(self, id, peso_max, cant_contenedores_max, combustible_maximo,tipoBarco=None,  sensor_viento=None):
         super().__init__(id, peso_max, cant_contenedores_max, combustible_maximo, TiposBarcos.BASICO, sensor_viento)
     
-    def puede_cargar_esta_carga(self, contenedor: Contenedor):
+    '''def puede_cargar_esta_carga(self, contenedor: Contenedor):
         if not contenedor.get_tipo() in [TipoContenedor.BASICO, TipoContenedor.BASICOHC]:
             return False
     
@@ -25,4 +25,4 @@ class BarcoBasico(Barco):
     def cargar(self, contenedor):
         if self.puede_cargar_esta_carga(contenedor) and self.tiene_lugar(contenedor):
             self.contenedores.append(contenedor)
-    
+    '''
