@@ -4,7 +4,7 @@ from ContenedoresDirectorio.Contenedores import Contenedor
 from Cargas.Carga import Carga
 from ContenedoresDirectorio.ObtenedorDeIDSDeCargas import ObtenedorIDSCargas
 from Medidas import Medidas
-from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
+from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 from Cargas.Categorias import Categoria
 
 

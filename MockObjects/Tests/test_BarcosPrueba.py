@@ -6,7 +6,7 @@ from pytest import raises
 from BarcosDirectorio.BarcoBasico import BarcoBasico
 from BarcosDirectorio.BarcoEspecial import BarcoEspecial
 from Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_exception, Contenedor_no_aceptado_exception, Peso_excedido_exception
-from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
+from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 from BarcosDirectorio.TiposDeBarcos import TiposBarcos
 from BarcosDirectorio.Factory.SelectorDeCreador import SelectorCreador
 from BarcosDirectorio.Factory.CreadorDeBarcosBasicos import CreadorBarcosBasicos
@@ -56,8 +56,7 @@ class test_barcos(TestCase):
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.FLATRACK
         mock_contenedor.get_material_especial.return_value = True
-        with self.assertRaises(Contenedor_no_aceptado_exception):
-            barco.puede_cargar_esta_carga(mock_contenedor)
+        assert False == barco.puede_cargar_esta_carga(mock_contenedor)
         
     
     def test_metodo_cargar_de_barco_carga_contenedor_sin_material_especial_y_peso_bajo(self):
@@ -182,8 +181,7 @@ class test_barcos(TestCase):
         mock_contenedor.get_material_especial.return_value = False
         mock_contenedor.get_tipo.return_value = TipoContenedor.BASICO
         
-        with self.assertRaises(Peso_excedido_exception):
-            barco.tiene_lugar(mock_contenedor)
+        assert False == barco.tiene_lugar(mock_contenedor)
     
     
     def test_barco_basico_creado_con_factory_tira_exception_por_cantidad_contenedores_al_tope(self):
@@ -215,8 +213,7 @@ class test_barcos(TestCase):
         mock_contenedor.get_material_especial.return_value = False
         mock_contenedor.get_tipo.return_value = TipoContenedor.BASICO
         
-        with self.assertRaises(Cantidad_contenedores_maxima_alcanzada_exception):
-            barco.tiene_lugar(mock_contenedor)
+        assert False == barco.tiene_lugar(mock_contenedor)
     
     
     def test_barco_especial_creado_con_factory(self):

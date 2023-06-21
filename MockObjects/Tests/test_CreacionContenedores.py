@@ -8,7 +8,7 @@ from ContenedoresDirectorio.Builder.BuilderContenedorOpenTop import BuilderConte
 
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from ContenedoresDirectorio.Contenedores import Contenedor
-from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
+from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 from Medidas import Medidas
 
 

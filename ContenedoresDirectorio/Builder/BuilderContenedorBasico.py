@@ -1,6 +1,6 @@
 from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
 from Medidas import Medidas
-from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
+from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 
 class BuilderContenedorBasico(Contenedor_builder):
     def __init__(self) -> None:

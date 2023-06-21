@@ -1,6 +1,6 @@
 from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
 from Medidas import Medidas
-from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
+from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 class BuilderContenedorVentilado(Contenedor_builder):
     def __init__(self) -> None:
         super().__init__()
@@ -21,3 +21,4 @@ class BuilderContenedorVentilado(Contenedor_builder):
     def set_medidas_exterior(self):
         self.contenedor.set_medidas_exterior(Medidas(6.1,2.45,2.6))
         return self
+    
