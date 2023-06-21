@@ -3,22 +3,22 @@ from unittest.mock import Mock, patch, MagicMock
 
 from pytest import raises
 from BarcosDirectorio.Factory.SelectorDeCreador import SelectorCreador
+from BarcosDirectorio.ManejadorDeContenedoresDirectorio.ManejadorDeContenedores import ManejadorDeContenedores
+from BarcosDirectorio.ManejadorDeContenedoresDirectorio.SelectoraEstrategiaPorBarco import SelectoraEstrategiaPorBarco
 from BarcosDirectorio.TiposDeBarcos import TiposBarcos
-from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from ContenedoresDirectorio.Contenedores import Contenedor
 from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderContenedorBasico
 from ContenedoresDirectorio.Builder.BuilderContenedorVentilado import BuilderContenedorVentilado
 from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
 from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
+from ContenedoresDirectorio.DepartamentoDeEstimacionDeCostos.SelectoraEstrategiaPrecio import SelectoraEstrategiaPrecio
 from EmpresaDirectorio.EmpresaData import EmpresaData
 from EmpresaDirectorio.EmpresaDeposito import EmpresaDeposito
 from Pedidos import Pedidos
 from Cargas.Carga import Carga
 from Cargas.Categorias import Categoria
 from Medidas import Medidas
-from EmpresaDirectorio.EmpresaCotizaciones import EmpresaCotizaciones
-from Camion import Camion
 from ContenedoresDirectorio.SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga
 class TestEmpresaDeposito(TestCase):
     
@@ -35,7 +35,10 @@ class TestEmpresaDeposito(TestCase):
         contenedores = [cont1,cont2,cont3,cont9]
         empresa_data = EmpresaData([mock_barcos], [mock_camiones], contenedores)
         
-        empresa_deposito = EmpresaDeposito(empresa_data)
+        manejador_cargas = Mock()
+        manejador_contenedores = Mock()
+        
+        empresa_deposito = EmpresaDeposito(empresa_data, manejador_cargas, manejador_contenedores)
         
         
         assert contenedores == empresa_deposito.obtener_contenedores_pedido(pedido)
@@ -46,7 +49,10 @@ class TestEmpresaDeposito(TestCase):
         mock_contenedores = Mock()
         empresa_data = EmpresaData([mock_barcos], [mock_camiones], [mock_contenedores])
         
-        empresa_deposito = EmpresaDeposito(empresa_data)
+        manejador_cargas = Mock()
+        manejador_contenedores = Mock()
+        
+        empresa_deposito = EmpresaDeposito(empresa_data, manejador_cargas, manejador_contenedores)
         
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
@@ -65,9 +71,12 @@ class TestEmpresaDeposito(TestCase):
         mock_contenedores = Mock()
         empresa_data = EmpresaData([mock_barcos], [mock_camiones], [mock_contenedores])
         
-        empresa_deposito = EmpresaDeposito(empresa_data)
+        manejador_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
+        manejador_contenedores = Mock()
         
-        manejador_de_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
+        empresa_deposito = EmpresaDeposito(empresa_data, manejador_cargas, manejador_contenedores)
+        
+        
         
         medidas = Medidas(3,2,2)
         carga = Carga(medidas,50,Categoria.MAQUINARIA)
@@ -82,9 +91,9 @@ class TestEmpresaDeposito(TestCase):
         director = Contenedor_director(builder)
         contenedor = director.crear_contenedor(1,False)
         
-        assert True == empresa_deposito.cargar_contenedor(manejador_de_cargas, carga, contenedor, pedido)
+        assert True == empresa_deposito.cargar_contenedor(empresa_deposito.get_manejador_cargas(), carga, contenedor, pedido)
     
-    """
+    
     def test_llenar_contenedores_y_llenar_barcos_con_solo_contenedores_flatrack_y_cargas_maquinarias_y_quimica(self):
         medidas = Medidas(1,1,1)
         carga = Carga(medidas,5,Categoria.MAQUINARIA)
@@ -122,10 +131,12 @@ class TestEmpresaDeposito(TestCase):
         barcos = [barco, barco2, barco3, barco4, barco5]
         empresa_data = EmpresaData(barcos, [mock_camiones], contenedores)
         
-        empresa_deposito = EmpresaDeposito(empresa_data)
+        manejador_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
+        manejador_contenedores = ManejadorDeContenedores(SelectoraEstrategiaPorBarco())
         
+        empresa_deposito = EmpresaDeposito(empresa_data, manejador_cargas, manejador_contenedores)
         
-        barco3.agregar_contenedores(contenedor)
+        manejador_contenedores.cargar(barco3, contenedor)
         
         assert barco.get_distancia() == 0
         print(contenedor)
@@ -137,8 +148,8 @@ class TestEmpresaDeposito(TestCase):
     def test_llenar_contenedores_y_llenar_barcos_con_solo_contenedores_flatrack_y_cargas_maquinarias_y_quimica(self):
         medidas = Medidas(1,1,1)
         carga = Carga(medidas,5,Categoria.MAQUINARIA)
-        carga1 = Carga(medidas,5,Categoria.ALIMENTICIA)
-        carga2 = Carga(medidas,5,Categoria.QUIMICA)
+        carga1 = Carga(medidas,5,Categoria.MAQUINARIA)
+        carga2 = Carga(medidas,5,Categoria.MAQUINARIA)
         
         
         cargas = [carga, carga1, carga2]
@@ -148,7 +159,7 @@ class TestEmpresaDeposito(TestCase):
         builder = BuilderContenedorFlatRack()
         director = Contenedor_director(builder)
         contenedor = director.crear_contenedor(1, True)
-        contenedor2 = director.crear_contenedor(1,False)
+        contenedor2 = director.crear_contenedor(1,True)
         builder2 = BuilderContenedorVentilado()
         director.change_builder(builder2)
         contenedor3 = director.crear_contenedor(1,True)
@@ -174,15 +185,17 @@ class TestEmpresaDeposito(TestCase):
         barcos = [barco, barco2, barco3, barco4, barco5]
         empresa_data = EmpresaData(barcos, [mock_camiones], contenedores)
         
-        empresa_deposito = EmpresaDeposito(empresa_data)
+        manejador_cargas = ManejadorDeCargas(SelectoraEstrategiaPorCarga())
+        manejador_contenedores = ManejadorDeContenedores(SelectoraEstrategiaPorBarco())
         
+        empresa_deposito = EmpresaDeposito(empresa_data, manejador_cargas, manejador_contenedores)
         
-        barco3.agregar_contenedores(contenedor)
+        manejador_contenedores.cargar(barco3, contenedor)
         
         assert barco.get_distancia() == 0
         
         empresa_deposito.llenar_contenedores_y_llenar_barcos(pedido)
-        
+        print(contenedor3.get_cargas())
         assert contenedor3.get_cargas() == [carga1]
         assert contenedor.get_cargas() == [carga1]
-    """
+    

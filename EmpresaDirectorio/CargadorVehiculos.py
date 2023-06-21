@@ -1,5 +1,6 @@
 from typing import List
 from BarcosDirectorio.Barcos import Barco
+from BarcosDirectorio.ManejadorDeContenedoresDirectorio.ManejadorDeContenedores import ManejadorDeContenedores
 from Camion import Camion
 from Cargas.Carga import Carga
 from Contenedores import Contenedor
@@ -11,21 +12,28 @@ from SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga
 
 
 class CargadorVehiculos:
-    def __init__(self, empresa_data: EmpresaData):
-        self.__empresa_data = empresa_data
+    def __init__(self, manejador_cargas: ManejadorDeCargas, manejador_contenedores: ManejadorDeContenedores):
+        self.__manejador_cargas = manejador_cargas
+        self.__manejador_contenedores = manejador_contenedores
     
     'Getters y Setters'
-    def get_empresa_data(self):
-        return self.__empresa_data
-    def set_empresa_data(self, empresa_data):
-        self.__empresa_data = empresa_data
-    empresa_data = property(get_empresa_data,set_empresa_data)
+    def get_manejador_cargas(self):
+        return self.__manejador_cargas
+    def set_manejador_cargas(self, manejador_cargas):
+        self.__manejador_cargas = manejador_cargas
+    manejador_cargas = property(get_manejador_cargas,set_manejador_cargas)
+    
+    def get_manejador_contenedores(self):
+        return self.__manejador_contenedores
+    def set_manejador_contenedores(self, manejador_contenedores):
+        self.__manejador_contenedores = manejador_contenedores
+    manejador_contenedores = property(get_manejador_contenedores,set_manejador_contenedores)
     'Fin Getters y Setters'
     
-    def cargar_camiones(self, contenedores: List[Contenedor]):
+    def cargar_camiones(self, contenedores: List[Contenedor], data: EmpresaData):
         try:
             for contenedor in contenedores:
-                camion = self.get_empresa_data().devolver_un_camion_disponible() # este metodo libera excepcion
+                camion = data.devolver_un_camion_disponible() # este metodo libera excepcion
                 camion.set_contenedor(contenedor)
             # si no libera excepcion termina de 10
             return
