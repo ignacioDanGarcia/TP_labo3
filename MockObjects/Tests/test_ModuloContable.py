@@ -22,6 +22,8 @@ from BarcosDirectorio.Factory.SelectorDeCreador import SelectorCreador
 from BarcosDirectorio.TiposDeBarcos import TiposBarcos
 from ModuloGPS import ModuloGPS
 from Modulo_Contable import ModuloContable
+from BarcosDirectorio.ManejadorDeContenedoresDirectorio.ManejadorDeContenedores import ManejadorDeContenedores
+from BarcosDirectorio.ManejadorDeContenedoresDirectorio.SelectoraEstrategiaPorBarco import SelectoraEstrategiaPorBarco
 
 
 class TestModuloContable(TestCase):
@@ -52,8 +54,10 @@ class TestModuloContable(TestCase):
         mock_contenedor.get_precio_transporte_base.return_value = 500 #Si son iguales los IDS cobramos 500 una sola vez. 
         mock_contenedor.get_medidas_interior.return_value = Medidas(12.0,2.35,2.3)
         mock_contenedor.peso_contenedor.return_value = 100
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
         
-        barco.cargar(mock_contenedor)
+        manejador_de_contenedores.cargar(barco,mock_contenedor)
         modulo_contable = ModuloContable()
         
         assert modulo_contable.calcular_ganancia_barco(barco,6, modulo_gps_mock) == 1900
@@ -89,12 +93,16 @@ class TestModuloContable(TestCase):
         mock_contenedor.get_medidas_interior.return_value = Medidas(12.0,2.35,2.3)
         mock_contenedor.peso_contenedor.return_value = 100
         
-        barco.cargar(mock_contenedor)
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        
+        manejador_de_contenedores.cargar(barco, mock_contenedor)
         modulo_contable = ModuloContable()
         
         assert modulo_contable.calcular_ganancia_barco(barco,6, modulo_gps_mock) == 2400
         #Estamos gastando $600 de nafta
         # $2000 de las cargas + 500 del precio base a cada uno = $3000 - 600 = 2400
+    
     
     def test_distancia_menor_a_100_gastamos_600_en_nafta_con_cargas_de_mas_de_una_persona_pero_una_tuvo_mas_de_una_carga(self):
         selector_de_factoria = SelectorCreador()
@@ -130,7 +138,10 @@ class TestModuloContable(TestCase):
         mock_contenedor.get_medidas_interior.return_value = Medidas(12.0,2.35,2.3)
         mock_contenedor.peso_contenedor.return_value = 100
         
-        barco.cargar(mock_contenedor)
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        
+        manejador_de_contenedores.cargar(barco, mock_contenedor)
         modulo_contable = ModuloContable()
         
         assert modulo_contable.calcular_ganancia_barco(barco,6, modulo_gps_mock) == 3400
@@ -182,8 +193,11 @@ class TestModuloContable(TestCase):
         mock_contenedor2.get_medidas_interior.return_value = Medidas(12.0,2.35,2.3)
         mock_contenedor2.peso_contenedor.return_value = 100
         
-        barco.cargar(mock_contenedor)
-        barco.cargar(mock_contenedor2)
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        
+        manejador_de_contenedores.cargar(barco, mock_contenedor)
+        manejador_de_contenedores.cargar(barco,mock_contenedor2)
         modulo_contable = ModuloContable()
         
         assert modulo_contable.calcular_ganancia_barco(barco,6, modulo_gps_mock) == 4100
@@ -241,8 +255,11 @@ class TestModuloContable(TestCase):
         mock_contenedor2.get_medidas_interior.return_value = Medidas(12.0,2.35,2.3)
         mock_contenedor2.peso_contenedor.return_value = 100
         
-        barco.cargar(mock_contenedor)
-        barco.cargar(mock_contenedor2)
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        
+        manejador_de_contenedores.cargar(barco, mock_contenedor)
+        manejador_de_contenedores.cargar(barco,mock_contenedor2)
         modulo_contable = ModuloContable()
         
         assert modulo_contable.calcular_ganancia_barco(barco,6, modulo_gps_mock) == 5100

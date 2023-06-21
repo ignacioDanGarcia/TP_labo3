@@ -117,7 +117,7 @@ class Barco(Cargable, ABC):
     
     def obtener_peso_actual(self):
         peso = 0
-        for contenedor in self.contenedores:
+        for contenedor in self.get_contenedores():
             peso += contenedor.peso_contenedor()
         return peso
     

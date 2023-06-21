@@ -11,19 +11,41 @@ from BarcosDirectorio.TiposDeBarcos import TiposBarcos
 from BarcosDirectorio.Factory.SelectorDeCreador import SelectorCreador
 from BarcosDirectorio.Factory.CreadorDeBarcosBasicos import CreadorBarcosBasicos
 from BarcosDirectorio.Factory.CreadorDeBarcosEspeciales import CreadorBarcosEspeciales
-
+from BarcosDirectorio.ManejadorDeContenedoresDirectorio.ManejadorDeContenedores import ManejadorDeContenedores
+from BarcosDirectorio.ManejadorDeContenedoresDirectorio.SelectoraEstrategiaPorBarco import SelectoraEstrategiaPorBarco
 class test_barcos(TestCase):
     
-    def test_si_barco_basico_puede_cargar_carga_sin_material_especial(self):
+    def test_manejadora_contenedores_carga_contenedor_en_barco(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
-        
+        creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
         barco = creador.crear_barco(1,100,3,500)
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.BASICO
-        mock_contenedor.get_material_especial.return_value = False
-        assert barco.puede_cargar_esta_carga(mock_contenedor) == True
+        mock_contenedor.peso_contenedor.return_value = 10
+        mock_contenedor.get_material_especial.return_value = True
         
+        assert manejador_de_contenedores.puede_cargar(barco, mock_contenedor) == True
+        assert len(barco.get_contenedores()) == 0
+        manejador_de_contenedores.cargar(barco,mock_contenedor)
+        assert len(barco.get_contenedores()) == 1
+        assert barco.obtener_peso_actual() == 10
+        assert barco.get_contenedores().pop() == mock_contenedor
+
+        
+    def test_si_barco_basico_puede_cargar_carga_sin_material_especial(self):
+        selector_factory = SelectorCreador()
+        creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        barco = creador.crear_barco(1,100,3,500)
+        mock_contenedor = Mock()
+        mock_contenedor.get_tipo.return_value = TipoContenedor.BASICO
+        mock_contenedor.peso_contenedor.return_value = 10
+        mock_contenedor.get_material_especial.return_value = False
+        
+        assert manejador_de_contenedores.puede_cargar(barco, mock_contenedor) == True
     
     def test_si_barco_especial_puede_cargar_carga_sin_material_especial(self):
         selector_factory = SelectorCreador()
@@ -31,60 +53,79 @@ class test_barcos(TestCase):
         
         barco = creador.crear_barco(1,100,3,500)
         
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.BASICO
         mock_contenedor.get_material_especial.return_value = False
-        assert barco.puede_cargar_esta_carga(mock_contenedor) == True
+        mock_contenedor.peso_contenedor.return_value = 10
+        assert manejador_de_contenedores.puede_cargar(barco,mock_contenedor)
     
         
     def test_si_barco_especial_puede_cargar_carga_con_material_especial(self):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
         
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        
         barco = creador.crear_barco(1,100,3,500)        
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.FLATRACK
         mock_contenedor.get_material_especial.return_value = True
-        assert barco.puede_cargar_esta_carga(mock_contenedor) == True
+        mock_contenedor.peso_contenedor.return_value = 10
+        assert manejador_de_contenedores.puede_cargar(barco, mock_contenedor) == True
     
     
     def test_barco_basico_no_puede_cargar_carga_con_material_especial(self):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
         
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        
         barco = creador.crear_barco(1,100,3,500)
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.FLATRACK
         mock_contenedor.get_material_especial.return_value = True
-        assert False == barco.puede_cargar_esta_carga(mock_contenedor)
+        mock_contenedor.peso_contenedor.return_value = 50
+        assert False == manejador_de_contenedores.puede_cargar(barco, mock_contenedor)
         
     
     def test_metodo_cargar_de_barco_carga_contenedor_sin_material_especial_y_peso_bajo(self):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
         
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        
         barco = creador.crear_barco(1,100,3,500) 
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.BASICO
         mock_contenedor.peso_contenedor.return_value = 10
         mock_contenedor.get_material_especial.return_value = False
-        barco.cargar(mock_contenedor)
-        assert mock_contenedor in barco.contenedores 
+        manejador_de_contenedores.cargar(barco, mock_contenedor)
         
+        assert mock_contenedor in barco.contenedores 
     
     def test_metodo_cargar_de_barco_no_carga_por_excepcion_por_peso_excedido(self):
         selector_factory = SelectorCreador()
         creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
+        
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
         
         barco = creador.crear_barco(1,100,3,500) 
         mock_contenedor = Mock()
         mock_contenedor.get_tipo.return_value = TipoContenedor.FLATRACK
         mock_contenedor.peso_contenedor.return_value = 900
         mock_contenedor.get_material_especial.return_value = False
-
-        with self.assertRaises(Peso_excedido_exception):
-            barco.cargar(mock_contenedor)
-
+        
+        '''with self.assertRaises(Peso_excedido_exception):
+            manejador_de_contenedores.cargar(barco, mock_contenedor)'''
+        assert manejador_de_contenedores.cargar(barco,mock_contenedor) == False
+    
     
     def test_metodo_tiene_lugar_de_barco_tira_exception_por_capacidad_contenedores_al_tope(self):
         selector_factory = SelectorCreador()
@@ -106,18 +147,23 @@ class test_barcos(TestCase):
         mock_contenedor3.get_material_especial.return_value = False
         mock_contenedor3.get_tipo.return_value = TipoContenedor.FLATRACK
         
-        barco.cargar(mock_contenedor1)
-        barco.cargar(mock_contenedor2)
-        barco.cargar(mock_contenedor3)
         
+        
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        
+        manejador_de_contenedores.cargar(barco,mock_contenedor1)
+        manejador_de_contenedores.cargar(barco,mock_contenedor2)
+        manejador_de_contenedores.cargar(barco,mock_contenedor3)
         mock_contenedor = Mock()
         mock_contenedor.peso_contenedor.return_value =80
         mock_contenedor.get_material_especial.return_value = False
         mock_contenedor.get_tipo.return_value = TipoContenedor.FLATRACK
         
-        with self.assertRaises(Cantidad_contenedores_maxima_alcanzada_exception):
-            barco.tiene_lugar(mock_contenedor)
-        
+        '''with self.assertRaises(Cantidad_contenedores_maxima_alcanzada_exception):
+            barco.tiene_lugar(mock_contenedor)'''
+            
+        assert manejador_de_contenedores.puede_cargar(barco,mock_contenedor) == False
     
     def test_metodo_tiene_lugar_de_barco_tira_exception_por_peso_maximo_excedido(self):
         selector_factory = SelectorCreador()
@@ -139,17 +185,23 @@ class test_barcos(TestCase):
         mock_contenedor3.get_material_especial.return_value = False
         mock_contenedor3.get_tipo.return_value = TipoContenedor.FLATRACK
         
-        barco.cargar(mock_contenedor1)
-        barco.cargar(mock_contenedor2)
-        barco.cargar(mock_contenedor3)
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        
+        
+        manejador_de_contenedores.cargar(barco,mock_contenedor1)
+        manejador_de_contenedores.cargar(barco,mock_contenedor2)
+        manejador_de_contenedores.cargar(barco,mock_contenedor3)
         
         mock_contenedor = Mock()
         mock_contenedor.peso_contenedor.return_value =33
         mock_contenedor.get_material_especial.return_value = False
         mock_contenedor.get_tipo.return_value = TipoContenedor.FLATRACK
         
-        with self.assertRaises(Peso_excedido_exception):
-            barco.tiene_lugar(mock_contenedor)
+        '''with self.assertRaises(Peso_excedido_exception):
+            manejador_de_contenedores.puede_cargar(barco, mock_contenedor)'''
+        
+        assert manejador_de_contenedores.puede_cargar(barco, mock_contenedor) == False
     
     
     def test_barco_basico_creado_con_factory_tira_exception_por_peso_maximo_excedido(self):
@@ -172,16 +224,19 @@ class test_barcos(TestCase):
         mock_contenedor3.get_material_especial.return_value = False
         mock_contenedor3.get_tipo.return_value = TipoContenedor.BASICO
         
-        barco.cargar(mock_contenedor1)
-        barco.cargar(mock_contenedor2)
-        barco.cargar(mock_contenedor3)
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        
+        manejador_de_contenedores.cargar(barco,mock_contenedor1)
+        manejador_de_contenedores.cargar(barco,mock_contenedor2)
+        manejador_de_contenedores.cargar(barco,mock_contenedor3)
         
         mock_contenedor = Mock()
-        mock_contenedor.peso_contenedor.return_value =33
+        mock_contenedor.peso_contenedor.return_value = 33
         mock_contenedor.get_material_especial.return_value = False
         mock_contenedor.get_tipo.return_value = TipoContenedor.BASICO
         
-        assert False == barco.tiene_lugar(mock_contenedor)
+        assert manejador_de_contenedores.puede_cargar(barco,mock_contenedor) == False
     
     
     def test_barco_basico_creado_con_factory_tira_exception_por_cantidad_contenedores_al_tope(self):
@@ -204,16 +259,19 @@ class test_barcos(TestCase):
         mock_contenedor3.get_material_especial.return_value = False
         mock_contenedor3.get_tipo.return_value = TipoContenedor.BASICO
         
-        barco.cargar(mock_contenedor1)
-        barco.cargar(mock_contenedor2)
-        barco.cargar(mock_contenedor3)
+        selectora_de_estrategias_de_carga = SelectoraEstrategiaPorBarco()
+        manejador_de_contenedores = ManejadorDeContenedores(selectora_de_estrategias_de_carga)
+        
+        manejador_de_contenedores.cargar(barco,mock_contenedor1)
+        manejador_de_contenedores.cargar(barco,mock_contenedor2)
+        manejador_de_contenedores.cargar(barco,mock_contenedor3)
         
         mock_contenedor = Mock()
         mock_contenedor.peso_contenedor.return_value =80
         mock_contenedor.get_material_especial.return_value = False
         mock_contenedor.get_tipo.return_value = TipoContenedor.BASICO
         
-        assert False == barco.tiene_lugar(mock_contenedor)
+        assert manejador_de_contenedores.puede_cargar(barco, mock_contenedor)== False
     
     
     def test_barco_especial_creado_con_factory(self):
@@ -225,7 +283,7 @@ class test_barcos(TestCase):
         barco = creador.crear_barco(1,100,4,500)         
         assert isinstance(barco, BarcoEspecial)
         
-       
+     
     def test_barco_basico_creado_con_factory(self):
         # entre comillas hay que poner el nombre de la subclase, no solamente basico
         # la subclase se llama BarcoBasico

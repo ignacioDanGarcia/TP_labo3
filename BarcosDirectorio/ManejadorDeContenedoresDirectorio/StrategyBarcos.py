@@ -3,5 +3,5 @@ from Cargas.Carga import Carga
 
 class StrategyBarcos(ABC):
     @abstractmethod
-    def verificar_carga(self, carga : Carga, contenedor):
+    def verificar_contenedor(self, barco, contenedor):
         pass
