@@ -1,6 +1,6 @@
 from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
 from Medidas import Medidas
-from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
+from TiposDeContenedores.TipoContenedor import TipoContenedor
 from ContenedoresDirectorio.Builder.BuilderDecorators import agregar_precio_adicional_open_top
 
 

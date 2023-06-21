@@ -2,7 +2,7 @@ from ContenedoresDirectorio.Estrategy import Estrategia
 from ContenedoresDirectorio.Contenedores import Contenedor
 from Cargas.Categorias import Categoria
 from Cargas.Carga import Carga
-from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
+from TiposDeContenedores.TipoContenedor import TipoContenedor
 
 class CargaAlimenticiaEstrategy(Estrategia):
     
@@ -21,7 +21,7 @@ class CargaAlimenticiaEstrategy(Estrategia):
                     carga.get_volumen() <= contenedor.get_volumen_max():
                 entra = True
         
-        return (puede_llevarla and entra) # Si puede llevarla por el tipo y entra en el contenedor la carga pasa.
+        return puede_llevarla and entra # Si puede llevarla por el tipo y entra en el contenedor la carga pasa.
 
 
 

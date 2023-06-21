@@ -140,8 +140,6 @@ class Barco(Cargable, ABC):
            raise CombustibleInsuficienteException("No alcanza el combustible. No es recomendado hacer este viaje.")
         return True
     
-    def agregar_contenedores(self,contenedor):
-        self.__contenedores.append(contenedor)
     
     #Estos dos métodos se usarían juntos, primero el puede_navegar para que levante alguna exception y luego el navegar. Si no podemos meterlo adentro de navegar pero estaría
     #revisando muchas veces los gastos.

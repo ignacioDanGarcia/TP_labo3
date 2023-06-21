@@ -152,7 +152,7 @@ class TestEmpresaDeposito(TestCase):
         contenedor2 = director.crear_contenedor(1,False)
         builder2 = BuilderContenedorVentilado()
         director.change_builder(builder2)
-        contenedor3 = director.crear_contenedor(1,False)
+        contenedor3 = director.crear_contenedor(1,True)
         
         contenedores = [contenedor, contenedor2, contenedor3]
         
@@ -185,5 +185,5 @@ class TestEmpresaDeposito(TestCase):
         empresa_deposito.llenar_contenedores_y_llenar_barcos(pedido)
         
         assert contenedor3.get_cargas() == [carga1]
-        assert contenedor.get_cargas()
+        assert contenedor.get_cargas() == [carga1]
     

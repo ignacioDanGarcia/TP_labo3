@@ -13,7 +13,7 @@ from Pedidos import Pedidos'''
 from Cargas.Carga import Carga
 from Cargas.Categorias import Categoria
 from Medidas import Medidas
-from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
+from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 '''from BarcosDirectorio.BarcoBasico import BarcoBasico
 from BarcosDirectorio.BarcoEspecial import BarcoEspecial
 from BarcosDirectorio.Factory.CreadorDeBarcosBasicos import CreadorBarcosBasicos
