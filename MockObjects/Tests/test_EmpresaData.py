@@ -15,15 +15,21 @@ from Pedidos import Pedidos
 from Cargas.Carga import Carga
 from Cargas.Categorias import Categoria
 from Medidas import Medidas
-from BarcosDirectorio.BarcoBasico import BarcoBasico
 from EmpresaDirectorio.EmpresaCotizaciones import EmpresaCotizaciones
 from Camion import Camion
+from BarcosDirectorio.Factory.CreadorBarcos import CreadorDeBarcos
+from BarcosDirectorio.Factory.SelectorDeCreador import SelectorCreador
+from BarcosDirectorio.TiposDeBarcos import TiposBarcos
+
+
 class TestEmpresaData(TestCase):
     def test_empresa_trae_barco_disponible_con_distancia_cero_y_camion_disponible(self):
+        selector_factory = SelectorCreador()
+        factoria = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         
-        barco1 = BarcoBasico(1,100,4,500)
-        barco2 = BarcoBasico(2,100,4,500)
-        barco3 = BarcoBasico(3,100,4,500) 
+        barco1 = factoria.crear_barco(1,100,4,500)
+        barco2 = factoria.crear_barco(2,100,4,500)
+        barco3 = factoria.crear_barco(3,100,4,500) 
         #Cuando los instanciamos están disponibles. 
         barco1.set_disponible(False)
         barco3.set_disponible(False)
@@ -52,9 +58,12 @@ class TestEmpresaData(TestCase):
     
     def test_empresa_tira_exception_si_no_hay_barcos_disponibles(self):
         
-        barco1 = BarcoBasico(1,100,4,500)
-        barco2 = BarcoBasico(2,100,4,500)
-        barco3 = BarcoBasico(3,100,4,500) 
+        selector_factory = SelectorCreador()
+        factoria = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
+        
+        barco1 = factoria.crear_barco(1,100,4,500)
+        barco2 = factoria.crear_barco(2,100,4,500)
+        barco3 = factoria.crear_barco(3,100,4,500)  
         #Cuando los instanciamos están disponibles. 
         barco1.set_disponible(False)
         barco3.set_disponible(False)
@@ -107,15 +116,18 @@ class TestEmpresaData(TestCase):
         assert contenedores_disponibles == [cont2,cont3]
     
     def test_empresa_trae_barco_con_mayores_y_menores_KMS_recorridos(self):
+        selector_factory = SelectorCreador()
+        factoria = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
+        
         mock_camiones = Mock()
         mock_contenedores = Mock()
         
-        barco1 = BarcoBasico(1,100,4,500)
-        barco2 = BarcoBasico(2,100,4,500)
-        barco3 = BarcoBasico(3,100,4,500) 
-        barco9 = BarcoBasico(3,100,4,500) 
-        barco15 = BarcoBasico(3,100,4,500) 
-        barco10 = BarcoBasico(3,100,4,500) 
+        barco1 = factoria.crear_barco(1,100,4,500)
+        barco2 = factoria.crear_barco(2,100,4,500)
+        barco3 = factoria.crear_barco(3,100,4,500) 
+        barco9 = factoria.crear_barco(3,100,4,500) 
+        barco15 = factoria.crear_barco(3,100,4,500) 
+        barco10 = factoria.crear_barco(3,100,4,500) 
         
         barco1.set_km_recorridos(500)
         barco2.set_km_recorridos(2.7)
@@ -130,7 +142,7 @@ class TestEmpresaData(TestCase):
         empresa_data.actualizar_barco_con_mas_y_con_menos_km()
         assert empresa_data.barco_con_mas_km == barco9
         assert empresa_data.barco_con_menos_km == barco2
-    
+
     def test_empresa_data_devuelve_contenedor_que_viajo_con_una_sola_carga_y_completo_mas_veces(self):
         mock_camiones = Mock()
         mock_barcos = Mock()

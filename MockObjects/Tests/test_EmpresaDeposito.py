@@ -17,7 +17,6 @@ from Pedidos import Pedidos
 from Cargas.Carga import Carga
 from Cargas.Categorias import Categoria
 from Medidas import Medidas
-from BarcosDirectorio.BarcoBasico import BarcoBasico
 from EmpresaDirectorio.EmpresaCotizaciones import EmpresaCotizaciones
 from Camion import Camion
 from ContenedoresDirectorio.SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga

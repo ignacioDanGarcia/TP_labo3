@@ -1,12 +1,9 @@
 from BarcosDirectorio.Cargable import Cargable
-from abc import ABC, abstractmethod
-from GenerarId import GenerarId
-from Interfaces.ViajeraInterfaz import ViajeraInterfaz
 from BarcosDirectorio.SistemasNavegacion.AMotor import AMotor
 from Excepciones.exceptions import CombustibleInsuficienteException, tiempo_incorrecto
 from ModuloGPS import ModuloGPS
 
-class Barco(Cargable, ABC):
+class Barco(Cargable):
 
     def __init__(self, id, peso_max, cant_contenedores_max, combustible_maximo, tipo_barco = None, sensor_viento = None ):
         self.__id = id # GenerarId.generar_numeros_distintos()
