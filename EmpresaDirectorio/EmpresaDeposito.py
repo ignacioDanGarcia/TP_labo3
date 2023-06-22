@@ -57,23 +57,44 @@ class EmpresaDeposito():
 
     def asignar_carga_a_contenedor_existente(self, pedido: Pedidos, carga: Carga):
         if pedido.get_cant_contenedores() == 0:
-            return False
-
+            return None
+        
         for contenedor in self.obtener_contenedores_pedido(pedido):
+            
             if self.cargar_contenedor(self.get_manejador_cargas(), carga, contenedor, pedido):
-                return True
+                
+                return contenedor
 
-        return False
+        return None
 
 
     def asignar_carga_a_contenedor_barco(self, pedido: Pedidos, carga: Carga, barcos: List[Barco]):
         for barco in barcos:
-            if len(barco.get_contenedores()) < barco.get_cant_contenedores_max():
-                for contenedor in barco.get_contenedores() or self.get_empresa_data().get_contenedores_disponibles():
+            if len(barco.get_contenedores()) <= barco.get_cant_contenedores_max():
+                contenedores_disponibles = barco.get_contenedores() + self.get_empresa_data().get_contenedores_disponibles()
+                for contenedor in contenedores_disponibles:
                     if self.cargar_contenedor(self.get_manejador_cargas(), carga, contenedor, pedido):
-                        return True
-        return False
+                        if contenedor not in barco.get_contenedores():
+                            self.get_manejador_contenedores().cargar(barco, contenedor)
+                        self.actualizar_contenedor_en_empresa_data(contenedor)
+                        self.actualizar_barco_en_empresa_data(barco)
+                        return barco
+        return None
+    
+    def actualizar_barco_en_empresa_data(self, barco_actualizado):
+        barcos = self.get_empresa_data().get_barcos()
+        for i in range(len(barcos)):
+            barco = barcos[i]
+            if barco.get_id() == barco_actualizado.get_id():
+                barcos[i] = barco_actualizado
+                break
 
+
+    def actualizar_contenedor_en_empresa_data(self, contenedor_actualizado):
+        for i, contenedor in enumerate(self.get_empresa_data().get_contenedores()):
+            if contenedor.get_id() == contenedor_actualizado.get_id():
+                self.get_empresa_data().get_contenedores()[i] = contenedor_actualizado
+                break
 
     def verificar_cargas_asignadas(self, cargas_pedido: List[Carga], cargas_asignadas: List[Carga]):
         if set(cargas_pedido) != set(cargas_asignadas):
@@ -90,19 +111,22 @@ class EmpresaDeposito():
         cargas_asignadas = []
 
         for carga in cargas_pedido:
-            asignada = self.asignar_carga_a_contenedor_existente(pedido, carga)
-            if asignada:
+            contenedor_actualizado = self.asignar_carga_a_contenedor_existente(pedido, carga)
+            if contenedor_actualizado is not None:
+                cargas_asignadas.append(carga)
+                self.actualizar_contenedor_en_empresa_data(contenedor_actualizado)
+                continue
+
+            barco_actualizado = self.asignar_carga_a_contenedor_barco(pedido, carga, barcos_misma_distancia)
+            if barco_actualizado is not None:
+                self.actualizar_barco_en_empresa_data(barco_actualizado)
                 cargas_asignadas.append(carga)
                 continue
 
-            asignada = self.asignar_carga_a_contenedor_barco(pedido, carga, barcos_misma_distancia)
-            if asignada:
+            barco_actualizado = self.asignar_carga_a_contenedor_barco(pedido, carga, [data.get_barco_disponible_distancia_cero()])
+            if barco_actualizado is not None:
                 cargas_asignadas.append(carga)
-                continue
-
-            asignada = self.asignar_carga_a_contenedor_barco(pedido, carga, [data.get_barco_disponible_distancia_cero()])
-            if asignada:
-                cargas_asignadas.append(carga)
+                self.actualizar_barco_en_empresa_data(barco_actualizado)
                 continue
 
             raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")

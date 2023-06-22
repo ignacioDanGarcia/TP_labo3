@@ -31,7 +31,9 @@ class ManejadorDeCargas():
     def cargar(self, carga :Carga, contenedor :Contenedor):
         if self.puede_cargar(carga, contenedor):
             contenedor.cargas.append(carga)
-        return False
+            return True 
+        return False 
+
     
     def puede_cargar(self, carga:Carga, contenedor :Contenedor):
         self.settear_estrategia(carga)
