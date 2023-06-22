@@ -1,4 +1,3 @@
-from Excepciones.exceptions import medidas_incorrectas
 class Medidas:
 
     def __init__(self, largo, ancho, alto):

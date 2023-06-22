@@ -1,8 +1,6 @@
 from Pedidos import Pedidos
 from Cargas.Carga import Carga
 
-from GenerarId import GenerarId
-
 
 class Cliente:
 

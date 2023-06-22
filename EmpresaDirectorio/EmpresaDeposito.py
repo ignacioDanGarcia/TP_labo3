@@ -1,14 +1,12 @@
 from typing import List
 from BarcosDirectorio.Barcos import Barco
 from BarcosDirectorio.ManejadorDeContenedoresDirectorio.ManejadorDeContenedores import ManejadorDeContenedores
-from Camion import Camion
 from Cargas.Carga import Carga
 from ContenedoresDirectorio.Contenedores import Contenedor
 from EmpresaDirectorio.EmpresaData import EmpresaData
-from Excepciones.exceptions import Hay_cargas_que_no_entraron_en_contenedores, No_hay_barcos_disponibles, No_hay_camiones_disponibles
+from Excepciones.exceptions import Hay_cargas_que_no_entraron_en_contenedores, No_hay_barcos_disponibles
 from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
 from Pedidos import Pedidos
-from ContenedoresDirectorio.SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga
 
 
 class EmpresaDeposito():

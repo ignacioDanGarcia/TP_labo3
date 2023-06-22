@@ -1,10 +1,8 @@
 from unittest import TestCase
-from unittest.mock import Mock, patch, MagicMock
 
 from pytest import raises
 from Cargas.Carga import Carga
 from Cargas.Categorias import Categoria
-from Excepciones.exceptions import medidas_incorrectas
 from Medidas import Medidas
 
 class TestMedidas(TestCase):

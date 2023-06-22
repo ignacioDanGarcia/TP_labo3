@@ -1,16 +1,12 @@
 from BarcosDirectorio.Barcos import Barco
 from BarcosDirectorio.ManejadorDeContenedoresDirectorio.SelectoraEstrategiaPorBarco import SelectoraEstrategiaPorBarco
 from ContenedoresDirectorio.Contenedores import Contenedor
-from Excepciones.exceptions import no_existe_carga
 
 class ManejadorDeContenedores():
     def __init__(self, selectora: SelectoraEstrategiaPorBarco) -> None:
         self.__estrategia = None
         self.__selectora = selectora
-    """
-    def agregar_contenedores(self,contenedor):
-        self.__contenedores.append(contenedor)
-    """ 
+
     'Getters y setters'
     def get_selectora(self):
         return self.__selectora

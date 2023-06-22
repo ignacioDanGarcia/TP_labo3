@@ -1,6 +1,3 @@
-#from Interfaces.ViajeraInterfaz import ViajeraInterfaz
-#from GenerarId import GenerarId
-
 class Camion():
     def __init__(self, id):
         self.__disponible = True

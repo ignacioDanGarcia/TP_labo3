@@ -1,12 +1,9 @@
 from BarcosDirectorio.Barcos import Barco
 from Camion import Camion
 from ContenedoresDirectorio.Contenedores import Contenedor
-from Pedidos import Pedidos
 from Excepciones.exceptions import *
-from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 
 from typing import List
-import random
 
 
 class EmpresaData():

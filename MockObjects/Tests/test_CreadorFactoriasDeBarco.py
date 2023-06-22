@@ -1,5 +1,4 @@
 from unittest import TestCase
-from unittest.mock import Mock, patch, MagicMock
 from BarcosDirectorio.Factory.SelectorDeCreador import SelectorCreador
 from BarcosDirectorio.TiposDeBarcos import TiposBarcos
 from BarcosDirectorio.Factory.CreadorBarcos import CreadorDeBarcos

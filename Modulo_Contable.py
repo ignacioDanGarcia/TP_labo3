@@ -1,5 +1,4 @@
 from BarcosDirectorio.Barcos import Barco
-from EmpresaDirectorio.EmpresaCotizaciones import EmpresaCotizaciones
 from ModuloGPS import ModuloGPS
 from EmpresaDirectorio.CalculadorIngresosBarco import CalculadorIngresosBarco
 class ModuloContable():

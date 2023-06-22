@@ -6,7 +6,6 @@ from EmpresaDirectorio.EmpresaEnvios import EmpresaEnvios
 from Camion import Camion
 from Cargas.Carga import Carga
 from Cargas.Categorias import Categoria
-from ContenedoresDirectorio.Builder.BuilderContenedorOpenTop import BuilderContenedorOpenTop
 from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderContenedorBasico
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from Medidas import Medidas

@@ -1,8 +1,5 @@
-from BarcosDirectorio.SistemasNavegacion.AVela import AVela
-from BarcosDirectorio.SistemasNavegacion.AMotor import AMotor
 from BarcosDirectorio.SistemasNavegacion.ControladorDeNavegacion import ControladorDeSistemaDeNavegacion
 import random
-import time
 class SensorViento():
 
     def __init__(self) -> None:

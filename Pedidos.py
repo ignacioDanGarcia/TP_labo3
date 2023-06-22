@@ -1,8 +1,5 @@
-
-import random
 from typing import List
 from Cargas.Carga import Carga
-from GenerarId import GenerarId
 
 class Pedidos:
     def __init__(self, id, cargas: List[Carga], distancia, puerta_a_puerta: bool):

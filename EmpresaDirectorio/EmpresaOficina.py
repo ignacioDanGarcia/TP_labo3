@@ -1,17 +1,13 @@
 from EmpresaDirectorio.EmpresaCotizaciones import EmpresaCotizaciones
 from EmpresaDirectorio.EmpresaDeposito import EmpresaDeposito
-from EmpresaDirectorio.CargadorVehiculos import CargadorVehiculos
 from Pedidos import Pedidos
-from ContenedoresDirectorio.DepartamentoDeEstimacionDeCostos.CalculadoraPrecioCargas import CalculadoraPrecioCargas
-from ContenedoresDirectorio.DepartamentoDeEstimacionDeCostos.SelectoraEstrategiaPrecio import SelectoraEstrategiaPrecio
-from Excepciones.exceptions import Hay_cargas_que_no_entraron_en_contenedores, contenedor_no_puede_llevar_carga, el_contenedor_basico_no_puede_mat_especial, medidas_incorrectas, no_existe_carga, distancia_incorrecta
+from Excepciones.exceptions import Hay_cargas_que_no_entraron_en_contenedores, no_existe_carga, distancia_incorrecta
 from EmpresaData import EmpresaData
 
 class EmpresaOficina():
-    def __init__(self, empresa_data: EmpresaData, empresa_deposito: EmpresaDeposito, cargador_vehiculos: CargadorVehiculos, empresa_cotizaciones: EmpresaCotizaciones) -> None:
+    def __init__(self, empresa_data: EmpresaData, empresa_deposito: EmpresaDeposito, empresa_cotizaciones: EmpresaCotizaciones) -> None:
         self.__empresa_data = empresa_data
         self.__empresa_deposito = empresa_deposito
-        self.__cargador_vehiculos = cargador_vehiculos
         self.__empresa_cotizaciones = empresa_cotizaciones
     
     'Getters y setters'
@@ -32,12 +28,6 @@ class EmpresaOficina():
     def set_empresa_cotizaciones(self, empresa_cotizaciones):
         self.__empresa_cotizaciones = empresa_cotizaciones
     empresa_cotizaciones = property(get_empresa_cotizaciones,set_empresa_cotizaciones)
-    
-    def get_cargador_vehiculos(self):
-        return self.__cargador_vehiculos
-    def set_cargador_vehiculos(self, cargador_vehiculos):
-        self.__cargador_vehiculos = cargador_vehiculos
-    cargador_vehiculos = property(get_cargador_vehiculos,set_cargador_vehiculos)
     'Fin getters y setters'
     
     

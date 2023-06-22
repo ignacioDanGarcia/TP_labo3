@@ -1,8 +1,6 @@
 from unittest import TestCase
 from unittest.mock import Mock, patch, MagicMock
-from ContenedoresDirectorio.Contenedores import Contenedor
 from Cargas.Carga import Carga
-from ContenedoresDirectorio.ObtenedorDeIDSDeCargas import ObtenedorIDSCargas
 from Medidas import Medidas
 from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 from Cargas.Categorias import Categoria
