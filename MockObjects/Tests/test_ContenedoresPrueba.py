@@ -1,11 +1,7 @@
-from types import NoneType
 from unittest import TestCase
-from unittest.mock import Mock, patch, MagicMock
-
 from Cargas.Carga import Carga
 from Cargas.Categorias import Categoria
-from ContenedoresDirectorio.Contenedores import Contenedor
-from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
+
 from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderContenedorBasico
 from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderContenedorBasicoHC
 from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack

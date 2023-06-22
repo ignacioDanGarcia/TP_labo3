@@ -1,4 +1,4 @@
-from types import NoneType
+
 from unittest import TestCase
 import unittest.mock as mock
 from unittest.mock import Mock, patch, MagicMock
@@ -12,8 +12,7 @@ from BarcosDirectorio.TiposDeBarcos import TiposBarcos
 from BarcosDirectorio.Factory.SelectorDeCreador import SelectorCreador
 
 from ModuloGPS import ModuloGPS
-import random
-import time
+
 class tests_sistemasNavegacion(TestCase):
     def test_prueba_instanciar_barco_y_navegar_tiempo_suficiente(self):
         selector_factory = SelectorCreador()

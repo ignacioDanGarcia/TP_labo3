@@ -1,5 +1,4 @@
 from ContenedoresDirectorio.Contenedores import Contenedor
-from Medidas import Medidas
 from abc import ABC, abstractmethod
 
 class Contenedor_builder(ABC):

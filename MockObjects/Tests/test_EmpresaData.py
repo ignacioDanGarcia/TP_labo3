@@ -2,22 +2,10 @@ from unittest import TestCase
 from unittest.mock import Mock, patch, MagicMock
 
 from pytest import raises
-from ContenedoresDirectorio.Builder.Builder_contenedor import Contenedor_builder
-from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from ContenedoresDirectorio.Contenedores import Contenedor
-from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderContenedorBasico
-from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderContenedorBasicoHC
-from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
-from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
 from EmpresaDirectorio.EmpresaData import EmpresaData
-from Excepciones.exceptions import No_hay_barcos_disponibles, No_hay_camiones_disponibles, distancia_incorrecta
-from Pedidos import Pedidos
-from Cargas.Carga import Carga
-from Cargas.Categorias import Categoria
-from Medidas import Medidas
-from EmpresaDirectorio.EmpresaCotizaciones import EmpresaCotizaciones
+from Excepciones.exceptions import No_hay_camiones_disponibles
 from Camion import Camion
-from BarcosDirectorio.Factory.CreadorBarcos import CreadorDeBarcos
 from BarcosDirectorio.Factory.SelectorDeCreador import SelectorCreador
 from BarcosDirectorio.TiposDeBarcos import TiposBarcos
 

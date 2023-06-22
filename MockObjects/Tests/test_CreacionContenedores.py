@@ -1,5 +1,5 @@
 from unittest import TestCase
-from unittest.mock import Mock
+
 from ContenedoresDirectorio.Builder.BuilderContenedorBasicoHc import BuilderContenedorBasicoHC
 from ContenedoresDirectorio.Builder.BuilderContenedorBasico import BuilderContenedorBasico
 from ContenedoresDirectorio.Builder.BuilderContenedorFlatRack import BuilderContenedorFlatRack
@@ -9,7 +9,7 @@ from ContenedoresDirectorio.Builder.BuilderContenedorOpenTop import BuilderConte
 from ContenedoresDirectorio.Director.Contenedor_director import Contenedor_director
 from ContenedoresDirectorio.Contenedores import Contenedor
 from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
-from Medidas import Medidas
+
 
 
 class ContenedorBuilderTest(TestCase):

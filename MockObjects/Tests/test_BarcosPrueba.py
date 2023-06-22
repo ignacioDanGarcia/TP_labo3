@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch, MagicMock
 
 from pytest import raises
 
-from Excepciones.exceptions import Cantidad_contenedores_maxima_alcanzada_exception, Contenedor_no_aceptado_exception, Peso_excedido_exception
+
 from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 from BarcosDirectorio.TiposDeBarcos import TiposBarcos
 from BarcosDirectorio.Factory.SelectorDeCreador import SelectorCreador

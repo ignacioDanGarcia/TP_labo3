@@ -1,6 +1,3 @@
-
-from Cargas.Carga import Carga
-from Medidas import Medidas
 from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 
 class Contenedor():

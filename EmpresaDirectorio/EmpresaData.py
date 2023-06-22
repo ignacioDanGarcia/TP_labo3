@@ -1,12 +1,9 @@
 from BarcosDirectorio.Barcos import Barco
 from Camion import Camion
 from ContenedoresDirectorio.Contenedores import Contenedor
-from Pedidos import Pedidos
 from Excepciones.exceptions import *
-from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 
 from typing import List
-import random
 
 
 class EmpresaData():
@@ -74,14 +71,14 @@ class EmpresaData():
         return None
     
     
-    def devolver_un_camion_disponible(self):          
+    def devolver_camiones_disponibles(self):
+        camiones_disponibles = []
         for camion in self.get_camiones():
-            if (camion.get_disponible()):
-                #segun la teoria, esto afecta a la lista de empresa de self.camiones en cualquier parte del codigo
-                camion.set_disponible = False
-                return camion
-        # excepcion caatcheada en cargar_camion de CargadorVehiculos
-        raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")
+            if camion.get_disponible():
+                camiones_disponibles.append(camion)
+
+        return camiones_disponibles
+
     
     def get_contenedores_disponibles(self):
         conts = []

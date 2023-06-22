@@ -1,13 +1,11 @@
 from unittest import TestCase
 from unittest.mock import Mock, patch, MagicMock
-from Cargas.Carga import Carga
 from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
 from Cargas.Categorias import Categoria
 from ContenedoresDirectorio.EstrategiaCargaAlimenticia import CargaAlimenticiaEstrategy
 from ContenedoresDirectorio.EstrategiaCargaQuimica import CargaQuimicaEstrategy
 from ContenedoresDirectorio.EstrategiaCargaMaquinaria import CargaMaquinariaEstrategy
 from ContenedoresDirectorio.SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga
-from Medidas import Medidas
 class TestEstrategiaDeCargas(TestCase):
     
     def test_manejador_de_cargas_setea_estrategia_alimenticia_a_una_carga(self):

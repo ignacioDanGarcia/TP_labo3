@@ -1,6 +1,6 @@
 from BarcosDirectorio.Cargable import Cargable
 from BarcosDirectorio.SistemasNavegacion.AMotor import AMotor
-from Excepciones.exceptions import CombustibleInsuficienteException, tiempo_incorrecto
+from Excepciones.exceptions import CombustibleInsuficienteException
 from ModuloGPS import ModuloGPS
 
 class Barco(Cargable):
@@ -134,9 +134,6 @@ class Barco(Cargable):
         gastonafta = self.get_gasto_por_hora() * horas
         
         if gastonafta > self.get_combustible_actual():
+            # falta ver donde se catchea esto
            raise CombustibleInsuficienteException("No alcanza el combustible. No es recomendado hacer este viaje.")
         return True
-    
-    
-    #Estos dos métodos se usarían juntos, primero el puede_navegar para que levante alguna exception y luego el navegar. Si no podemos meterlo adentro de navegar pero estaría
-    #revisando muchas veces los gastos.
