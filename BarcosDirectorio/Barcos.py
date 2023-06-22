@@ -119,7 +119,6 @@ class Barco(Cargable):
         return peso
     
     def navegar(self, modulo_gps :ModuloGPS): #Modulo gps
-        self.set_disponible(False)
         modulo_gps.check_valores()
         horas = modulo_gps.calcular_tiempo()
         for hora in range(horas):

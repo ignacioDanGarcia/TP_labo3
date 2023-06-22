@@ -20,6 +20,7 @@ class EmpresaEnvios():
             try:
                 barco.puede_navegar(gps) # este metodo lanza excepcion
                 barco.navegar(gps)
+                barco.set_disponible(False)
             except CombustibleInsuficienteException as e:
                 print(e.mensaje)
 
