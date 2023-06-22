@@ -2,7 +2,9 @@ from BarcosDirectorio.Barcos import Barco
 from Camion import Camion
 from EmpresaDirectorio.EmpresaData import EmpresaData
 from Excepciones.exceptions import CombustibleInsuficienteException, tiempo_incorrecto
-from ContenedoresDirectorio.Contenedores import Contenedor
+from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
+from ContenedoresDirectorio.SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga
+from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
 """
 CLASE QUE HACE VIAJAR A LOS VEHICULOS
 """
@@ -30,48 +32,28 @@ class EmpresaEnvios():
 
                     
 
-    def descargar_cargas_contenedores_barcos(self, barcos):
+    def descargar_contenedores_barcos(self, barcos):
         #lista_con_todos_los_contenedores = []
 
-        #este for setea todas las cargas de los contenedores de cada barco en None
         for barco in barcos:
-
-            lista_contenedores_aux = []
-
-            for contenedor  in barco.get_contenedores():
-
-                contenedor.set_cargas(None)
-                contenedor.set_precio_transporte_base(0)#seteo contadores del contenedor en cero
-                contenedor.set_cant_de_veces_comple_y_carga_unica(0)
-                lista_contenedores_aux.append(contenedor)
-                #lista_con_todos_los_contenedores.append(contenedor)
     
-            barco.set_lista_contenedores(lista_contenedores_aux)
             barco.set_disponible(True)
             barco.set_combustible_gastado(0)
             barco.set_km_recorridos(0)
+            barco.set_lista_contenedores(None)
 
-        #esto actualiza los datos de la empresa
-        #aca sirve usar un Singleton para EmpresaData que es la que tiene la lista de contenedores
-        #self.administracion_empresaData.set_barcos(barcos)
-        #self.administracion_empresaData.set_contenedores(lista_con_todos_los_contenedores)
        
     def hacer_viajar_camiones(self,camiones):
         for camion in camiones:
             camion.viajar()
     
-    def descargar_cargas_contenedores_camiones(self, camiones):
+    def descargar_contenedor_camiones(self, camiones):
         for camion in camiones:
-            cont_aux = camion.get_contenedor()
-
-            cont_aux.set_cargas(None)  #seteo contadores y cargas del contenedor en cero
-            cont_aux.set_cant_de_veces_comple_y_carga_unica(0)
-            cont_aux.set_precio_transporte_base(0)
-            #camion.get_contenedor().set_cargas(None)\
-            #.set_cant_de_veces_comple_y_carga_unica(0)\
-            #.set_precio_transporte_base(0)
-            camion.set_contenedor(cont_aux) #le cambio al camion el contenedor por el vacio
-            camion.set_disponible(True)
+            if camion.get_contenedor().get_tipo() == TipoContenedor.OPENTOP :
+                self.administracion_empresaData.remove(camion.get_contenedor())
+            else:
+                camion.set_contenedor(None)
+                camion.set_disponible(True)
 
 
 

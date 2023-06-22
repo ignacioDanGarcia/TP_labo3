@@ -38,6 +38,7 @@ class TestEmpresaEnvios(TestCase):
 
         assert camion1.get_disponible() == True
         assert camion2.get_disponible() == True
+        assert empresa_data.get_camiones() == camiones
 
     def test_descargar_cargas_contenedores_camiones(self):
         camion1 = Camion(111)
@@ -64,14 +65,13 @@ class TestEmpresaEnvios(TestCase):
 
         empresa_envios = EmpresaEnvios(empresa_data)
 
-        empresa_envios.descargar_cargas_contenedores_camiones(camiones)
+        empresa_envios.descargar_contenedor_camiones(camiones)
 
-        assert camion1.get_contenedor().get_cargas() == None
-        assert camion2.get_contenedor().get_cargas() == None
+        assert camion1.get_contenedor() == None
+        assert camion2.get_contenedor() == None
         assert camion1.get_disponible() == True
         assert camion2.get_disponible() == True
-        assert camion1.get_contenedor().get_cant_de_veces_comple_y_carga_unica() == 0
-        assert camion2.get_contenedor().get_cant_de_veces_comple_y_carga_unica() == 0
+        assert empresa_data.get_camiones() == camiones
 
 
     def test_hacer_viajar_barcos(self):
@@ -103,8 +103,9 @@ class TestEmpresaEnvios(TestCase):
         assert barco2.get_disponible() == False
         assert barco.get_km_recorridos() > 0
         assert barco2.get_km_recorridos() > 0
+        assert empresa_data.get_barcos() == barcos
 
-    def test_descargar_cargas_contenedores_barcos(self):
+    def test_descargar_contenedores_barcos(self):
         builder = BuilderContenedorBasico()
         director = Contenedor_director(builder)
         contenedor1 = director.crear_contenedor(1,False)
@@ -133,12 +134,12 @@ class TestEmpresaEnvios(TestCase):
 
         empresa_envios = EmpresaEnvios(empresa_data)
 
-        empresa_envios.descargar_cargas_contenedores_barcos(barcos)
+        empresa_envios.descargar_contenedores_barcos(barcos)
 
         assert barco2.get_disponible() == True
         assert barco2.get_disponible() == True
-        assert barco.get_contenedores().index(1).get_cargas() == None
-        assert barco2.get_contenedores().index(1).get_cargas() == None
+        assert barco.get_contenedores()== None
+        assert barco2.get_contenedores() == None
         assert barco.get_combustible_gastado() == 0
         assert barco2.get_combustible_gastado() == 0
         assert barco.get_km_recorridos() == 0
