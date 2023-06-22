@@ -1,7 +1,7 @@
 from EmpresaDirectorio.EmpresaCotizaciones import EmpresaCotizaciones
 from EmpresaDirectorio.EmpresaDeposito import EmpresaDeposito
 from Pedidos import Pedidos
-from Excepciones.exceptions import Hay_cargas_que_no_entraron_en_contenedores, no_existe_carga, distancia_incorrecta
+from Excepciones.exceptions import Hay_cargas_que_no_entraron_en_contenedores, No_hay_barcos_disponibles, No_hay_camiones_disponibles, no_existe_carga, distancia_incorrecta
 from EmpresaData import EmpresaData
 
 class EmpresaOficina():
@@ -35,17 +35,26 @@ class EmpresaOficina():
         try:
             # se llenan los contenedores y se guardan en el pedido de paso
             self.get_empresa_deposito().ordenar_por_categoria(pedido.get_cargas())
-            self.get_empresa_deposito().llenar_contenedores(pedido)
+            self.get_empresa_deposito().llenar_contenedores_y_llenar_barcos(pedido)
             # los ids de los contenedores ya se guardan en los pedidos cuando se ejecuta el llenar_contenedores
             # si sale todo bien, ejecutas self.calcular_precio_pedido que es el metodo de abajo
             precio = self.calcular_precio_pedido(pedido, pedido.get_distancia())
             
             if pedido.get_puerta_a_puerta():
-                precio += 20000
+                cant_camiones_disponibles =len(self.get_empresa_data().devolver_camiones_disponibles())
+                if cant_camiones_disponibles < pedido.get_cant_contenedores():
+                    raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")
+                else:
+                    precio += (20000 * cant_camiones_disponibles)
+                    camiones_disponibles = self.get_empresa_data().devolver_camiones_disponibles()
+                    for i, contenedor in enumerate(self.get_empresa_deposito().obtener_contenedores_pedido()):
+                        camiones_disponibles[i].set_contenedor(contenedor)
             
             return precio
                 
         except Hay_cargas_que_no_entraron_en_contenedores as e:
+            print(str(e))
+        except No_hay_barcos_disponibles as e:
             print(str(e))
     
     

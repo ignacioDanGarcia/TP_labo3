@@ -96,6 +96,7 @@ class EmpresaDeposito():
 
     def verificar_cargas_asignadas(self, cargas_pedido: List[Carga], cargas_asignadas: List[Carga]):
         if set(cargas_pedido) != set(cargas_asignadas):
+            # excepcion catcheada en empresa oficina
             raise Hay_cargas_que_no_entraron_en_contenedores("Sus cargas no entran en nuestros contenedores")
 
         # si llega aca es porque se cargaron correctamente
@@ -126,7 +127,7 @@ class EmpresaDeposito():
                 cargas_asignadas.append(carga)
                 self.actualizar_barco_en_empresa_data(barco_actualizado)
                 continue
-
+            # excepcion catcheada en empresa oficina
             raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")
 
         self.verificar_cargas_asignadas(cargas_pedido, cargas_asignadas)
