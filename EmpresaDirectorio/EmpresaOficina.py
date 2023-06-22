@@ -54,7 +54,7 @@ class EmpresaOficina():
             
             return precio
                 
-        except Hay_cargas_que_no_entraron_en_contenedores as e:
+        except (Hay_cargas_que_no_entraron_en_contenedores) as e:
             print(str(e))
         except No_hay_barcos_disponibles as e:
             print(str(e))
