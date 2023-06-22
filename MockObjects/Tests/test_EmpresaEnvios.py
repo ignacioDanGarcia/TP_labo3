@@ -76,7 +76,7 @@ class TestEmpresaEnvios(TestCase):
 
     def test_hacer_viajar_barcos(self):
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         
         barco = creador.crear_barco(1,100,4,500)  
         barco2 = creador.crear_barco(1,100,4,500) # se inicializa el barco on 0km recorridos
@@ -121,7 +121,7 @@ class TestEmpresaEnvios(TestCase):
         contenedores = [contenedor1,contenedor2]
 
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         
         barco = creador.crear_barco(1,100,4,500)  
         barco2 = creador.crear_barco(1,100,4,500)

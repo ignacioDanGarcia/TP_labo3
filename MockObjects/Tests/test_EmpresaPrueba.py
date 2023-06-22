@@ -21,18 +21,6 @@ class TestEmpresaPrueba(TestCase):
         # falta implementar
         pass
     
-    # CONTAINER QUE MAYOR VECES VIAJO CON LA MISMA CARGA
-    def test_misma_carga_mas_veces(self):
-        # falta implementar
-        pass
-    
-    # BARCO CANT KM
-    def test_barco_mayor_cant_km(self):
-        # falta implementar
-        pass
-    def test_barco_menor_cant_km(self):
-        # falta implementar
-        pass
     
     
         

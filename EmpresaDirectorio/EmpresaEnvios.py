@@ -2,7 +2,7 @@ from BarcosDirectorio.Barcos import Barco
 from Camion import Camion
 from EmpresaDirectorio.EmpresaData import EmpresaData
 from Excepciones.exceptions import CombustibleInsuficienteException, tiempo_incorrecto
-from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
+from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 from ContenedoresDirectorio.SelectoraEstrategiaPorCarga import SelectoraEstrategiaPorCarga
 from ContenedoresDirectorio.ManejadorDeCargas import ManejadorDeCargas
 """
@@ -40,7 +40,7 @@ class EmpresaEnvios():
             barco.set_disponible(True)
             barco.set_combustible_gastado(0)
             barco.set_km_recorridos(0)
-            barco.set_lista_contenedores(None)
+            barco.set_contenedores(None)
 
        
     def hacer_viajar_camiones(self,camiones):

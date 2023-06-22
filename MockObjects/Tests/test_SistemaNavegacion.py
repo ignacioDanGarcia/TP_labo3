@@ -2,7 +2,7 @@ from types import NoneType
 from unittest import TestCase
 import unittest.mock as mock
 from unittest.mock import Mock, patch, MagicMock
-from BarcosDirectorio.BarcoBasico import BarcoBasico
+
 from BarcosDirectorio.SistemasNavegacion.Sensor_viento import SensorViento
 from BarcosDirectorio.SistemasNavegacion.AMotor import AMotor
 from BarcosDirectorio.SistemasNavegacion.AVela import AVela
@@ -10,15 +10,15 @@ from Excepciones.exceptions import CombustibleInsuficienteException, distancia_i
 from BarcosDirectorio.SistemasNavegacion.ControladorDeNavegacion import ControladorDeSistemaDeNavegacion
 from BarcosDirectorio.TiposDeBarcos import TiposBarcos
 from BarcosDirectorio.Factory.SelectorDeCreador import SelectorCreador
-from BarcosDirectorio.Factory.CreadorDeBarcosBasicos import CreadorBarcosBasicos
-from BarcosDirectorio.Factory.CreadorDeBarcosEspeciales import CreadorBarcosEspeciales
+
 from ModuloGPS import ModuloGPS
 import random
 import time
 class tests_sistemasNavegacion(TestCase):
     def test_prueba_instanciar_barco_y_navegar_tiempo_suficiente(self):
-        selector = SelectorCreador()
-        factoria = selector.crear_factoria(TiposBarcos.BASICO)
+        selector_factory = SelectorCreador()
+        factoria = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.ESPECIAL)
+        
         barco = factoria.crear_barco(1,400,3,40)
         modulo_gps = Mock()
         modulo_gps.calcular_tiempo.return_value = 5
@@ -35,8 +35,8 @@ class tests_sistemasNavegacion(TestCase):
         #assert isinstance(barco.get_sistema_navegacion(), AVela)
     
     def test_prueba_instanciar_barco_y_navegar_mas_tiempo_que_aguanta_su_nafta(self):
-        selector = SelectorCreador()
-        factoria = selector.crear_factoria(TiposBarcos.ESPECIAL)
+        selector_factory = SelectorCreador()
+        factoria = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.ESPECIAL)
         barco = factoria.crear_barco(1,400,3,10)
         
         modulo_gps = Mock()
@@ -51,8 +51,8 @@ class tests_sistemasNavegacion(TestCase):
     
     def test_prueba_barco_con_sensor_de_viento_puede_ahorrar_nafta(self):
         sensor_viento = SensorViento()
-        selector = SelectorCreador()
-        factoria = selector.crear_factoria(TiposBarcos.BASICO)
+        selector_factory = SelectorCreador()
+        factoria = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         barco = factoria.crear_barco(1,400,3,600,sensor_viento)
         
         modulo_gps = Mock()
@@ -72,8 +72,8 @@ class tests_sistemasNavegacion(TestCase):
 
     def test_prueba_barco_con_sensor_de_viento_mock_cambia_de_sistemas_correctamente_dependiendo_del_viento(self):
         sensor_viento_mock = Mock()
-        selector = SelectorCreador()
-        factoria = selector.crear_factoria(TiposBarcos.BASICO)
+        selector_factory = SelectorCreador()
+        factoria = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         barco = factoria.crear_barco(1,400,3,600,sensor_viento_mock)
         
         modulo_gps = Mock()
@@ -119,8 +119,8 @@ class tests_sistemasNavegacion(TestCase):
         
         
     def test_prueba_navegar_tiempo_es_0(self):
-        selector = SelectorCreador()
-        factoria = selector.crear_factoria(TiposBarcos.BASICO)
+        selector_factory = SelectorCreador()
+        factoria = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         barco = factoria.crear_barco(1,400,3,40)
 
         modulo_gps_real = ModuloGPS()
@@ -130,8 +130,8 @@ class tests_sistemasNavegacion(TestCase):
     
     
     def test_prueba_navegar_distancia_0(self):
-        selector = SelectorCreador()
-        factoria = selector.crear_factoria(TiposBarcos.BASICO)
+        selector_factory = SelectorCreador()
+        factoria = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         barco = factoria.crear_barco(1,400,3,40)
         
         modulo_gps_real = ModuloGPS()

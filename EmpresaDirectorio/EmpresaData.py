@@ -3,7 +3,7 @@ from Camion import Camion
 from ContenedoresDirectorio.Contenedores import Contenedor
 from Pedidos import Pedidos
 from Excepciones.exceptions import *
-from ContenedoresDirectorio.TiposDeContenedores.Tipo import TipoContenedor
+from ContenedoresDirectorio.TiposDeContenedores.TipoContenedor import TipoContenedor
 
 from typing import List
 import random
@@ -54,16 +54,24 @@ class EmpresaData():
     
     
     'Vehiculos disponibles'
-    def devolver_un_barco_disponible(self):          
+    # una vez que se carga un contenedor en un barco se debe setear la distancia del barco como la distancia del pedido
+    
+    def get_barcos_disponible_misma_distancia(self, distancia):
+        barcos_con_misma_distancia = []
+
         for barco in self.get_barcos():
-            if (barco.get_disponible()):
-                #segun la teoria, esto afecta a la lista de empresa de self.barcos en cualquier parte del codigo
-                if len(barco.get_contenedores()) > barco.get_cant_contenedores_max():
-                    # excepcion caatcheada en cargar_barco de CargadorVehiculos
-                    raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")
-                return barco
-        # excepcion caatcheada en cargar_barco de CargadorVehiculos
-        raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")
+            if barco.get_disponible():
+                if barco.get_distancia() == distancia:
+                    barcos_con_misma_distancia.append(barco)
+
+        return barcos_con_misma_distancia
+
+    def get_barco_disponible_distancia_cero(self):
+        for barco in self.get_barcos():
+            if barco.get_disponible():
+                if barco.get_distancia() == 0:
+                    return barco
+        return None
     
     
     def devolver_un_camion_disponible(self):          
@@ -82,7 +90,7 @@ class EmpresaData():
                 conts.append(cont)
         return conts
     
-    def actualizar_barco_trotamundo_o_sedentario(self):
+    def actualizar_barco_con_mas_y_con_menos_km(self):
         #Podríamos cambiar este nombre no? Es raro
         bmenos = self.get_barco_con_menos_km()
         bmas = self.get_barco_con_mas_km()

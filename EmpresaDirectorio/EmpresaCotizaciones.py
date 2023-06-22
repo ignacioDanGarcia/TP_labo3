@@ -16,7 +16,7 @@ class EmpresaCotizaciones():
         cargas_cliente_en_este_contenedor = []
         cargas_contenedor = contenedor.get_cargas()
 
-        if cargas_contenedor is None:
+        if cargas_contenedor is []:
             # catcheada en oficina
             raise no_existe_carga("No existe una carga en el contenedor")
 
