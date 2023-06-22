@@ -15,7 +15,7 @@ class BarcoBasicoStrategy(StrategyBarcos):
         if barco.get_cant_contenedores_max()<= len(barco.get_contenedores()):
             entra = False
             
-        print(barco.obtener_peso_actual())
+        
         if ( contenedor.peso_contenedor() + barco.obtener_peso_actual() )> barco.peso_max:
             '''raise Peso_excedido_exception("a")'''
             entra = False
