@@ -16,7 +16,5 @@ class SelectoraEstrategiaPrecio():
         for enum_valor, condicion in estrategias.items():
             if condicion:
                 return enum_valor
-        # falta ver donde se catchea esto segun donde se usa el metodo este
-        raise distancia_incorrecta("La distancia especificada no cumple con ningún caso")
-        
+       
 
