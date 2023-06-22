@@ -40,9 +40,9 @@ class TestEmpresaData(TestCase):
         assert barco_disponible.get_id() == 2
         assert barco_disponible.get_distancia() == 0
         
-        camion_disponible = empresa_data.devolver_un_camion_disponible()
-        assert camion_disponible == camion7
-        assert camion_disponible.get_id() == 999
+        camion_disponible = empresa_data.devolver_camiones_disponibles()
+        assert camion_disponible[0] == camion7
+        assert camion_disponible[0].get_id() == 999
     
     def test_empresa_tira_exception_si_no_hay_barcos_disponibles(self):
         
@@ -65,7 +65,7 @@ class TestEmpresaData(TestCase):
         assert empresa_data.get_barcos_disponible_misma_distancia(1) == []
         assert empresa_data.get_barco_disponible_distancia_cero() == None
     
-    def test_empresa_tira_exception_si_no_hay_camiones_disponibles(self):
+    def test_empresa_tira_lista_vacia_si_no_hay_camiones_disponibles(self):
         mock_contenedores = Mock()
         mock_barcos = Mock()
 
@@ -81,8 +81,8 @@ class TestEmpresaData(TestCase):
         
         empresa_data = EmpresaData([mock_barcos], camiones, [mock_contenedores])
         
-        with self.assertRaises(No_hay_camiones_disponibles):
-            camion_disponible = empresa_data.devolver_un_camion_disponible()
+        
+        assert  empresa_data.devolver_camiones_disponibles() == []
     
     def test_empresa_trae_contenedores_disponibles(self):
         mock_barcos = Mock()
