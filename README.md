@@ -1,6 +1,6 @@
 # TP_labo3 - 1ra Etapa
 
-
+ 
 ## Objetivos
 ### Objetivo General
 El trabajo práctico tiene por objetivo garantizar que cada alumno/a, a través de la investigación y experimentación, transite por el proceso de diseñar e implementar un sistema complejo.
