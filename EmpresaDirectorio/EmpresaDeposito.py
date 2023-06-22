@@ -55,70 +55,56 @@ class EmpresaDeposito():
             return True
         return False
 
+    def asignar_carga_a_contenedor_existente(self, pedido: Pedidos, carga: Carga):
+        if pedido.get_cant_contenedores() == 0:
+            return False
+
+        for contenedor in self.obtener_contenedores_pedido(pedido):
+            if self.cargar_contenedor(self.get_manejador_cargas(), carga, contenedor, pedido):
+                return True
+
+        return False
+
+
+    def asignar_carga_a_contenedor_barco(self, pedido: Pedidos, carga: Carga, barcos: List[Barco]):
+        for barco in barcos:
+            if len(barco.get_contenedores()) < barco.get_cant_contenedores_max():
+                for contenedor in barco.get_contenedores() or self.get_empresa_data().get_contenedores_disponibles():
+                    if self.cargar_contenedor(self.get_manejador_cargas(), carga, contenedor, pedido):
+                        return True
+        return False
+
+
+    def verificar_cargas_asignadas(self, cargas_pedido: List[Carga], cargas_asignadas: List[Carga]):
+        if set(cargas_pedido) != set(cargas_asignadas):
+            raise Hay_cargas_que_no_entraron_en_contenedores("Sus cargas no entran en nuestros contenedores")
+
+        # si llega aca es porque se cargaron correctamente
     
     def llenar_contenedores_y_llenar_barcos(self, pedido: Pedidos):
         cargas_pedido = pedido.get_cargas()
         self.ordenar_por_categoria(cargas_pedido)
 
-        
         data = self.get_empresa_data()
-        barcos_misma_distancia = self.get_empresa_data().get_barcos_disponible_misma_distancia(pedido.get_distancia())
+        barcos_misma_distancia = data.get_barcos_disponible_misma_distancia(pedido.get_distancia())
         cargas_asignadas = []
-        
+
         for carga in cargas_pedido:
-            asignada = False
-            
-            # primero analizo los contenedores ya usados por el pedido
-            if pedido.get_cant_contenedores() != 0:
-                for contenedor in self.obtener_contenedores_pedido(pedido):
-                    if self.cargar_contenedor(self.get_manejador_cargas(), carga, contenedor, pedido):
-                        asignada = True
-                        break
-
+            asignada = self.asignar_carga_a_contenedor_existente(pedido, carga)
             if asignada:
                 cargas_asignadas.append(carga)
                 continue
-            
-            # despues analizo los barcos con contenedores que vayan al mismo lugar
-            for barco in barcos_misma_distancia:
-                # primero sus contenedores
-                for contenedor in barco.get_contenedores():
-                    if self.cargar_contenedor(self.get_manejador_cargas(), carga, contenedor, pedido):
-                        asignada = True
-                        break
-                if asignada:
-                    continue
-                # luego trato de insertarle mas contenedores
-                if len(barco.get_contenedores()) < barco.get_cant_contenedores_max():
-                    for contenedor in data.get_contenedores_disponibles():
-                        if self.get_manejador_contenedores().cargar(barco, contenedor):
-                            if self.cargar_contenedor(self.get_manejador_cargas(), carga, contenedor, pedido):
-                                asignada = True
-                                break
 
+            asignada = self.asignar_carga_a_contenedor_barco(pedido, carga, barcos_misma_distancia)
             if asignada:
                 cargas_asignadas.append(carga)
                 continue
-            
-            barco_distancia_cero = self.get_empresa_data().get_barco_disponible_distancia_cero()
-            
-            # si todavia quedan cargas agarro un barco disponible con distancia no asignada todavia
-            if barco_distancia_cero is None or len(barcos_misma_distancia) == 0:
-                raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")
 
-            for contenedor in data.get_contenedores_disponibles():
-                if self.get_manejador_contenedores().cargar(barco_distancia_cero, contenedor):
-                    if self.cargar_contenedor(self.get_manejador_cargas(), carga, contenedor, pedido):
-                        cargas_asignadas.append(carga)
-                        barco_distancia_cero.cargar(contenedor)
-                        barco_distancia_cero.set_distancia(pedido.get_distancia())
-                        barcos_misma_distancia.append(barco_distancia_cero)
-                        break
+            asignada = self.asignar_carga_a_contenedor_barco(pedido, carga, [data.get_barco_disponible_distancia_cero()])
+            if asignada:
+                cargas_asignadas.append(carga)
+                continue
 
-        # si la carga sigue estando en la lista de pedidos quiere decir que no fue asignada
-        if set(cargas_pedido).difference(set(cargas_asignadas)):
-            raise Hay_cargas_que_no_entraron_en_contenedores("Sus cargas no entran en nuestros contenedores")
+            raise No_hay_barcos_disponibles("En este momento no hay barcos disponibles")
 
-
-        
-        # si llega aca es porque se cargaron correctamente
+        self.verificar_cargas_asignadas(cargas_pedido, cargas_asignadas)

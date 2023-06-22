@@ -117,7 +117,7 @@ class TestEmpresaDeposito(TestCase):
 
         
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.BASICO)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.BASICO)
         
         barco = creador.crear_barco(1,100,3,500)
         barco2 = creador.crear_barco(2,100,3,500)
@@ -145,7 +145,7 @@ class TestEmpresaDeposito(TestCase):
         assert barco3.get_contenedores() == [contenedor]
         assert contenedor.get_cargas() == cargas
     
-    def test_llenar_contenedores_y_llenar_barcos_con_solo_contenedores_flatrack_y_cargas_maquinarias_y_quimica(self):
+    def test_llenar_contenedores_y_llenar_barcos_con_solo_contenedores_flatrack_y_cargas_maquinarias(self):
         medidas = Medidas(1,1,1)
         carga = Carga(medidas,5,Categoria.MAQUINARIA)
         carga1 = Carga(medidas,5,Categoria.MAQUINARIA)
@@ -170,13 +170,13 @@ class TestEmpresaDeposito(TestCase):
 
         
         selector_factory = SelectorCreador()
-        creador = selector_factory.crear_factoria(TiposBarcos.ESPECIAL)
+        creador = selector_factory.crear_factoria_de_tipo_de_barco(TiposBarcos.ESPECIAL)
         
         barco = creador.crear_barco(1,100,3,500)
         barco2 = creador.crear_barco(2,100,3,500)
         barco3 = creador.crear_barco(3,100,3,500)
-        barco4 = creador.crear_barco(3,100,3,500)
-        barco5 = creador.crear_barco(3,100,3,500)
+        barco4 = creador.crear_barco(4,100,3,500)
+        barco5 = creador.crear_barco(5,100,3,500)
         
         barco3.set_distancia(3)
         barco2.set_distancia(2)
