@@ -8,10 +8,10 @@ from Excepciones.exceptions import *
 class TestEmpresaPrueba(TestCase):
     """ TEST OBLIGATORIOS PEDIDOS POR EL TP """
     def test_cliente_retira_carga_en_puerto(self):
-        # ver empresa envios
+        # ver test_empresa envios
         pass
     def test_cliente_contrata_servicio_puerta_a_puerta(self):
-        # ver empresa envios
+        # ver test_empresa envios
         pass
     def test_utiliza_container_completo(self):
         # hay varios pero en test departamento de costos tenes un par

@@ -1,5 +1,3 @@
-
-# excepciones barcos
 class Contenedor_no_aceptado_exception(Exception):
     def __init__(self, mensaje) -> None:
         self.mensaje = mensaje
@@ -34,8 +32,7 @@ class CombustibleInsuficienteException(Exception):
         self.mensaje = mensaje
     def __str__(self) -> str:
         return self.mensaje
- # Excepciones Empresa... esto habria que cambiarlo de lugar pero por ahora lo dejo aca
- 
+
 class No_hay_camiones_disponibles(Exception):
     def __init__(self, mensaje) -> None:
         self.mensaje = mensaje
@@ -66,21 +63,21 @@ class Hay_cargas_que_no_entraron_en_contenedores(Exception):
         return self.mensaje
     
     
-# excepcion contenedor basico abstracto
+
 class el_contenedor_basico_no_puede_mat_especial(Exception):
     def __init__(self, mensaje) -> None:
         self.mensaje = mensaje
     def __str__(self) -> str:
         return self.mensaje
     
-# excepciones contenedor abc
+
 class contenedor_no_puede_llevar_carga(Exception):
     def __init__(self, mensaje) -> None:
         self.mensaje = mensaje
     def __str__(self) -> str:
         return self.mensaje
 
-# Excepciones de medidas contenedor
+
 class medidas_incorrectas(Exception):
     def __init__(self, mensaje) -> None:
         self.mensaje = mensaje
