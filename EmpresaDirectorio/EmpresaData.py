@@ -71,7 +71,7 @@ class EmpresaData():
         return None
     
     
-    def devolver_camiones_disponibles(self):
+    def devolver_camiones_disponibles(self) -> List[Camion]:
         camiones_disponibles = []
         for camion in self.get_camiones():
             if camion.get_disponible():

@@ -33,12 +33,9 @@ class EmpresaOficina():
     
     def procesar_pedido(self, pedido: Pedidos):
         try:
-            # se llenan los contenedores y se guardan en el pedido de paso
-            cargas_pedido = pedido.get_cargas()
-            self.get_empresa_deposito().ordenar_por_categoria(cargas_pedido)
+
             self.get_empresa_deposito().llenar_contenedores_y_llenar_barcos(pedido)
-            # los ids de los contenedores ya se guardan en los pedidos cuando se ejecuta el llenar_contenedores
-            # si sale todo bien, ejecutas self.calcular_precio_pedido que es el metodo de abajo
+
             precio = self.calcular_precio_pedido(pedido, pedido.get_distancia())
 
             if pedido.get_puerta_a_puerta():
@@ -46,7 +43,7 @@ class EmpresaOficina():
                 if cant_camiones_disponibles < pedido.get_cant_contenedores():
                     raise No_hay_camiones_disponibles("En este momento no hay camiones disponibles")
                 else:
-                    precio += (20000 * cant_camiones_disponibles)
+                    precio += (20000 * pedido.get_cant_contenedores())
                     
                     camiones_disponibles = self.get_empresa_data().devolver_camiones_disponibles()
                     for i, contenedor in enumerate(self.get_empresa_deposito().obtener_contenedores_pedido(pedido)):
